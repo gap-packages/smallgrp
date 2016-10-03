@@ -3,14 +3,34 @@
    ]>
 
 <Book Name="SmallGrp">
-<#Include SYSTEM="title.xml">
+<TitlePage>
+  <Title>Small Groups Library;</Title>
+  <Version>Version &VERSION;</Version>
+
+  <Author>
+  </Author>
+  
+  <Copyright>&copyright; &COPYRIGHTYEARS; by <P/>
+  </Copyright>
+
+  <Abstract>
+  </Abstract>
+
+</TitlePage>
 
 <TableOfContents/>
 
 <Body>
+  <Chapter Label="Small Groups">
+    <Heading>The SmallGroups Library</Heading>
+    <Index Key="SmallGroups">SmallGroups package overview</Index>
+       
+    Hello, world
+  </Chapter>
 </Body>
 
 <Bibliography Databases="smallgrp" />
+
 <TheIndex/>
 
 </Book>

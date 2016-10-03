@@ -9,7 +9,7 @@ function()
     MakeGAPDocDoc(Concatenation(PackageInfo("smallgrp")[1]!.InstallationPath,
                                 "/doc")
                  , "main.xml"
-                 , []
+                 , [ "main.xml" ]
                  , "smallgrp"
                  , "MathJax",
                  "../../..");
