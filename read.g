@@ -5,7 +5,7 @@
 ##  GAP small groups library
 ##
 
-ReadPackage("smallgrp", "gap/utils.gd");
+ReadPackage("smallgrp", "gap/utils.gi");
 ReadPackage("smallgrp", "gap/small.gi");
 
 #############################################################################
