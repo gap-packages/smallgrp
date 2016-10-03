@@ -8,7 +8,7 @@
 ##
 ## tell GAP about the component
 ##
-DeclareComponent("small","2.1");
+# DeclareComponent("small","2.1");
 
 InfoIdgroup := NewInfoClass( "InfoIdgroup" );
 
