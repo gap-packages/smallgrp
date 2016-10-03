@@ -1,0 +1,18 @@
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+   [ <!ENTITY SmallGrp "<Package>SmallGrp</Package>">
+   ]>
+
+<Book Name="SmallGrp">
+<#Include SYSTEM="title.xml">
+
+<TableOfContents/>
+
+<Body>
+</Body>
+
+<Bibliography Databases="smallgrp" />
+<TheIndex/>
+
+</Book>
+  
+
