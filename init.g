@@ -5,4 +5,4 @@
 #
 
 ReadPackage("smallgrp", "gap/utils.gd");
-ReadPackage("smallgrp", "gap/smallgrp.gd");
+ReadPackage("smallgrp", "gap/small.gd");

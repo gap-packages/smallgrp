@@ -5,7 +5,8 @@
 ##  GAP small groups library
 ##
 
-ReadPackage( "smallgrp", "gap/utils.gd");
+ReadPackage("smallgrp", "gap/utils.gd");
+ReadPackage("smallgrp", "gap/small.gi");
 
 #############################################################################
 ##
@@ -18,14 +19,6 @@ READ_SMALL_FUNCS := [ ];
 #V  READ_IDLIB_FUNCS[ ]
 ##
 READ_IDLIB_FUNCS := [ ];
-
-#############################################################################
-##
-#X  first read the basic stuff of the small group library and the id-group
-##  functions
-##
-ReadPackage( "smallgrp", "small.gd" );
-ReadPackage( "smallgrp", "small.gi" );
 
 #############################################################################
 ##
@@ -48,7 +41,7 @@ READ_SMALL_LIB := function()
     local i, s;
 
     s := 1;
-    repeat 
+    repeat
         s := s + 1;
         READ_SMALL_FUNCS[ s ] := ReadAndCheckFunc(
                                Concatenation( "small/small", String( s ) ) );
