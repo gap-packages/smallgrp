@@ -1,6 +1,6 @@
 #############################################################################
 ##
-b#W  readsml.g                GAP group library             Hans Ulrich Besche
+#W  readsml.g                GAP group library             Hans Ulrich Besche
 ##                                               Bettina Eick, Eamonn O'Brien
 ##
 
