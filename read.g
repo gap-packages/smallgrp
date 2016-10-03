@@ -1,8 +1,11 @@
 #############################################################################
 ##
-#W  readsml.g                GAP group library             Hans Ulrich Besche
-##                                               Bettina Eick, Eamonn O'Brien
+#W  read.g
 ##
+##  GAP small groups library
+##
+
+ReadPackage( "smallgrp", "gap/utils.gd");
 
 #############################################################################
 ##
