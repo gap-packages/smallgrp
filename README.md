@@ -22,5 +22,4 @@ Please submit bug reports and feature requests via our GitHub issue tracker:
   <https://github.com/gap-packages/smallgrp/issues>
 
 
-License
-=======
+# License
