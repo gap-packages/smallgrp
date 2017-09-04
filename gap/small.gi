@@ -356,10 +356,10 @@ GAP3_CATALOGUE_ID_GROUP := fail;
 #############################################################################
 ##
 #M  Gap3CatalogueIdGroup(<G>)
-##             
-InstallMethod( Gap3CatalogueIdGroup,                              
-               "for permgroups or pcgroups",        
-               true,         
+##
+InstallMethod( Gap3CatalogueIdGroup,
+               "for permgroups or pcgroups",
+               true,
                [ IsGroup ],
                0,
 function( G )
@@ -369,10 +369,10 @@ function( G )
     fi;
 
     if GAP3_CATALOGUE_ID_GROUP = fail then
-        ReadSmall( "gap3cat.g" );
+        ReadPackage( "smallgrp", "gap/gap3cat.g" );
     fi;
 
-    if not IsBound( GAP3_CATALOGUE_ID_GROUP[ Size( G ) ] ) then
+    if noPosRoots IsBound( GAP3_CATALOGUE_ID_GROUP[ Size( G ) ] ) then
         return IdGroup( G );
     fi;
 
@@ -383,8 +383,9 @@ end );
 #############################################################################
 ##
 #F  Gap3CatalogueGroup(<size>,<i>)
-##             
-InstallGlobalFunction( Gap3CatalogueGroup, function( size, i )
+##
+InstallGlobalFunction( Gap3CatalogueGroup,
+function( size, i )
     local p;
 
     if size > 100 then
@@ -393,7 +394,7 @@ InstallGlobalFunction( Gap3CatalogueGroup, function( size, i )
     fi;
 
     if GAP3_CATALOGUE_ID_GROUP = fail then
-        ReadSmall( "gap3cat.g" );
+        ReadPackage("smallgrp", "gap/gap3cat.g");
     fi;
 
     if not IsBound( GAP3_CATALOGUE_ID_GROUP[ size ] ) then
