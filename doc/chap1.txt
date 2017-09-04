@@ -1,0 +1,263 @@
+  
+  [1X1 [33X[0;0YThe Small Groups Library[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YOverview[133X[101X
+  
+  [33X[0;0YThe Small Groups library gives access to all groups of certain [21Xsmall[121X orders.
+  The groups are sorted by their orders and they are listed up to isomorphism;
+  that is, for each of the available orders a complete and irredundant list of
+  isomorphism  type representatives of groups is given. Currently, the library
+  contains the following groups:[133X
+  
+  [30X    [33X[0;6Ythose of order at most 2000 except 1024   ([22X423 164 062[122X groups);[133X
+  
+  [30X    [33X[0;6Ythose of cubefree order at most 50 000   ([22X395 703[122X groups);[133X
+  
+  [30X    [33X[0;6Ythose of order [22Xp^7[122X for the primes [22Xp = 3,5,7,11[122X   ([22X907 489[122X groups);[133X
+  
+  [30X    [33X[0;6Ythose of order [22Xp^n[122X for [22Xn ≤ 6[122X and all primes [22Xp[122X[133X
+  
+  [30X    [33X[0;6Ythose  of  order [22Xq^n ⋅ p[122X for [22Xq^n[122X dividing [22X2^8[122X, [22X3^6[122X, [22X5^5[122X or [22X7^4[122X and all
+        primes [22Xp[122X with [22Xp ≠ q[122X;[133X
+  
+  [30X    [33X[0;6Ythose of squarefree order;[133X
+  
+  [30X    [33X[0;6Ythose whose order factorises into at most 3 primes.[133X
+  
+  [33X[0;0YThe  first  three  items in this list cover an explicit range of orders; the
+  last  four  provide  access  to infinite families of groups having orders of
+  certain types.[133X
+  
+  [33X[0;0YThe  library  also  has  an  identification function: it returns the library
+  number  of  a  given  group.  This function determines library numbers using
+  invariants  of  groups.  The  function  is  available  for all orders in the
+  library  except  for  the orders 512 and 1536 and except for the orders [22Xp^5[122X,
+  [22Xp^6[122X and [22Xp^7[122X above 2000.[133X
+  
+  [33X[0;0YThe  library  is  organised  in 11 layers. Each layer contains the groups of
+  certain  orders and their corresponding group identification routines. It is
+  possible  to install the first [22Xn[122X layers of the group library and the first [22Xm[122X
+  layers  of  the  group identification for each [22X1 ≤ m ≤ n ≤ 11[122X. This might be
+  useful  to  save disk space. There is an extensive [11XREADME[111X file for the Small
+  Groups  library  available  in  the  [10Xsmall[110X directory of the [5XGAP[105X distribution
+  containing  detailed  information  on the layers. A brief description of the
+  layers is given here:[133X
+  
+  [8X(1)[108X
+        [33X[0;6Ythe groups whose order factorises into at most 3 primes.[133X
+  
+  [8X(2)[108X
+        [33X[0;6Ythe remaining groups of order at most 1000 except 512 and 768.[133X
+  
+  [8X(3)[108X
+        [33X[0;6Ythe remaining groups of order [22X2^n ⋅ p[122X with [22Xn ≤ 8[122X and [22Xp[122X an odd prime.[133X
+  
+  [8X(4)[108X
+        [33X[0;6Ythe  remaining  groups  of order [22X5^5[122X, [22X7^4[122X and of order [22Xq^n ⋅ p[122X for [22Xq^n[122X
+        dividing [22X3^6[122X, [22X5^5[122X or [22X7^4[122X and [22Xp ≠ q[122X a prime.[133X
+  
+  [8X(5)[108X
+        [33X[0;6Ythe remaining groups of order at most 2000 except 1024, 1152, 1536 and
+        1920.[133X
+  
+  [8X(6)[108X
+        [33X[0;6Ythe groups of orders 1152 and 1920.[133X
+  
+  [8X(7)[108X
+        [33X[0;6Ythe groups of order 512.[133X
+  
+  [8X(8)[108X
+        [33X[0;6Ythe groups of order 1536.[133X
+  
+  [8X(9)[108X
+        [33X[0;6Ythe remaining groups of order [22Xp^n[122X for [22X4 ≤ n ≤ 6[122X.[133X
+  
+  [8X(10)[108X
+        [33X[0;6Ythe  remaining  groups  of  cubefree  order  at  most  50  000  and of
+        squarefree order.[133X
+  
+  [8X(11)[108X
+        [33X[0;6Ythe remaining groups of order [22Xp^7[122X for [22Xp = 3,5,7,11[122X.[133X
+  
+  [33X[0;0YThe data in this library has been carefully checked and cross-checked. It is
+  believed to be reliable. However, no absolute guarantees are given and users
+  should, as always, make their own checks in critical cases.[133X
+  
+  [33X[0;0YThe  data occupies about 30 MB (storing over 400 million groups in about 200
+  megabits).  The  group identification occupies about 47 MB of which 18 MB is
+  used  for  the  groups  in  layer  (6). More information on the Small Groups
+  library can be found on [7Xhttp://www.icm.tu-bs.de/ag_algebra/software/small/[107X[133X
+  
+  [33X[0;0YThis  library  has  been constructed by Hans Ulrich Besche, Bettina Eick and
+  E. A. O'Brien. A survey on this topic and an account of the history of group
+  constructions  can  be found in [BEO02]. Further detailed information on the
+  construction  of  this  library  is  available in [New77], [O'B90], [O'B91],
+  [BE99a],  [BE99b],  [BE01],  [BEO01],  [EO99a],  [EO99b],  [NOV04], [Gir03],
+  [DE05],  [OV05].  The  Small Groups library incorporates the [5XGAP[105X 3 libraries
+  [10XTwoGroup[110X and [10XThreeGroup[110X. The data from these libraries was directly included
+  into  the  Small  Groups  library, and the ordering there was preserved. The
+  Small  Groups library replaces the Gap 3 library of solvable groups of order
+  at  most  100. However, both the organisation and data descriptions of these
+  groups has changed in the Small Groups library.[133X
+  
+  
+  [1X1.2 [33X[0;0YFunction Reference[133X[101X
+  
+  [1X1.2-1 SmallGroup[101X
+  
+  [29X[2XSmallGroup[102X( [3Xorder[103X, [3Xi[103X ) [32X function
+  [29X[2XSmallGroup[102X( [3Xpair[103X ) [32X function
+  
+  [33X[0;0Yreturns  the  [3Xi[103X-th  group  of  order [3Xorder[103X in the catalogue. If the group is
+  solvable,  it  will  be  given as a PcGroup; otherwise it will be given as a
+  permutation  group.  If  the  groups  of  order [3Xorder[103X are not installed, the
+  function reports an error and enters a break loop.[133X
+  
+  [1X1.2-2 AllSmallGroups[101X
+  
+  [29X[2XAllSmallGroups[102X( [3Xarg[103X ) [32X function
+  
+  [33X[0;0Yreturns  all groups with certain properties as specified by [3Xarg[103X. If [3Xarg[103X is a
+  number  [22Xn[122X,  then  this  function returns all groups of order [22Xn[122X. However, the
+  function  can  also  take  several arguments which then must be organized in
+  pairs  [10Xfunction[110X  and  [10Xvalue[110X.  In  this  case the first function must be [2XSize[102X
+  ([14XReference:  Size[114X)  and  the  first  value an order or a range of orders. If
+  value  is a list then it is considered a list of possible function values to
+  include.  The  function  returns those groups of the specified orders having
+  those properties specified by the remaining functions and their values.[133X
+  
+  [33X[0;0YPrecomputed  information  is stored for the properties [2XIsAbelian[102X ([14XReference:
+  IsAbelian[114X),       [2XIsNilpotentGroup[102X       ([14XReference:      IsNilpotentGroup[114X),
+  [2XIsSupersolvableGroup[102X   ([14XReference:   IsSupersolvableGroup[114X),  [2XIsSolvableGroup[102X
+  ([14XReference:    IsSolvableGroup[114X),    [2XRankPGroup[102X    ([14XReference:   RankPGroup[114X),
+  [2XPClassPGroup[102X  ([14XReference:  PClassPGroup[114X),  [2XLGLength[102X  ([14XReference:  LGLength[114X),
+  [10XFrattinifactorSize[110X and [10XFrattinifactorId[110X for the groups of order at most [22X2000[122X
+  which  have  more  than three prime factors, except those of order [22X512[122X, [22X768[122X,
+  [22X1024[122X, [22X1152[122X, [22X1536[122X, [22X1920[122X and those of order [22Xp^n ⋅ q > 1000[122X with [22Xn > 2[122X.[133X
+  
+  [1X1.2-3 OneSmallGroup[101X
+  
+  [29X[2XOneSmallGroup[102X( [3Xarg[103X ) [32X function
+  
+  [33X[0;0Yreturns one group with certain properties as specified by [3Xarg[103X. The permitted
+  arguments are those supported by [2XAllSmallGroups[102X ([14XReference: AllSmallGroups[114X).[133X
+  
+  [1X1.2-4 NumberSmallGroups[101X
+  
+  [29X[2XNumberSmallGroups[102X( [3Xorder[103X ) [32X function
+  
+  [33X[0;0Yreturns the number of groups of order [3Xorder[103X.[133X
+  
+  [1X1.2-5 IdSmallGroup[101X
+  
+  [29X[2XIdSmallGroup[102X( [3XG[103X ) [32X attribute
+  [29X[2XIdGroup[102X( [3XG[103X ) [32X attribute
+  
+  [33X[0;0Yreturns  the  library  number  of  [3XG[103X;  that  is, the function returns a pair
+  [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X where [3XG[103X is isomorphic to [10XSmallGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X.[133X
+  
+  [1X1.2-6 IdsOfAllSmallGroups[101X
+  
+  [29X[2XIdsOfAllSmallGroups[102X( [3Xarg[103X ) [32X function
+  
+  [33X[0;0Ysimilar  to  [10XAllSmallGroups[110X  but  returns  ids  instead  of groups. This may
+  prevent workspace overflows, if a large number of groups are expected in the
+  output.[133X
+  
+  [1X1.2-7 IdGap3SolvableGroup[101X
+  
+  [29X[2XIdGap3SolvableGroup[102X( [3XG[103X ) [32X attribute
+  [29X[2XGap3CatalogueIdGroup[102X( [3XG[103X ) [32X attribute
+  
+  [33X[0;0Yreturns the catalogue number of [3XG[103X in the [5XGAP[105X 3 catalogue of solvable groups;
+  that is, the function returns a pair [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X meaning that [3XG[103X is isomorphic
+  to the group [10XSolvableGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X in [5XGAP[105X 3.[133X
+  
+  [1X1.2-8 SmallGroupsInformation[101X
+  
+  [29X[2XSmallGroupsInformation[102X( [3Xorder[103X ) [32X function
+  
+  [33X[0;0Yprints information on the groups of the specified order.[133X
+  
+  [1X1.2-9 UnloadSmallGroupsData[101X
+  
+  [29X[2XUnloadSmallGroupsData[102X(  ) [32X function
+  
+  [33X[0;0Y[5XGAP[105X loads all necessary data from the library automatically, but it does not
+  delete  the  data  from  the  workspace  again.  Usually,  this  will be not
+  necessary,  since  the  data is stored in a compressed format. However, if a
+  large  number  of  groups  from  the library have been loaded, then the user
+  might wish to remove the data from the workspace and this can be done by the
+  above function call.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( 768, 1000000 );[127X[104X
+    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( [768, 1000000] );[127X[104X
+    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
+    [4X[25Xgap>[125X [27XAllSmallGroups( 6 );[127X[104X
+    [4X[28X[ <pc group of size 6 with 2 generators>, [128X[104X
+    [4X[28X  <pc group of size 6 with 2 generators> ][128X[104X
+    [4X[25Xgap>[125X [27XAllSmallGroups( Size, 120, IsSolvableGroup, false );[127X[104X
+    [4X[28X[ Group([128X[104X
+    [4X[28X    [ (1,2,4,8)(3,6,9,5)(7,12,13,17)(10,14,11,15)(16,20,21,24)(18,22,[128X[104X
+    [4X[28X        19,23), (1,3,7)(2,5,10)(4,9,13)(6,11,8)(12,16,20)(14,18,[128X[104X
+    [4X[28X        22)(15,19,23)(17,21,24) ]), Group([ (1,2,3,4,5), (1,2) ]), [128X[104X
+    [4X[28X  Group([ (1,2,3,5,4), (1,3)(2,4)(6,7) ]) ][128X[104X
+    [4X[25Xgap>[125X [27XG := OneSmallGroup( 120, IsNilpotentGroup, false );[127X[104X
+    [4X[28X<pc group of size 120 with 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup(G);[127X[104X
+    [4X[28X[ 120, 1 ][128X[104X
+    [4X[25Xgap>[125X [27XG := OneSmallGroup( Size, [1..1000], IsSolvableGroup, false );[127X[104X
+    [4X[28XGroup([ (1,2,3,4,5), (1,2,3) ])[128X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup(G);[127X[104X
+    [4X[28X[ 60, 5 ][128X[104X
+    [4X[25Xgap>[125X [27XUnloadSmallGroupsData();[127X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup( GL( 2,3 ) );[127X[104X
+    [4X[28X[ 48, 29 ][128X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup( Group( (1,2,3,4),(4,5) ) );[127X[104X
+    [4X[28X[ 120, 34 ][128X[104X
+    [4X[25Xgap>[125X [27XIdsOfAllSmallGroups( Size, 60, IsSupersolvableGroup, true );[127X[104X
+    [4X[28X[ [ 60, 1 ], [ 60, 2 ], [ 60, 3 ], [ 60, 4 ], [ 60, 6 ], [ 60, 7 ], [128X[104X
+    [4X[28X  [ 60, 8 ], [ 60, 10 ], [ 60, 11 ], [ 60, 12 ], [ 60, 13 ] ][128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 512 );[127X[104X
+    [4X[28X10494213[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 2^8 * 23 );[127X[104X
+    [4X[28X1083472[128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 2^9 * 23 );[127X[104X
+    [4X[28XError, the library of groups of size 11776 is not available called from[128X[104X
+    [4X[28X<function>( <arguments> ) called from read-eval-loop[128X[104X
+    [4X[28XEntering break read-eval-print loop ...[128X[104X
+    [4X[28Xyou can 'quit;' to quit to outer loop, or[128X[104X
+    [4X[28Xyou can 'return;' to continue[128X[104X
+    [4X[26Xbrk>[126X [27Xquit;[127X[104X
+    [4X[28Xgap>[128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSmallGroupsInformation( 32 );[127X[104X
+    [4X[28X[128X[104X
+    [4X[28X  There are 51 groups of order 32.[128X[104X
+    [4X[28X  They are sorted by their ranks. [128X[104X
+    [4X[28X     1 is cyclic. [128X[104X
+    [4X[28X     2 - 20 have rank 2.[128X[104X
+    [4X[28X     21 - 44 have rank 3.[128X[104X
+    [4X[28X     45 - 50 have rank 4.[128X[104X
+    [4X[28X     51 is elementary abelian. [128X[104X
+    [4X[28X[128X[104X
+    [4X[28X  For the selection functions the values of the following attributes [128X[104X
+    [4X[28X  are precomputed and stored:[128X[104X
+    [4X[28X     IsAbelian, PClassPGroup, RankPGroup, FrattinifactorSize and [128X[104X
+    [4X[28X     FrattinifactorId. [128X[104X
+    [4X[28X[128X[104X
+    [4X[28X  This size belongs to layer 2 of the SmallGroups library. [128X[104X
+    [4X[28X  IdSmallGroup is available for this size. [128X[104X
+    [4X[28X [128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y [133X
+  

@@ -1,101 +1,132 @@
-#############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
-##
-
+#
+# smallgrp: The GAP Small Groups Library
+#
+# This file contains package meta data. For additional information on
+# the meaning and correct usage of these fields, please consult the
+# manual of the "Example" package as well as the comments in its
+# PackageInfo.g file.
+#
 SetPackageInfo( rec(
 
-PackageName := "GitHubPagesForGAP",
-
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.2",
-Date := "04/02/2017", # dd/mm/yyyy format
+PackageName := "smallgrp",
+Subtitle := "The GAP Small Groups Library",
+Version := "1.0",
+Date := "03/10/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
-    LastName      := "Horn",
-    FirstNames    := "Max",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
+    IsAuthor := true,
+    IsMaintainer := false,
+    FirstNames := "Bettina",
+    LastName := "Eick",
+    WWWHome := "http://www.icm.tu-bs.de/~beick",
+    Email := "beick@tu-bs.de",
     PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
-                       "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
+               "Institut Computational Mathematics\n",
+               "TU Braunschweig\n",
+               "Pockelsstr. 14\n",
+               " D-38106 Braunschweig\n",
+               " Germany" ),
+    Place := "TU Braunschweig",
+    Institution := "TU Braunschweig",
   ),
-
   rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
+    IsAuthor := true,
+    IsMaintainer := false,
+    FirstNames := "Hans Ulrich",
+    LastName := "Besche",
+    WWWHome := "http://www-public.tu-bs.de/~hubesche/",
+    Email := "hubesche@tu-bs.de",
+    PostalAddress := Concatenation(
+               "Institut Computational MathematicsTU Braunschweig\n",
+               "Pockelsstr. 14\n",
+               " D-38106 Braunschweig\n",
+               " Germany" ),
+    Place := "Braunschweig",
+    Institution := "TU Braunschweig",
   ),
-
   rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    #Email         := "janitor@example.com",
+    IsAuthor := true,
+    IsMaintainer := false,
+    FirstNames := "Eamonn",
+    LastName := "O'Brien",
+    WWWHome := "http://www.math.auckland.ac.nz/~obrien",
+    Email := "obrien@math.auckland.ac.nz",
+    PostalAddress := Concatenation(
+               "Department of Mathematics\n",
+               "University of Auckland\n",
+               "Private Bag 92019\n",
+               " Auckland\n",
+               " New Zealand" ),
+    Place := "Auckland",
+    Institution := "University of Auckland",
+  ),
+  rec(
+    IsAuthor := false,
+    IsMaintainer := true,
+    FirstNames := "Markus",
+    LastName := "Pfeiffer",
+    WWWHome := "http://www.morphism.de/~markusp/",
+    Email := "markus.pfeiffer@st-andrews.ac.uk",
+    PostalAddress := Concatenation(
+               "School of Computer Science\n",
+               "University of St Andrews\n",
+               "Jack Cole Building, North Haugh\n",
+               "St Andrews, Fife, KY16 9SX\n",
+               "United Kingdom" ),
+    Place := "St Andrews",
+    Institution := "University of St Andrews",
   ),
 ],
 
-Status := "other",
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+#SupportEmail   := "TODO",
+PackageWWWHome  := "https://gap-packages.github.io/smallgrp/",
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
 
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "fingolfin",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
+ArchiveFormats := ".tar.gz",
 
-PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
+##  Status information. Currently the following cases are recognized:
+##    "accepted"      for successfully refereed packages
+##    "submitted"     for packages submitted for the refereeing
+##    "deposited"     for packages for which the GAP developers agreed
+##                    to distribute them with the core GAP system
+##    "dev"           for development versions of packages
+##    "other"         for all other packages
+##
+Status := "dev",
 
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
+AbstractHTML   :=  "",
 
 PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
+  BookName  := "smallgrp",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
+  LongTitle := "The GAP Small Groups Library",
 ),
 
-# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.8.1",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
-  ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+  GAP := ">= 4.9",
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ] ],
+  SuggestedOtherPackages := [ ],
+  ExternalConditions := [ ],
 ),
 
 AvailabilityTest := ReturnTrue,
 
-Keywords := ["GitHub Pages", "GAP"]
+TestFile := "tst/testall.g",
+
+#Keywords := [ "TODO" ],
 
 ));
 
