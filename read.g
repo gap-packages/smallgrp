@@ -15,8 +15,9 @@ ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 READ_SMALL_LIB := function()
     local i, s, LoadFunc;
 
-    LoadFunc := path -> {args...} -> ReadPackage("smallgrp",
-                                                 Concatenation(path, "/", args[1]));
+    LoadFunc := path ->
+                    {args...} ->
+                    ReadPackage("smallgrp", Concatenation(path, "/", args[1]));
     s := 1;
     repeat
         s := s + 1;
@@ -28,7 +29,7 @@ READ_SMALL_LIB := function()
 
     for i in [ 2 .. Length( SMALL_AVAILABLE_FUNCS ) ] do
         # These functions are used in ReadSmallLib to load data on demand
-        READ_IDLIB_FUNCS[ i ] := LoadFunc(Concatenation("id", String(s), ".g"));
+        READ_IDLIB_FUNCS[ i ] := LoadFunc(Concatenation("id", String(i)));
         READ_IDLIB_FUNCS[ i ]( Concatenation( "idgrp", String( i ), ".g" ),
                                Concatenation( "ids of groups #", String( i ) ) );
     od;
