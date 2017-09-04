@@ -5,20 +5,12 @@
 ##  GAP small groups library
 ##
 
+READ_SMALL_FUNCS := [ ];
+READ_IDLIB_FUNCS := [ ];
+
 ReadPackage("smallgrp", "gap/utils.gi");
 ReadPackage("smallgrp", "gap/small.gi");
 
-#############################################################################
-##
-#V  READ_SMALL_FUNCS[ ]
-##
-READ_SMALL_FUNCS := [ ];
-
-#############################################################################
-##
-#V  READ_IDLIB_FUNCS[ ]
-##
-READ_IDLIB_FUNCS := [ ];
 
 #############################################################################
 ##
