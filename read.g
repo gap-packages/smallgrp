@@ -13,30 +13,24 @@ ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 
 # read the function-files of the small groups library
 READ_SMALL_LIB := function()
-    local i, s, path;
+    local i, s, LoadFunc;
 
+    LoadFunc := path -> {args...} -> ReadPackage("smallgrp",
+                                                 Concatenation(path, "/", args[1]));
     s := 1;
     repeat
         s := s + 1;
-        path := DirectoriesPackageLibrary("smallgrp",
-                                          Concatenation("small", String(s)));
-        if path <> [] then
-            # These functions are used in ReadSmallLib to load data on demand
-            READ_SMALL_FUNCS[s] := ReadAndCheckFunc(Filename(path, ""));
-            READ_SMALL_FUNCS[s]( Concatenation( "smlgp", String( s ), ".g" ),
-                                 Concatenation( "small groups #", String( s ) ) );
-        fi;
+        # These functions are used in ReadSmallLib to load data on demand
+        READ_SMALL_FUNCS[s] := LoadFunc(Concatenation("small", String(s)));
+        READ_SMALL_FUNCS[s]( Concatenation( "smlgp", String(s), ".g" ),
+                             Concatenation( "small groups #", String( s ) ) );
     until not IsBound( SMALL_AVAILABLE_FUNCS[ s ] );
 
     for i in [ 2 .. Length( SMALL_AVAILABLE_FUNCS ) ] do
-        path := DirectoriesPackageLibrary("smallgrp",
-                                          Concatenation("id", String(i)));
-        if path <> [] then
-            # These functions are used in ReadSmallLib to load data on demand
-            READ_IDLIB_FUNCS[ i ] := ReadAndCheckFunc(Filename(path, ""));
-            READ_IDLIB_FUNCS[ i ]( Concatenation( "idgrp", String( i ), ".g" ),
-                                   Concatenation( "ids of groups #", String( i ) ) );
-        fi;
+        # These functions are used in ReadSmallLib to load data on demand
+        READ_IDLIB_FUNCS[ i ] := LoadFunc(Concatenation("id", String(s), ".g"));
+        READ_IDLIB_FUNCS[ i ]( Concatenation( "idgrp", String( i ), ".g" ),
+                               Concatenation( "ids of groups #", String( i ) ) );
     od;
 end;
 READ_SMALL_LIB();
