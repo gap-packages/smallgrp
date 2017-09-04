@@ -372,7 +372,7 @@ function( G )
         ReadPackage( "smallgrp", "gap/gap3cat.g" );
     fi;
 
-    if noPosRoots IsBound( GAP3_CATALOGUE_ID_GROUP[ Size( G ) ] ) then
+    if not IsBound( GAP3_CATALOGUE_ID_GROUP[ Size( G ) ] ) then
         return IdGroup( G );
     fi;
 
