@@ -25,8 +25,8 @@ branches:
 
 before_script:
   - scripts/build_gap.sh
-script:
   - scripts/build_pkg.sh
+script:
   - scripts/run_tests.sh
 after_script:
   - bash scripts/gather-coverage.sh
