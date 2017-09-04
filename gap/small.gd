@@ -82,7 +82,7 @@ UnbindGlobal( "AllGroups" );
 ##  of order <M>n</M>.
 ##  However, the function can also take several arguments which then
 ##  must be organized in pairs <C>function</C> and <C>value</C>.
-##  In this case the first function must be <Ref Func="Size"/>
+##  In this case the first function must be <Ref BookName="ref" Func="Size"/>
 ##  and the first value an order or a range of orders.
 ##  If value is a list then it is considered a list of possible function
 ##  values to include. 
@@ -90,10 +90,10 @@ UnbindGlobal( "AllGroups" );
 ##  properties specified by the remaining functions and their values.
 ##  <P/>
 ##  Precomputed information is stored for the properties
-##  <Ref Func="IsAbelian"/>, <Ref Func="IsNilpotentGroup"/>,
-##  <Ref Func="IsSupersolvableGroup"/>, <Ref Func="IsSolvableGroup"/>, 
-##  <Ref Func="RankPGroup"/>, <Ref Func="PClassPGroup"/>,
-##  <Ref Func="LGLength"/>, <C>FrattinifactorSize</C> and 
+##  <Ref BookName="ref" Func="IsAbelian"/>, <Ref BookName="ref" Func="IsNilpotentGroup"/>,
+##  <Ref BookName="ref" Func="IsSupersolvableGroup"/>, <Ref BookName="ref" Func="IsSolvableGroup"/>, 
+##  <Ref BookName="ref" Func="RankPGroup"/>, <Ref BookName="ref" Func="PClassPGroup"/>,
+##  <Ref BookName="ref" Func="LGLength"/>, <C>FrattinifactorSize</C> and 
 ##  <C>FrattinifactorId</C> for the groups of order at most
 ##  <M>2000</M> which have  more than three prime factors,
 ##  except those of order <M>512</M>, <M>768</M>, 
@@ -122,7 +122,7 @@ UnbindGlobal( "OneGroup" );
 ##  <Description>
 ##  returns one group with certain properties as specified by <A>arg</A>.
 ##  The permitted arguments are those supported by
-##  <Ref Func="AllSmallGroups"/>.
+##  <Ref BookName="ref" Func="AllSmallGroups"/>.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

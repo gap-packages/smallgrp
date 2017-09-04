@@ -135,15 +135,18 @@ Groups library replaces the Gap 3 library of solvable groups of order at
 most 100. However, both the organisation and data descriptions of these
 groups has changed in the Small Groups library.
 <P/>
-<#Include Label="SmallGroup">
-<#Include Label="AllSmallGroups">
-<#Include Label="OneSmallGroup">
-<#Include Label="NumberSmallGroups">
-<#Include Label="IdSmallGroup">
-<#Include Label="IdsOfAllSmallGroups">
-<#Include Label="IdGap3SolvableGroup">
-<#Include Label="SmallGroupsInformation">
-<#Include Label="UnloadSmallGroupsData">
+</Section>
 
+<Section Label="Reference">
+  <Heading>Function Reference</Heading>
+  <#Include Label="SmallGroup">
+  <#Include Label="AllSmallGroups">
+  <#Include Label="OneSmallGroup">
+  <#Include Label="NumberSmallGroups">
+  <#Include Label="IdSmallGroup">
+  <#Include Label="IdsOfAllSmallGroups">
+  <#Include Label="IdGap3SolvableGroup">
+  <#Include Label="SmallGroupsInformation">
+  <#Include Label="UnloadSmallGroupsData">
 </Section>
 </Chapter>
