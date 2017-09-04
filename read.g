@@ -13,14 +13,14 @@ ReadPackage("smallgrp", "gap/small.gi");
 ##
 #X  read the 3-primes-order stuff, which is placed in the 'small'-directory
 ##
-ReadPackage( "smallgrp", "smlgp1.g" );
-ReadPackage( "smallgrp", "idgrp1.g" );
+ReadPackage( "smallgrp", "gap/smlgp1.g" );
+ReadPackage( "smallgrp", "gap/idgrp1.g" );
 
 #############################################################################
 ##
 #X  read the information function
 ##
-ReadPackage( "smallgrp", "smlinfo.gi" );
+ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 
 #############################################################################
 ##
