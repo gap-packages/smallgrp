@@ -9,12 +9,6 @@
 
 #############################################################################
 ##
-## tell GAP about the component
-##
-DeclareComponent("id10","0.1");
-
-#############################################################################
-##
 #F ID_AVAILABLE_FUNCS[ 10 ]
 ##
 ID_AVAILABLE_FUNCS[ 10 ] := SMALL_AVAILABLE_FUNCS[ 10 ];

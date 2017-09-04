@@ -9,12 +9,6 @@
 
 #############################################################################
 ##
-## tell GAP about the component
-##
-DeclareComponent("small7","1.0");
-
-#############################################################################
-##
 #F SMALL_AVAILABLE_FUNCS[ 7 ]
 ##
 SMALL_AVAILABLE_FUNCS[ 7 ] := function( size )

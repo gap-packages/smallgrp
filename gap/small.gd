@@ -4,12 +4,6 @@
 ##                                               Bettina Eick, Eamonn O'Brien
 ##
 
-#############################################################################
-##
-## tell GAP about the component
-##
-# DeclareComponent("small","2.1");
-
 InfoIdgroup := NewInfoClass( "InfoIdgroup" );
 
 BindGlobal("READ_SMALL_FUNCS", [ ]);
