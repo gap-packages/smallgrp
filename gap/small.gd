@@ -12,6 +12,9 @@
 
 InfoIdgroup := NewInfoClass( "InfoIdgroup" );
 
+BindGlobal("READ_SMALL_FUNCS", [ ]);
+BindGlobal("READ_IDLIB_FUNCS", [ ]);
+
 UnbindGlobal( "SMALL_AVAILABLE" );
 
 #############################################################################
