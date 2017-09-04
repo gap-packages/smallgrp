@@ -27,22 +27,30 @@ ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 #X   read the function-files of the small groups library
 ##
 READ_SMALL_LIB := function()
-    local i, s;
+    local i, s, path;
 
     s := 1;
     repeat
         s := s + 1;
-        READ_SMALL_FUNCS[ s ] := ReadAndCheckFunc(
-                               Concatenation( "small/small", String( s ) ) );
-        READ_SMALL_FUNCS[ s ]( Concatenation( "smlgp", String( s ), ".g" ),
-                           Concatenation( "small groups #", String( s ) ) );
+        path := DirectoriesPackageLibrary("smallgrp",
+                                          Concatenation("small", String(s)));
+        if path <> [] then
+            # These functions are used in ReadSmallLib to load data on demand
+            READ_SMALL_FUNCS[s] := ReadAndCheckFunc(Filename(path, ""));
+            READ_SMALL_FUNCS[s]( Concatenation( "smlgp", String( s ), ".g" ),
+                                 Concatenation( "small groups #", String( s ) ) );
+        fi;
     until not IsBound( SMALL_AVAILABLE_FUNCS[ s ] );
 
     for i in [ 2 .. Length( SMALL_AVAILABLE_FUNCS ) ] do
-        READ_IDLIB_FUNCS[ i ] := ReadAndCheckFunc(
-                               Concatenation( "small/id", String( i ) ) );
-        READ_IDLIB_FUNCS[ i ]( Concatenation( "idgrp", String( i ), ".g" ),
-                           Concatenation( "ids of groups #", String( i ) ) );
+        path := DirectoriesPackageLibrary("smallgrp",
+                                          Concatenation("id", String(i)));
+        if path <> [] then
+            # These functions are used in ReadSmallLib to load data on demand
+            READ_IDLIB_FUNCS[ i ] := ReadAndCheckFunc(Filename(path, ""));
+            READ_IDLIB_FUNCS[ i ]( Concatenation( "idgrp", String( i ), ".g" ),
+                                   Concatenation( "ids of groups #", String( i ) ) );
+        fi;
     od;
 end;
 
