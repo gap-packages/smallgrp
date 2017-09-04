@@ -7,6 +7,10 @@ env:
 
 addons:
   apt_packages:
+    - libgmp-dev
+    - libreadline-dev
+    - libgmp-dev:i386
+    - libreadline-dev:i386
     - gcc-multilib
     - g++-multilib
 
