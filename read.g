@@ -1,31 +1,17 @@
-#############################################################################
-##
-#W  read.g
-##
-##  GAP small groups library
-##
-
+#
+# GAP small groups library
+#
 ReadPackage("smallgrp", "gap/utils.gi");
 ReadPackage("smallgrp", "gap/small.gi");
 
-
-#############################################################################
-##
-#X  read the 3-primes-order stuff, which is placed in the 'small'-directory
-##
+# read the 3-primes-order stuff, which is placed in the 'small'-directory
 ReadPackage( "smallgrp", "gap/smlgp1.g" );
 ReadPackage( "smallgrp", "gap/idgrp1.g" );
 
-#############################################################################
-##
-#X  read the information function
-##
+# read the information function
 ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 
-#############################################################################
-##
-#X   read the function-files of the small groups library
-##
+# read the function-files of the small groups library
 READ_SMALL_LIB := function()
     local i, s, path;
 
@@ -53,7 +39,5 @@ READ_SMALL_LIB := function()
         fi;
     od;
 end;
-
 READ_SMALL_LIB();
-
 Unbind( READ_SMALL_LIB );
