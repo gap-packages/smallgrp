@@ -92,23 +92,32 @@ InstallGlobalFunction( SmallGroup, function( arg )
     local inforec, g, size, i;
 
     if Length( arg ) = 1 then
-        if not IsList( arg[1] ) or Length( arg[1] ) <> 2 then 
-            Error( "usage: SmallGroup( order, number )" ); 
+        if not IsList( arg[1] ) or Length( arg[1] ) <> 2 then
+            Error( "usage: SmallGroup( order, number )" );
         fi;
         size := arg[ 1 ][ 1 ];
         i    := arg[ 1 ][ 2 ];
-    elif Length( arg ) = 2 then 
+    elif Length( arg ) = 2 then
         size := arg[ 1 ];
         i    := arg[ 2 ];
-    else 
-        Error( "usage: SmallGroup( order, number )" ); 
+    else
+        Error( "usage: SmallGroup( order, number )" );
     fi;
-    if not IsPosInt( size ) or not IsPosInt( i ) then 
-        Error( "usage: SmallGroup( order, number )" ); 
+    if not IsPosInt( size ) or not IsPosInt( i ) then
+        Error( "usage: SmallGroup( order, number )" );
     fi;
     inforec := SMALL_AVAILABLE( size );
     if inforec = fail then
         Error( "the library of groups of size ", size, " is not available" );
+    fi;
+    if not SMALL_GROUPS_OLD_ORDER then
+        if size = 5^7 then
+            i := SMALL_GROUPS_PERM5(i);
+        elif size = 7^7 then
+            i := SMALL_GROUPS_PERM7(i);
+        elif size = 11^7 then
+            i := SMALL_GROUPS_PERM11(i);
+        fi;
     fi;
     g := SMALL_GROUP_FUNCS[ inforec.func ]( size, i, inforec );
     SetIdGroup( g, [ size, i ] );
