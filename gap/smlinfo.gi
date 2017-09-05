@@ -21,6 +21,10 @@ SMALL_GROUPS_INFORMATION := [ ];
 InstallGlobalFunction( SmallGroupsInformation, function( size )
     local smav, idav, num, lib, t;
 
+    if not IsPosInt(size) then
+      ErrorNoReturn("usage: SmallGroupsInformation( size )"); 
+    fi;
+
     smav := SMALL_AVAILABLE( size );
     idav := ID_AVAILABLE( size );
 
