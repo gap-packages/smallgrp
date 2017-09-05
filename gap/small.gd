@@ -6,6 +6,39 @@
 
 InfoIdgroup := NewInfoClass( "InfoIdgroup" );
 
+# whether to apply Bettina's permutations
+# to indices for groups of order 5^7, 7^7, and 11^7
+SMALL_GROUPS_OLD_ORDER := false;
+#
+# Bettina's code:
+#    perm5  := [1];
+#    Append(perm5, [ 30083, 30084, 30085, 30086 ]);
+#    Append(perm5, [2..30082]);
+SMALL_GROUPS_PERM5 := function(i)
+    if i in [2..5] then
+        return 30031 + i;
+    fi;
+    return i;
+end;
+#    perm7  := [1]; 
+#    Append(perm7, [ 104599, 104600, 104601, 104602 ]);
+#    Append(perm7, [2..104598]);
+SMALL_GROUPS_PERM7 := function(i)
+    if i in [2..5] then
+        return 104597 + i;
+    fi;
+    return i;
+end;
+#    perm11 := [1]; 
+#    Append(perm11, [ 721053, 721054, 721055, 721056 ]);
+#    Append(perm11, [2..721053]);
+SMALL_GROUPS_PERM11 := function(i)
+    if i in [2..5] then
+        return 721051 + i;
+    fi;
+    return i;
+end;
+
 BindGlobal("READ_SMALL_FUNCS", [ ]);
 BindGlobal("READ_IDLIB_FUNCS", [ ]);
 
