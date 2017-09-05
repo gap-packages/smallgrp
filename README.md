@@ -22,3 +22,8 @@ Please submit bug reports and feature requests via our GitHub issue tracker:
 
 
 # License
+
+The Small Groups Library is free software distributed under
+the [Artistic License 2.0](https://opensource.org/licenses/Artistic-2.0).
+
+For details see the files LICENSE and COPYRIGHT.
