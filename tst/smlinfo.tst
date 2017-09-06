@@ -353,8 +353,8 @@ gap> SmallGroupsInformation(15625);
       with order p^6 for p >= 5 is based on the Easterfield 
       list, corrected by Newman, O'Brien and Vaughan-Lee (2004).
       It differs only in the addition of groups in isoclinism 
-      family $Phi_{13}$, in using the James (1980) presentations 
-      for the groups in $Phi_{19}$, and a small number of 
+      family $\Phi_{13}$, in using the James (1980) presentations 
+      for the groups in $\Phi_{19}$, and a small number of 
       typographical amendments. The linear ordering employed is 
       very close to that of Easterfield. 
  
