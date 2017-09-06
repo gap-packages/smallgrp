@@ -30,25 +30,31 @@ SMALL_GROUPS_OLD_ORDER := false;
 #    Append(perm5, [2..30082]);
 SMALL_GROUPS_PERM5 := function(i)
     if i in [2..5] then
-        return 30031 + i;
+        return 30081 + i;
+    elif i in [30083..30086] then
+        return i - 30081;
     fi;
     return i;
 end;
-#    perm7  := [1]; 
+#    perm7  := [1];
 #    Append(perm7, [ 104599, 104600, 104601, 104602 ]);
 #    Append(perm7, [2..104598]);
 SMALL_GROUPS_PERM7 := function(i)
     if i in [2..5] then
         return 104597 + i;
+    elif i in [104599..104602] then
+        return i - 104597;
     fi;
     return i;
 end;
-#    perm11 := [1]; 
+#    perm11 := [1];
 #    Append(perm11, [ 721053, 721054, 721055, 721056 ]);
 #    Append(perm11, [2..721053]);
 SMALL_GROUPS_PERM11 := function(i)
     if i in [2..5] then
         return 721051 + i;
+    elif i in [721053..721056] then
+        return i - 721051;
     fi;
     return i;
 end;
