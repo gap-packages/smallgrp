@@ -1,3 +1,4 @@
+# Test file by Wilf A. Wilson
 #
 gap> START_TEST("smlinfo.tst");
 
