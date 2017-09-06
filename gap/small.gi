@@ -277,7 +277,7 @@ InstallMethod( IdGroup,
                [ IsGroup ],
                0,
 function( G )
-    local inforec, size;
+    local inforec, size, id;
 
     size := Size( G );
     if size = 1 then return [ 1, 1 ]; fi;
@@ -306,7 +306,18 @@ function( G )
         G := PcGroupCode( CodePcGroup( G ), Size( G ) );
     fi;
 
-    return [ size, ID_GROUP_FUNCS[ inforec.func ]( G, inforec ) ];
+    id := ID_GROUP_FUNCS[ inforec.func ]( G, inforec );
+
+    if not SMALL_GROUPS_OLD_ORDER then
+        if size = 5^7 then
+            id := SMALL_GROUPS_PERM5(id);
+        elif size = 7^7 then
+            id := SMALL_GROUPS_PERM7(id);
+        elif size = 11^7 then
+            id := SMALL_GROUPS_PERM11(id);
+        fi;
+    fi;
+    return [ size, id ];
 end );
 
 #############################################################################
