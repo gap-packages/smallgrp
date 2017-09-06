@@ -89,7 +89,7 @@ PROPERTIES_SMALL_GROUPS := [ ];
 ##  an PcGroup, if the group is soluble and a permutation group otherwise.
 ##  If the groups of this size are not installed, it will return an error.
 InstallGlobalFunction( SmallGroup, function( arg )
-    local inforec, g, size, i;
+    local inforec, g, size, i, nid;
 
     if Length( arg ) = 1 then
         if not IsList( arg[1] ) or Length( arg[1] ) <> 2 then
@@ -110,16 +110,17 @@ InstallGlobalFunction( SmallGroup, function( arg )
     if inforec = fail then
         Error( "the library of groups of size ", size, " is not available" );
     fi;
+    nid := i;
     if not SMALL_GROUPS_OLD_ORDER then
         if size = 5^7 then
-            i := SMALL_GROUPS_PERM5(i);
+            nid := SMALL_GROUPS_PERM5(i);
         elif size = 7^7 then
-            i := SMALL_GROUPS_PERM7(i);
+            nid := SMALL_GROUPS_PERM7(i);
         elif size = 11^7 then
-            i := SMALL_GROUPS_PERM11(i);
+            nid := SMALL_GROUPS_PERM11(i);
         fi;
     fi;
-    g := SMALL_GROUP_FUNCS[ inforec.func ]( size, i, inforec );
+    g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
     SetIdGroup( g, [ size, i ] );
     IsPGroup( g );
     return g;
