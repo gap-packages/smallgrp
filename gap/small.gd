@@ -6,10 +6,24 @@
 
 InfoIdgroup := NewInfoClass( "InfoIdgroup" );
 
-# whether to apply Bettina's permutations
-# to indices for groups of order 5^7, 7^7, and 11^7
+##  <#GAPDoc Label="SMALL_GROUPS_OLD_ORDER">
+##  <ManSection>
+##  <Var Name="SMALL_GROUPS_OLD_ORDER"/>
+##
+##  <Description>
+##  If set to <C>true</C>, then groups of order <M>5^7</M>
+##  <M>7^7</M>, and <M>11^7</M> are ordered in the way they were
+##  orderd up to version 1.0 of the package. If this variable is
+##  set to <C>false</C>, which is the default as of version 1.1,
+##  then the permutations <M>(2,30083)(3,30084)(4,30085)(5,30086)</M>,
+##  <M>(2,104599)(3,104600)(4,104601)(5,104602)</M>, and
+##  <M>(2,721053)(3,721054)(4,721055)(5,721059)</M> respectively
+##  are applied to the old ordering of groups of that order.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 SMALL_GROUPS_OLD_ORDER := false;
-#
+
 # Bettina's code:
 #    perm5  := [1];
 #    Append(perm5, [ 30083, 30084, 30085, 30086 ]);

@@ -148,5 +148,8 @@ groups has changed in the Small Groups library.
   <#Include Label="IdGap3SolvableGroup">
   <#Include Label="SmallGroupsInformation">
   <#Include Label="UnloadSmallGroupsData">
+  <#Include Label="SMALL_GROUPS_OLD_ORDER">
 </Section>
+
+
 </Chapter>
