@@ -42,7 +42,6 @@
 /src/pkgconfig.h
 /src/stamp-h1
 
-*.la
 src/*.lo
 
 /tmp/
