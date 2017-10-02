@@ -149,7 +149,13 @@
   
   [33X[0;0Yreturns the number of groups of order [3Xorder[103X.[133X
   
-  [1X1.2-5 IdSmallGroup[101X
+  [1X1.2-5 SelectSmallGroups[101X
+  
+  [29X[2XSelectSmallGroups[102X( [3Xargl[103X, [3Xall[103X, [3Xid[103X ) [32X function
+  
+  [33X[0;0Yuniversal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.[133X
+  
+  [1X1.2-6 IdSmallGroup[101X
   
   [29X[2XIdSmallGroup[102X( [3XG[103X ) [32X attribute
   [29X[2XIdGroup[102X( [3XG[103X ) [32X attribute
@@ -157,7 +163,7 @@
   [33X[0;0Yreturns  the  library  number  of  [3XG[103X;  that  is, the function returns a pair
   [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X where [3XG[103X is isomorphic to [10XSmallGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X.[133X
   
-  [1X1.2-6 IdsOfAllSmallGroups[101X
+  [1X1.2-7 IdsOfAllSmallGroups[101X
   
   [29X[2XIdsOfAllSmallGroups[102X( [3Xarg[103X ) [32X function
   
@@ -165,7 +171,7 @@
   prevent workspace overflows, if a large number of groups are expected in the
   output.[133X
   
-  [1X1.2-7 IdGap3SolvableGroup[101X
+  [1X1.2-8 IdGap3SolvableGroup[101X
   
   [29X[2XIdGap3SolvableGroup[102X( [3XG[103X ) [32X attribute
   [29X[2XGap3CatalogueIdGroup[102X( [3XG[103X ) [32X attribute
@@ -174,13 +180,13 @@
   that is, the function returns a pair [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X meaning that [3XG[103X is isomorphic
   to the group [10XSolvableGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X in [5XGAP[105X 3.[133X
   
-  [1X1.2-8 SmallGroupsInformation[101X
+  [1X1.2-9 SmallGroupsInformation[101X
   
   [29X[2XSmallGroupsInformation[102X( [3Xorder[103X ) [32X function
   
   [33X[0;0Yprints information on the groups of the specified order.[133X
   
-  [1X1.2-9 UnloadSmallGroupsData[101X
+  [1X1.2-10 UnloadSmallGroupsData[101X
   
   [29X[2XUnloadSmallGroupsData[102X(  ) [32X function
   
@@ -258,6 +264,18 @@
     [4X[28X  IdSmallGroup is available for this size. [128X[104X
     [4X[28X [128X[104X
   [4X[32X[104X
+  
+  [1X1.2-11 SMALL_GROUPS_OLD_ORDER[101X
+  
+  [29X[2XSMALL_GROUPS_OLD_ORDER[102X[32X global variable
+  
+  [33X[0;0YIf  set  to  [10Xtrue[110X, then groups of order [22X5^7[122X [22X7^7[122X, and [22X11^7[122X are ordered in the
+  way  they  were orderd up to version 1.0 of the package. If this variable is
+  set  to [10Xfalse[110X, which is the default as of version 1.1, then the permutations
+  [22X(2,30083)(3,30084)(4,30085)(5,30086)[122X,
+  [22X(2,104599)(3,104600)(4,104601)(5,104602)[122X,                                and
+  [22X(2,721053)(3,721054)(4,721055)(5,721059)[122X respectively are applied to the old
+  ordering of groups of that order.[133X
   
   [33X[0;0Y [133X
   

@@ -3,19 +3,21 @@
   [1XIndex[101X
   
   [2XAllSmallGroups[102X  1.2-2
-  [2XGap3CatalogueIdGroup[102X  1.2-7
-  [2XIdGap3SolvableGroup[102X  1.2-7
-  [2XIdGroup[102X  1.2-5
-  [2XIdSmallGroup[102X  1.2-5
-  [2XIdsOfAllSmallGroups[102X  1.2-6
+  [2XGap3CatalogueIdGroup[102X  1.2-8
+  [2XIdGap3SolvableGroup[102X  1.2-8
+  [2XIdGroup[102X  1.2-6
+  [2XIdSmallGroup[102X  1.2-6
+  [2XIdsOfAllSmallGroups[102X  1.2-7
   [2XNumberSmallGroups[102X  1.2-4
   [2XOneSmallGroup[102X  1.2-3
+  [2XSelectSmallGroups[102X  1.2-5
+  [2XSMALL_GROUPS_OLD_ORDER[102X  1.2-11
   [2XSmallGroup[102X (for a pair [ order, index ])  1.2-1
   [2XSmallGroup[102X (for group order and index)  1.2-1
-  [2XSmallGroupsInformation[102X  1.2-8
+  [2XSmallGroupsInformation[102X  1.2-9
   [10XThreeGroup[110X library  1.1
   [10XTwoGroup[110X library  1.1
-  [2XUnloadSmallGroupsData[102X  1.2-9
+  [2XUnloadSmallGroupsData[102X  1.2-10
   
   
   -------------------------------------------------------
