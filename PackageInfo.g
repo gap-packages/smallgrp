@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "smallgrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.1",
+Version := "1.2",
 Date := "02/10/2017", # dd/mm/yyyy format
 
 Persons := [
