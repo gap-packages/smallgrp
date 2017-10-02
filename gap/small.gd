@@ -109,6 +109,7 @@ DeclareGlobalFunction( "SmallGroup" );
 ##
 #F  SelectSmallGroups( <argl>, <all>, <id> )
 ##
+##  <#GAPDoc Label="SelectSmallGroups">
 ##  <ManSection>
 ##  <Func Name="SelectSmallGroups" Arg='argl, all, id'/>
 ##
@@ -116,6 +117,7 @@ DeclareGlobalFunction( "SmallGroup" );
 ##  universal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.
 ##  </Description>
 ##  </ManSection>
+##  <#/GAPDoc>
 ##
 DeclareGlobalFunction( "SelectSmallGroups" );
 

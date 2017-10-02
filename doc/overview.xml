@@ -143,6 +143,7 @@ groups has changed in the Small Groups library.
   <#Include Label="AllSmallGroups">
   <#Include Label="OneSmallGroup">
   <#Include Label="NumberSmallGroups">
+  <#Include Label="SelectSmallGroups">
   <#Include Label="IdSmallGroup">
   <#Include Label="IdsOfAllSmallGroups">
   <#Include Label="IdGap3SolvableGroup">

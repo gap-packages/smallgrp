@@ -19,3 +19,8 @@ gap> Length(gs) = Length(l);
 true
 
 #
+gap> List([2,3,4,5,6], x -> CodePcGroup(OneSmallGroup(128,Rank,x)));
+[ 3551146855211248660685, 2254033733550151, 2233919864839, 17448304643, 
+  134217729 ]
+
+#
