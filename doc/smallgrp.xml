@@ -4,7 +4,7 @@
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
 [
 <!ENTITY see '<Alt Only="LaTeX">$	o$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
-<!ENTITY smallgrp '<Package>smallgrp</Package>'>
+<!ENTITY smallgrp '<Package>SmallGrp</Package>'>
 ]
 >
 <Book Name="smallgrp">

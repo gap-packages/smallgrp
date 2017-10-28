@@ -1,5 +1,5 @@
 #
-# smallgrp: The GAP Small Groups Library
+# SmallGrp: The GAP Small Groups Library
 #
 # This file contains package meta data. For additional information on
 # the meaning and correct usage of these fields, please consult the
@@ -8,7 +8,7 @@
 #
 SetPackageInfo( rec(
 
-PackageName := "smallgrp",
+PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
 Version := "1.2",
 Date := "02/10/2017", # dd/mm/yyyy format
@@ -104,7 +104,11 @@ ArchiveFormats := ".tar.gz",
 ##
 Status := "dev",
 
-AbstractHTML   :=  "",
+AbstractHTML   :=  "The <span class=\"smallgrp\">SmallGrp</span> package \
+provides the library of groups of certain "small" orders. The groups are \
+sorted by their orders and they are listed up to isomorphism; that is, for \
+each of the available orders a complete and irredundant list of isomorphism \
+type representatives of groups is given.",
 
 PackageDoc := rec(
   BookName  := "smallgrp",
