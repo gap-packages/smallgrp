@@ -105,7 +105,7 @@ ArchiveFormats := ".tar.gz",
 Status := "dev",
 
 AbstractHTML   :=  "The <span class=\"smallgrp\">SmallGrp</span> package \
-provides the library of groups of certain "small" orders. The groups are \
+provides the library of groups of certain \"small\" orders. The groups are \
 sorted by their orders and they are listed up to isomorphism; that is, for \
 each of the available orders a complete and irredundant list of isomorphism \
 type representatives of groups is given.",
