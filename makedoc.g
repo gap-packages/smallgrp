@@ -11,4 +11,3 @@ AutoDoc(rec(
              scaffold := rec( includes := [ "overview.xml" ]
                             , bib := "manualbib.xml" ),
              autodoc := true ));
-PrintTo("VERSION", GAPInfo.PackageInfoCurrent.Version);
