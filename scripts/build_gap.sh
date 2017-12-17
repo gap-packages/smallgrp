@@ -1,39 +1,31 @@
 #!/usr/bin/env bash
 set -ex
 
-# build GAP in a subdirectory
-git clone --depth=2 https://github.com/gap-system/gap.git $GAPROOT
+# clone GAP into a subdirectory
+git clone --depth=2 -b ${GAPBRANCH:-master} https://github.com/gap-system/gap.git $GAPROOT
 cd $GAPROOT
-./autogen.sh
-./configure
-make -j4 V=1
-make bootstrap-pkg-minimal
 
-if [[ $ABI == 32 ]]
-then
-    CONFIGFLAGS="CFLAGS=-m32 LDFLAGS=-m32 LOPTS=-m32 CXXFLAGS=-m32"
+# for HPC-GAP, install ward, add suitable flags
+if [[ $HPCGAP = yes ]]; then
+  git clone https://github.com/gap-system/ward
+  cd ward
+  CFLAGS= LDFLAGS= ./build.sh
+  cd ..
+  GAP_CONFIGFLAGS="$GAP_CONFIGFLAGS --enable-hpcgap"
 fi
 
-# build some packages...
+# build GAP in a subdirectory
+./autogen.sh
+./configure $GAP_CONFIGFLAGS
+make -j4 V=1
+
+# download packages; instruct wget to retry several times if the
+# connection is refused, to work around intermittent failures
+make bootstrap-pkg-full WGET="wget -N --no-check-certificate --tries=5 --waitretry=5 --retry-connrefused"
+
+# build some packages (default is to build 'io' and 'profiling',
+# in order to generate coverage results)
 cd pkg
-
-# install latest version of io
-git clone https://github.com/gap-packages/io
-cd io
-./autogen.sh
-./configure $CONFIGFLAGS
-make -j4 V=1
-cd ..
-
-# install latest version of profiling
-git clone https://github.com/gap-packages/profiling
-cd profiling
-./autogen.sh
-# HACK to workaround problems when building with clang
-if [[ $CC = clang ]]
-then
-    export CXX=clang++
-fi
-./configure $CONFIGFLAGS
-make -j4 V=1
-cd ..
+for pkg in ${GAP_PKGS_TO_BUILD-io profiling}; do
+    ../bin/BuildPackages.sh --strict $pkg*
+done

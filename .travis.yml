@@ -1,4 +1,3 @@
-dist: trusty
 language: c
 env:
   global:
@@ -16,7 +15,7 @@ addons:
 
 matrix:
   include:
-    - env: CFLAGS="-O2"
+    - env: CFLAGS="-O2" CC=clang CXX=clang++
       compiler: clang
     - env: CFLAGS="-O2"
       compiler: gcc
@@ -27,10 +26,10 @@ branches:
     - master
 
 before_script:
+  - export GAPROOT="$HOME/gap"
   - scripts/build_gap.sh
-  - scripts/build_pkg.sh
 script:
-  - scripts/run_tests.sh
+  - scripts/build_pkg.sh && scripts/run_tests.sh
 after_script:
   - bash scripts/gather-coverage.sh
   - bash <(curl -s https://codecov.io/bash)
