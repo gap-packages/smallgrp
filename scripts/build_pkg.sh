@@ -5,19 +5,20 @@ set -ex
 export CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
 export LDFLAGS="$LDFLAGS -fprofile-arcs"
 
-if [[ $ABI = 32 ]]
-then
+if [[ $ABI = 32 ]]; then
     export CFLAGS="$CFLAGS -m32"
     export LDFLAGS="$LDFLAGS -m32"
 fi
 
 # build this package
-# ./autogen.sh
-# ./configure --with-gaproot=$GAPROOT
-# make -j4 V=1
+if [[ -x autogen.sh ]]; then
+    ./autogen.sh
+    ./configure --with-gaproot=$GAPROOT
+    make -j4 V=1
+elif [[ -x configure ]]; then
+    ./configure $GAPROOT
+    make -j4
+fi
 
-# ... and link it into GAP pkg dir
-ls
-ls $GAPROOT
-ls $GAPROOT/pkg
-ln -s $PWD $GAPROOT/pkg/
+# trick to allow the package directory to be used as a GAP root dir
+ln -s . pkg
