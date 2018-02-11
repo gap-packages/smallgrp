@@ -33,11 +33,12 @@ gap> notavailable;
 
 ################################################################################
 # Testing some of the data lists
+# Check ">=" condition when the data may be extended by the SglPPow package
 ################################################################################
-gap> Length(SMALL_GROUP_FUNCS);
-26
-gap> Number(SMALL_GROUP_FUNCS);
-24
+gap> Length(SMALL_GROUP_FUNCS) >= 26;
+true
+gap> Number(SMALL_GROUP_FUNCS) >= 24;
+true
 gap> Filtered([1 .. Length(SMALL_GROUP_FUNCS)],
 >             i -> not IsBound(SMALL_GROUP_FUNCS[i]));
 [ 15, 16 ]
@@ -55,10 +56,10 @@ gap> Number(NUMBER_SMALL_GROUPS_FUNCS);
 gap> Filtered([1 .. Length(NUMBER_SMALL_GROUPS_FUNCS)],
 >             i -> not IsBound(NUMBER_SMALL_GROUPS_FUNCS[i]));
 [ 1, 2, 4, 10, 12, 13, 14, 15, 16, 18, 19, 20, 22, 23 ]
-gap> Length(SELECT_SMALL_GROUPS_FUNCS);
-26
-gap> Number(SELECT_SMALL_GROUPS_FUNCS);
-21
+gap> Length(SELECT_SMALL_GROUPS_FUNCS) >= 26;
+true
+gap> Number(SELECT_SMALL_GROUPS_FUNCS) >= 21;
+true
 gap> Filtered([1 .. Length(SELECT_SMALL_GROUPS_FUNCS)],
 >             i -> not IsBound(SELECT_SMALL_GROUPS_FUNCS[i]));
 [ 13, 15, 16, 22, 23 ]
