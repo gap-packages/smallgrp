@@ -34,33 +34,29 @@ gap> notavailable;
 ################################################################################
 # Testing some of the data lists
 ################################################################################
-gap> Length(SMALL_GROUP_FUNCS);
-26
-gap> Number(SMALL_GROUP_FUNCS);
-24
-gap> Filtered([1 .. Length(SMALL_GROUP_FUNCS)],
->             i -> not IsBound(SMALL_GROUP_FUNCS[i]));
+gap> Length(SMALL_GROUP_FUNCS) >= 26;
+true
+gap> Number(SMALL_GROUP_FUNCS) >= 24;
+true
+gap> Filtered([1 .. 26], i -> not IsBound(SMALL_GROUP_FUNCS[i]));
 [ 15, 16 ]
-gap> Length(CODE_SMALL_GROUP_FUNCS);
-10
-gap> Number(CODE_SMALL_GROUP_FUNCS);
-3
-gap> Filtered([1 .. Length(CODE_SMALL_GROUP_FUNCS)],
->             i -> not IsBound(CODE_SMALL_GROUP_FUNCS[i]));
-[ 1, 2, 3, 4, 5, 6, 7 ]
-gap> Length(NUMBER_SMALL_GROUPS_FUNCS);
-26
-gap> Number(NUMBER_SMALL_GROUPS_FUNCS);
-12
-gap> Filtered([1 .. Length(NUMBER_SMALL_GROUPS_FUNCS)],
->             i -> not IsBound(NUMBER_SMALL_GROUPS_FUNCS[i]));
+gap> Length(CODE_SMALL_GROUP_FUNCS) >= 10;
+true
+gap> Number(CODE_SMALL_GROUP_FUNCS) >= 3;
+true
+gap> Filtered([1 .. 26], i -> IsBound(CODE_SMALL_GROUP_FUNCS[i]));
+[ 8, 9, 10 ]
+gap> Length(NUMBER_SMALL_GROUPS_FUNCS) >= 26;
+true
+gap> Number(NUMBER_SMALL_GROUPS_FUNCS) >= 12;
+true
+gap> Filtered([1 .. 26], i -> not IsBound(NUMBER_SMALL_GROUPS_FUNCS[i]));
 [ 1, 2, 4, 10, 12, 13, 14, 15, 16, 18, 19, 20, 22, 23 ]
-gap> Length(SELECT_SMALL_GROUPS_FUNCS);
-26
-gap> Number(SELECT_SMALL_GROUPS_FUNCS);
-21
-gap> Filtered([1 .. Length(SELECT_SMALL_GROUPS_FUNCS)],
->             i -> not IsBound(SELECT_SMALL_GROUPS_FUNCS[i]));
+gap> Length(SELECT_SMALL_GROUPS_FUNCS) >= 26;
+true
+gap> Number(SELECT_SMALL_GROUPS_FUNCS) >= 21;
+true
+gap> Filtered([1 .. 26], i -> not IsBound(SELECT_SMALL_GROUPS_FUNCS[i]));
 [ 13, 15, 16, 22, 23 ]
 
 ################################################################################
