@@ -3,19 +3,13 @@
 gap> START_TEST("smlinfo.tst");
 
 # SMALL_GROUPS_INFORMATION
-gap> SMALL_GROUPS_INFORMATION;
-[ function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end,, 
-  function( size, smav, num ) ... end,,, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end,,, 
-  function( size, smav, num ) ... end, function( size, smav, num ) ... end, 
-  function( size, smav, num ) ... end ]
-gap> Filtered([1 .. Length(SMALL_GROUPS_INFORMATION)],
+gap> Length(SMALL_GROUPS_INFORMATION) >= 26;
+true
+gap> Number(SMALL_GROUPS_INFORMATION) >= 21;
+true
+gap> ForAll(SMALL_GROUPS_INFORMATION, IsFunction);
+true
+gap> Filtered([1 .. 26],
 >             i -> not IsBound(SMALL_GROUPS_INFORMATION[i]));
 [ 13, 15, 16, 22, 23 ]
 
