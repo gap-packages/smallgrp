@@ -1,6 +1,6 @@
 name: smallgrp
 version: 1.2
-date: 02/10/2017
+date: 2017-10-02
 description: |
     The GAP Small Groups Library
 
@@ -32,7 +32,6 @@ downloads:
       url: https://github.com/gap-packages/smallgrp/releases/download/v1.2/smallgrp-1.2.tar.gz
 
 abstract: |
-    
 
 status: dev
 doc-html: doc/chap0.html
