@@ -24,3 +24,11 @@ gap> List([2,3,4,5,6], x -> CodePcGroup(OneSmallGroup(128,Rank,x)));
   134217729 ]
 
 #
+gap> for i in [1..100] do
+>   n:=Random(1, NrSmallGroups(512));
+>   G:=SmallGroup(512,n);
+>   id:=IdStandardPresented512Group(G);
+>   if id <> [512,n] then Error("IdStandardPresented512Group failed for ", n); fi;
+> od;
+
+#
