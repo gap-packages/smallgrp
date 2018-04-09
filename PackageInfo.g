@@ -1,5 +1,5 @@
 #
-# smallgrp: The GAP Small Groups Library
+# SmallGrp: The GAP Small Groups Library
 #
 # This file contains package meta data. For additional information on
 # the meaning and correct usage of these fields, please consult the
@@ -8,10 +8,10 @@
 #
 SetPackageInfo( rec(
 
-PackageName := "smallgrp",
+PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.2",
-Date := "02/10/2017", # dd/mm/yyyy format
+Version := "1.3",
+Date := "09/04/2018", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -62,20 +62,11 @@ Persons := [
     Institution := "University of Auckland",
   ),
   rec(
-    IsAuthor := false,
-    IsMaintainer := true,
-    FirstNames := "Markus",
-    LastName := "Pfeiffer",
-    WWWHome := "http://www.morphism.de/~markusp/",
-    Email := "markus.pfeiffer@st-andrews.ac.uk",
-    PostalAddress := Concatenation(
-               "School of Computer Science\n",
-               "University of St Andrews\n",
-               "Jack Cole Building, North Haugh\n",
-               "St Andrews, Fife, KY16 9SX\n",
-               "United Kingdom" ),
-    Place := "St Andrews",
-    Institution := "University of St Andrews",
+    LastName      := "GAP Team",
+    FirstNames    := "The",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    Email         := "support@gap-system.org",
   ),
 ],
 
@@ -104,7 +95,11 @@ ArchiveFormats := ".tar.gz",
 ##
 Status := "dev",
 
-AbstractHTML   :=  "",
+AbstractHTML   :=  "The <span class=\"smallgrp\">SmallGrp</span> package \
+provides the library of groups of certain \"small\" orders. The groups are \
+sorted by their orders and they are listed up to isomorphism; that is, for \
+each of the available orders a complete and irredundant list of isomorphism \
+type representatives of groups is given.",
 
 PackageDoc := rec(
   BookName  := "smallgrp",

@@ -93,8 +93,8 @@
   E. A. O'Brien. A survey on this topic and an account of the history of group
   constructions  can  be found in [BEO02]. Further detailed information on the
   construction  of  this  library  is  available in [New77], [O'B90], [O'B91],
-  [BE99a],  [BE99b],  [BE01],  [BEO01],  [EO99a],  [EO99b],  [NOV04], [Gir03],
-  [DE05],  [OV05].  The  Small Groups library incorporates the [5XGAP[105X 3 libraries
+  [BE99a],  [BE99b],  [BE01],  [BEO01],  [EO99a],  [EO99b], [NOVL04], [Gir03],
+  [DE05],  [OVL05].  The Small Groups library incorporates the [5XGAP[105X 3 libraries
   [10XTwoGroup[110X and [10XThreeGroup[110X. The data from these libraries was directly included
   into  the  Small  Groups  library, and the ordering there was preserved. The
   Small  Groups library replaces the Gap 3 library of solvable groups of order
@@ -106,8 +106,8 @@
   
   [1X1.2-1 SmallGroup[101X
   
-  [29X[2XSmallGroup[102X( [3Xorder[103X, [3Xi[103X ) [32X function
-  [29X[2XSmallGroup[102X( [3Xpair[103X ) [32X function
+  [33X[1;0Y[29X[2XSmallGroup[102X( [3Xorder[103X, [3Xi[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XSmallGroup[102X( [3Xpair[103X ) [32X function[133X
   
   [33X[0;0Yreturns  the  [3Xi[103X-th  group  of  order [3Xorder[103X in the catalogue. If the group is
   solvable,  it  will  be  given as a PcGroup; otherwise it will be given as a
@@ -116,7 +116,7 @@
   
   [1X1.2-2 AllSmallGroups[101X
   
-  [29X[2XAllSmallGroups[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XAllSmallGroups[102X( [3Xarg[103X ) [32X function[133X
   
   [33X[0;0Yreturns  all groups with certain properties as specified by [3Xarg[103X. If [3Xarg[103X is a
   number  [22Xn[122X,  then  this  function returns all groups of order [22Xn[122X. However, the
@@ -138,34 +138,34 @@
   
   [1X1.2-3 OneSmallGroup[101X
   
-  [29X[2XOneSmallGroup[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XOneSmallGroup[102X( [3Xarg[103X ) [32X function[133X
   
   [33X[0;0Yreturns one group with certain properties as specified by [3Xarg[103X. The permitted
-  arguments are those supported by [2XAllSmallGroups[102X ([14XReference: AllSmallGroups[114X).[133X
+  arguments are those supported by [2XAllSmallGroups[102X ([14XAllSmallGroups???[114X).[133X
   
   [1X1.2-4 NumberSmallGroups[101X
   
-  [29X[2XNumberSmallGroups[102X( [3Xorder[103X ) [32X function
+  [33X[1;0Y[29X[2XNumberSmallGroups[102X( [3Xorder[103X ) [32X function[133X
   
   [33X[0;0Yreturns the number of groups of order [3Xorder[103X.[133X
   
   [1X1.2-5 SelectSmallGroups[101X
   
-  [29X[2XSelectSmallGroups[102X( [3Xargl[103X, [3Xall[103X, [3Xid[103X ) [32X function
+  [33X[1;0Y[29X[2XSelectSmallGroups[102X( [3Xargl[103X, [3Xall[103X, [3Xid[103X ) [32X function[133X
   
   [33X[0;0Yuniversal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.[133X
   
   [1X1.2-6 IdSmallGroup[101X
   
-  [29X[2XIdSmallGroup[102X( [3XG[103X ) [32X attribute
-  [29X[2XIdGroup[102X( [3XG[103X ) [32X attribute
+  [33X[1;0Y[29X[2XIdSmallGroup[102X( [3XG[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XIdGroup[102X( [3XG[103X ) [32X attribute[133X
   
   [33X[0;0Yreturns  the  library  number  of  [3XG[103X;  that  is, the function returns a pair
   [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X where [3XG[103X is isomorphic to [10XSmallGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X.[133X
   
   [1X1.2-7 IdsOfAllSmallGroups[101X
   
-  [29X[2XIdsOfAllSmallGroups[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XIdsOfAllSmallGroups[102X( [3Xarg[103X ) [32X function[133X
   
   [33X[0;0Ysimilar  to  [10XAllSmallGroups[110X  but  returns  ids  instead  of groups. This may
   prevent workspace overflows, if a large number of groups are expected in the
@@ -173,8 +173,8 @@
   
   [1X1.2-8 IdGap3SolvableGroup[101X
   
-  [29X[2XIdGap3SolvableGroup[102X( [3XG[103X ) [32X attribute
-  [29X[2XGap3CatalogueIdGroup[102X( [3XG[103X ) [32X attribute
+  [33X[1;0Y[29X[2XIdGap3SolvableGroup[102X( [3XG[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XGap3CatalogueIdGroup[102X( [3XG[103X ) [32X attribute[133X
   
   [33X[0;0Yreturns the catalogue number of [3XG[103X in the [5XGAP[105X 3 catalogue of solvable groups;
   that is, the function returns a pair [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X meaning that [3XG[103X is isomorphic
@@ -182,13 +182,13 @@
   
   [1X1.2-9 SmallGroupsInformation[101X
   
-  [29X[2XSmallGroupsInformation[102X( [3Xorder[103X ) [32X function
+  [33X[1;0Y[29X[2XSmallGroupsInformation[102X( [3Xorder[103X ) [32X function[133X
   
   [33X[0;0Yprints information on the groups of the specified order.[133X
   
   [1X1.2-10 UnloadSmallGroupsData[101X
   
-  [29X[2XUnloadSmallGroupsData[102X(  ) [32X function
+  [33X[1;0Y[29X[2XUnloadSmallGroupsData[102X(  ) [32X function[133X
   
   [33X[0;0Y[5XGAP[105X loads all necessary data from the library automatically, but it does not
   delete  the  data  from  the  workspace  again.  Usually,  this  will be not
@@ -267,7 +267,7 @@
   
   [1X1.2-11 SMALL_GROUPS_OLD_ORDER[101X
   
-  [29X[2XSMALL_GROUPS_OLD_ORDER[102X[32X global variable
+  [33X[1;0Y[29X[2XSMALL_GROUPS_OLD_ORDER[102X[32X global variable[133X
   
   [33X[0;0YIf  set  to  [10Xtrue[110X, then groups of order [22X5^7[122X [22X7^7[122X, and [22X11^7[122X are ordered in the
   way  they  were orderd up to version 1.0 of the package. If this variable is

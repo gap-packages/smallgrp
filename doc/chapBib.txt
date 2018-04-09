@@ -40,7 +40,7 @@
   in  Math.,  [19X573[119X,  Berlin  (1977),  73–84.  Lecture Notes in Math., Vol. 573,
   ((Lecture Notes in Mathematics, Vol. 573)).
   
-  [[20XNOV04[120X]  [16XNewman,  M.  F.,  O'Brien, E. A. and Vaughan-Lee, M. R.[116X, [17XGroups and
+  [[20XNOVL04[120X]  [16XNewman,  M.  F., O'Brien, E. A. and Vaughan-Lee, M. R.[116X, [17XGroups and
   nilpotent  Lie  rings whose order is the sixth power of a prime[117X, [18XJ. Algebra[118X,
   [19X278[119X, 1 (2004), 383–401.
   
@@ -50,7 +50,7 @@
   [[20XO'B91[120X]  [16XO'Brien, E. A.[116X, [17XThe groups of order 256[117X, [18XJ. Algebra[118X, [19X143[119X, 1 (1991),
   219–235.
   
-  [[20XOV05[120X]  [16XO'Brien, E. A. and Vaughan-Lee, M. R.[116X, [17XThe groups with order p^7 for
+  [[20XOVL05[120X] [16XO'Brien, E. A. and Vaughan-Lee, M. R.[116X, [17XThe groups with order p^7 for
   odd prime p[117X, [18XJ. Algebra[118X, [19X292[119X, 1 (2005), 243–258.
   
   
