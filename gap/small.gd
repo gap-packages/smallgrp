@@ -4,7 +4,7 @@
 ##                                               Bettina Eick, Eamonn O'Brien
 ##
 
-InfoIdgroup := NewInfoClass( "InfoIdgroup" );
+DeclareInfoClass( "InfoIdgroup" );
 
 ##  <#GAPDoc Label="SMALL_GROUPS_OLD_ORDER">
 ##  <ManSection>
