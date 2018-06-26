@@ -30,6 +30,11 @@ gap> notavailable;
   3726, 3744, 3750, 3752, 3760, 3768, 3780, 3784, 3792, 3800, 3808, 3816, 
   3834, 3840, 3848, 3861, 3864, 3872, 3880, 3888, 3912, 3915, 3920, 3936, 
   3942, 3944, 3952, 3960, 3969, 3976, 3984, 3993, 3996, 4000 ]
+gap> notavailable2 := Filtered([1..4000], x -> not SmallGroupsAvailable(x));;
+gap> notavailable = notavailable2;
+true
+gap> Filtered([1..4000], i -> NumberSmallGroupsAvailable(i) <> SmallGroupsAvailable(i));
+[ 1024 ]
 
 ################################################################################
 # Testing some of the data lists
@@ -202,6 +207,9 @@ gap> notavailable;
   4752, 4760, 4776, 4784, 4800, 4806, 4816, 4824, 4840, 4848, 4860, 4872, 
   4875, 4880, 4888, 4896, 4914, 4920, 4928, 4944, 4960, 4968, 4984, 4992, 
   4995, 5000 ]
+gap> notavailable2 := Filtered([1..5000], x -> not IdGroupsAvailable(x));;
+gap> notavailable = notavailable2;
+true
 
 ################################################################################
 # IdGroup
