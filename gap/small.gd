@@ -72,13 +72,47 @@ UnbindGlobal( "SMALL_AVAILABLE" );
 ##  <Func Name="SMALL_AVAILABLE" Arg='order'/>
 ##
 ##  <Description>
-##  returns fail if the library of groups of <A>order</A> is not installed. 
-##  Otherwise a record with some information about the construction of the 
-##  groups of <A>order</A> is returned.
+##  returns fail if the library of groups of order <A>order</A> is not installed.
+##  Otherwise a record with some information about the construction of the
+##  groups of order <A>order</A> is returned.
 ##  </Description>
 ##  </ManSection>
 ##
 DeclareGlobalFunction( "SMALL_AVAILABLE" );
+
+#############################################################################
+##
+#F  SmallGroupsAvailable( <order> )
+##
+##  <#GAPDoc Label="SmallGroupsAvailable">
+##  <ManSection>
+##  <Func Name="SmallGroupsAvailable" Arg='order'/>
+##
+##  <Description>
+##  returns <C>true</C> if the library of groups of order <A>order</A> is
+##  installed, and <C>false</C> otherwise.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "SmallGroupsAvailable" );
+
+#############################################################################
+##
+#F  NumberSmallGroupsAvailable( <order> )
+##
+##  <#GAPDoc Label="NumberSmallGroupsAvailable">
+##  <ManSection>
+##  <Func Name="NumberSmallGroupsAvailable" Arg='order'/>
+##
+##  <Description>
+##  returns <C>true</C> if the number of groups of order <A>order</A> is known, and
+##  <C>false</C> otherwise.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "NumberSmallGroupsAvailable" );
 
 UnbindGlobal( "SmallGroup" );
 
@@ -328,13 +362,30 @@ UnbindGlobal( "ID_AVAILABLE" );
 ##  <Func Name="ID_AVAILABLE" Arg='order'/>
 ##
 ##  <Description>
-##  returns false, if the identification routines for of groups of <A>order</A> is
-##  not installed. Otherwise a record with some information about the 
-##  identification of groups of <A>order</A> is returned.
+##  returns false, if the identification routines for groups of order
+##  <A>order</A> is not installed. Otherwise a record with some information
+##  about the identification of groups of order <A>order</A> is returned.
 ##  </Description>
 ##  </ManSection>
 ##
 DeclareGlobalFunction( "ID_AVAILABLE" );
+
+#############################################################################
+##
+#F  IdGroupsAvailable( <order> )
+##
+##  <#GAPDoc Label="IdGroupsAvailable">
+##  <ManSection>
+##  <Func Name="IdGroupsAvailable" Arg='order'/>
+##
+##  <Description>
+##  returns <C>true</C>, if the identification routines for groups of
+##  order <A>order</A> are installed, otherwise returns <C>false</C>. 
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "IdGroupsAvailable");
 
 UnbindGlobal( "IdGroup" );
 
