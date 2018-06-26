@@ -37,6 +37,20 @@ InstallGlobalFunction( SMALL_AVAILABLE, function( size )
     return fail;
 end );
 
+InstallGlobalFunction( SmallGroupsAvailable,
+function(order)
+    return SMALL_AVAILABLE(order) <> fail;
+end);
+
+InstallGlobalFunction( NumberSmallGroupsAvailable,
+function(order)
+    if order = 1024 then
+        return true;
+    else
+        return SmallGroupsAvailable(order);
+    fi;
+end);
+
 #############################################################################
 ##
 #F  SMALL_GROUP_FUNCS
@@ -261,6 +275,11 @@ InstallGlobalFunction( ID_AVAILABLE, function( size )
     od;
     return fail;
 end );
+
+InstallGlobalFunction( IdGroupsAvailable,
+function(order)
+    return ID_AVAILABLE(order) <> fail;
+end);
 
 #############################################################################
 ##
