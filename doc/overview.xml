@@ -135,6 +135,15 @@ Groups library replaces the Gap 3 library of solvable groups of order at
 most 100. However, both the organisation and data descriptions of these
 groups has changed in the Small Groups library.
 <P/>
+
+<P>
+As of version 1.4 of this library, the arrangement of groups is the same as in
+Magma, Version 2.23. In earlier releases of this library, the arrangement in
+orders <M>p^7</M>, <M>p=3,5,7,11</M> disagreed. An attempt to fix this was
+instated on version 1.1 of this library, but a wrong permutation was used. If
+you would like to refer to index numbers for these orders in older versions of
+the library, see <Ref Sect="SMALL_GROUPS_OLD_ORDER"/>). The arrangement of
+all other orders has always agreed and has remained stable.
 </Section>
 
 <Section Label="Reference">
