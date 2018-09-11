@@ -112,12 +112,14 @@ InstallGlobalFunction( SmallGroup, function( arg )
     fi;
     nid := i;
     if not SMALL_GROUPS_OLD_ORDER then
-        if size = 5^7 then
-            nid := SMALL_GROUPS_PERM5(i);
+        if size = 3^7 then
+            nid := SMALLGP_PERM3(i);
+        elif size = 5^7 then
+            nid := SMALLGP_PERM5(i);
         elif size = 7^7 then
-            nid := SMALL_GROUPS_PERM7(i);
+            nid := SMALLGP_PERM7(i);
         elif size = 11^7 then
-            nid := SMALL_GROUPS_PERM11(i);
+            nid := SMALLGP_PERM11(i);
         fi;
     fi;
     g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
@@ -310,12 +312,15 @@ function( G )
     id := ID_GROUP_FUNCS[ inforec.func ]( G, inforec );
 
     if not SMALL_GROUPS_OLD_ORDER then
-        if size = 5^7 then
-            id := SMALL_GROUPS_PERM5(id);
+        if size = 3^7 then
+          id:=First([1..NrSmallGroups(3^7)],x->SMALLGP_PERM3(x)=id);
+        elif size = 5^7 then
+          # note that the permutation is not an involution!
+          id:=First([1..NrSmallGroups(5^7)],x->SMALLGP_PERM5(x)=id);
         elif size = 7^7 then
-            id := SMALL_GROUPS_PERM7(id);
+          id:=First([1..NrSmallGroups(7^7)],x->SMALLGP_PERM7(x)=id);
         elif size = 11^7 then
-            id := SMALL_GROUPS_PERM11(id);
+          id:=First([1..NrSmallGroups(11^7)],x->SMALLGP_PERM11(x)=id);
         fi;
     fi;
     return [ size, id ];
