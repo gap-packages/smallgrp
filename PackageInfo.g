@@ -12,6 +12,7 @@ PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
 Version := "1.3",
 Date := "09/04/2018", # dd/mm/yyyy format
+License := "Artistic-2.0",
 
 Persons := [
   rec(
