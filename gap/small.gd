@@ -177,7 +177,7 @@ UnbindGlobal( "OneGroup" );
 ##  <Description>
 ##  returns one group with certain properties as specified by <A>arg</A>.
 ##  The permitted arguments are those supported by
-##  <Ref BookName="ref" Func="AllSmallGroups"/>.
+##  <Ref Func="AllSmallGroups"/>.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
