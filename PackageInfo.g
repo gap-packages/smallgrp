@@ -95,7 +95,7 @@ ArchiveFormats := ".tar.gz",
 ##    "dev"           for development versions of packages
 ##    "other"         for all other packages
 ##
-Status := "dev",
+Status := "deposited",
 
 AbstractHTML   :=  "The <span class=\"smallgrp\">SmallGrp</span> package \
 provides the library of groups of certain \"small\" orders. The groups are \
