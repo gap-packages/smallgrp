@@ -136,7 +136,6 @@ most 100. However, both the organisation and data descriptions of these
 groups has changed in the Small Groups library.
 <P/>
 
-<P>
 As of version 1.4 of this library, the arrangement of groups is the same as in
 Magma, Version 2.23. In earlier releases of this library, the arrangement in
 orders <M>p^7</M>, <M>p=3,5,7,11</M> disagreed. An attempt to fix this was
