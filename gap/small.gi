@@ -26,6 +26,10 @@ SMALL_AVAILABLE_FUNCS := [ ];
 InstallGlobalFunction( SMALL_AVAILABLE, function( size )
     local l, r;
 
+    if not IsPosInt( size ) then
+      Error( "<size> must be a positive integer");
+    fi;
+
     for l in [ 1 .. Length( SMALL_AVAILABLE_FUNCS ) ] do
         if IsBound( SMALL_AVAILABLE_FUNCS[ l ] ) then
             r := SMALL_AVAILABLE_FUNCS[ l ]( size );
@@ -186,7 +190,7 @@ InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
             idList := argl[ i ];
         elif ( not hasSizes ) and IsList( argl[ i ] ) then
             Append( sizes, argl[ i ] );
-        elif ( not hasSizes ) and IsInt( argl[ i ] ) then
+        elif ( not hasSizes ) and IsPosInt( argl[ i ] ) then
             Add( sizes, argl[ i ] );
         elif ( not hasSizes ) and sizes <> [] and IsFunction( argl[i] ) then
             hasSizes     := true;
