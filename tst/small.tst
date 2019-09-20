@@ -30,6 +30,10 @@ gap> notavailable;
   3726, 3744, 3750, 3752, 3760, 3768, 3780, 3784, 3792, 3800, 3808, 3816, 
   3834, 3840, 3848, 3861, 3864, 3872, 3880, 3888, 3912, 3915, 3920, 3936, 
   3942, 3944, 3952, 3960, 3969, 3976, 3984, 3993, 3996, 4000 ]
+gap> SmallGroupsAvailable(0);
+Error, <size> must be a positive integer
+gap> SmallGroupsAvailable(-10);
+Error, <size> must be a positive integer
 gap> notavailable2 := Filtered([1..4000], x -> not SmallGroupsAvailable(x));;
 gap> notavailable = notavailable2;
 true
@@ -117,6 +121,16 @@ gap> OneSmallGroup();
 Error, Variable: 'vals' must have an assigned value
 gap> OneSmallGroup(Size);
 Error, Variable: 'vals' must have an assigned value
+gap> OneSmallGroup(0);
+Error, usage: AllSmallGroups / OneGroup(
+             Size, [ sizes ],
+             function1, [ values1 ],
+             function2, [ values2 ], ... )
+gap> OneSmallGroup(-10);
+Error, usage: AllSmallGroups / OneGroup(
+             Size, [ sizes ],
+             function1, [ values1 ],
+             function2, [ values2 ], ... )
 gap> OneSmallGroup(IsAbelian);
 Error, usage: AllSmallGroups / OneGroup(
              Size, [ sizes ],
