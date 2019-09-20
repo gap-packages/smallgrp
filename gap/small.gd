@@ -62,8 +62,6 @@ end;
 BindGlobal("READ_SMALL_FUNCS", [ ]);
 BindGlobal("READ_IDLIB_FUNCS", [ ]);
 
-UnbindGlobal( "SMALL_AVAILABLE" );
-
 #############################################################################
 ##
 #F  SMALL_AVAILABLE( <order> )
@@ -78,6 +76,7 @@ UnbindGlobal( "SMALL_AVAILABLE" );
 ##  </Description>
 ##  </ManSection>
 ##
+UnbindGlobal( "SMALL_AVAILABLE" );
 DeclareGlobalFunction( "SMALL_AVAILABLE" );
 
 #############################################################################
@@ -114,8 +113,6 @@ DeclareGlobalFunction( "SmallGroupsAvailable" );
 ##
 DeclareGlobalFunction( "NumberSmallGroupsAvailable" );
 
-UnbindGlobal( "SmallGroup" );
-
 #############################################################################
 ##
 #F  SmallGroup( <order>, <i> )
@@ -137,6 +134,7 @@ UnbindGlobal( "SmallGroup" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+UnbindGlobal( "SmallGroup" );
 DeclareGlobalFunction( "SmallGroup" );
 
 #############################################################################
@@ -154,8 +152,6 @@ DeclareGlobalFunction( "SmallGroup" );
 ##  <#/GAPDoc>
 ##
 DeclareGlobalFunction( "SelectSmallGroups" );
-
-UnbindGlobal( "AllGroups" );
 
 #############################################################################
 ##
@@ -193,12 +189,11 @@ UnbindGlobal( "AllGroups" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-AllSmallGroups := function( arg )
+UnbindGlobal( "AllGroups" );
+BindGlobal( "AllSmallGroups", function( arg )
     return SelectSmallGroups( arg, true, false );
-end;
+end );
 DeclareSynonym( "AllGroups", AllSmallGroups );
-
-UnbindGlobal( "OneGroup" );
 
 #############################################################################
 ##
@@ -216,12 +211,11 @@ UnbindGlobal( "OneGroup" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-OneSmallGroup := function( arg )
+UnbindGlobal( "OneGroup" );
+BindGlobal( "OneSmallGroup", function( arg )
     return SelectSmallGroups( arg, false, false );
-end;
+end );
 DeclareSynonym( "OneGroup", OneSmallGroup );
-
-UnbindGlobal( "IdsOfAllGroups" );
 
 #############################################################################
 ##
@@ -239,13 +233,11 @@ UnbindGlobal( "IdsOfAllGroups" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-IdsOfAllGroups := function( arg )
+UnbindGlobal( "IdsOfAllGroups" );
+BindGlobal( "IdsOfAllGroups", function( arg )
     return SelectSmallGroups( arg, true, true );
-end;
-
+end );
 DeclareSynonym( "IdsOfAllSmallGroups", IdsOfAllGroups );
-
-UnbindGlobal( "NumberSmallGroups" );
 
 #############################################################################
 ##
@@ -261,6 +253,7 @@ UnbindGlobal( "NumberSmallGroups" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+UnbindGlobal( "NumberSmallGroups" );
 DeclareGlobalFunction( "NumberSmallGroups" );
 DeclareSynonym( "NrSmallGroups",NumberSmallGroups );
 
@@ -353,7 +346,6 @@ DeclareSynonym( "NrSmallGroups",NumberSmallGroups );
 ##
 DeclareGlobalFunction( "UnloadSmallGroupsData" );
 
-UnbindGlobal( "ID_AVAILABLE" );
 #############################################################################
 ##
 #F  ID_AVAILABLE( <order> )
@@ -368,6 +360,7 @@ UnbindGlobal( "ID_AVAILABLE" );
 ##  </Description>
 ##  </ManSection>
 ##
+UnbindGlobal( "ID_AVAILABLE" );
 DeclareGlobalFunction( "ID_AVAILABLE" );
 
 #############################################################################
@@ -387,8 +380,6 @@ DeclareGlobalFunction( "ID_AVAILABLE" );
 ##
 DeclareGlobalFunction( "IdGroupsAvailable");
 
-UnbindGlobal( "IdGroup" );
-
 #############################################################################
 ##
 #A  IdSmallGroup( <G> )
@@ -406,10 +397,9 @@ UnbindGlobal( "IdGroup" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+UnbindGlobal( "IdGroup" );
 DeclareAttribute( "IdGroup", IsGroup );
 DeclareSynonym( "IdSmallGroup",IdGroup );
-
-UnbindGlobal( "IdStandardPresented512Group" );
 
 #############################################################################
 ##
@@ -429,6 +419,7 @@ UnbindGlobal( "IdStandardPresented512Group" );
 ##  </Description>
 ##  </ManSection>
 ##
+UnbindGlobal( "IdStandardPresented512Group" );
 DeclareGlobalFunction( "IdStandardPresented512Group" );
 
 #############################################################################
@@ -446,8 +437,6 @@ DeclareGlobalFunction( "IdStandardPresented512Group" );
 ##  <#/GAPDoc>
 ##
 DeclareGlobalFunction( "SmallGroupsInformation" );
-
-UnbindGlobal( "Gap3CatalogueIdGroup" );
 
 #############################################################################
 ##  
@@ -469,6 +458,7 @@ UnbindGlobal( "Gap3CatalogueIdGroup" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+UnbindGlobal( "Gap3CatalogueIdGroup" );
 DeclareAttribute( "Gap3CatalogueIdGroup", IsGroup );
 DeclareSynonym( "IdGap3SolvableGroup", Gap3CatalogueIdGroup );
 
@@ -514,9 +504,3 @@ DeclareAttribute( "FrattinifactorSize", IsGroup );
 ##  </ManSection>
 ##
 DeclareAttribute( "FrattinifactorId", IsGroup );
-
-
-#############################################################################
-##
-#E
-
