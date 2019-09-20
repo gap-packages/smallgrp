@@ -23,7 +23,7 @@ DeclareInfoClass( "InfoIdgroup" );
 ##  and the permutations <M>(2,30083)(3,30084)(4,30085)(5,30086)</M>,
 ##  <M>(2,104599)(3,104600)(4,104601)(5,104602)</M>, and
 ##  <M>(2,721053)(3,721054)(4,721055)(5,721059)</M> respectively
-##  was used.
+##  were used.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
