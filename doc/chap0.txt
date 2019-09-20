@@ -6,25 +6,23 @@
                          [1X The [5XGAP[105X Small Groups Library [101X
   
   
-                                      1.3
+                                      1.4
   
   
-                                  9 April 2018
+                               21 September 2019
   
-  
-                                  Bettina Eick
   
                                Hans Ulrich Besche
   
+                                  Bettina Eick
+  
                                  Eamonn O'Brien
   
-                                  The GAP Team
   
   
-  
-  Bettina Eick
-      Email:    [7Xmailto:beick@tu-bs.de[107X
-      Homepage: [7Xhttp://www.icm.tu-bs.de/~beick[107X
+  Hans Ulrich Besche
+      Email:    [7Xmailto:hubesche@tu-bs.de[107X
+      Homepage: [7Xhttp://www-public.tu-bs.de/~hubesche/[107X
       Address:  [33X[0;14YInstitut Computational Mathematics[133X
                 [33X[0;14YTU Braunschweig[133X
                 [33X[0;14YPockelsstr. 14[133X
@@ -32,10 +30,11 @@
                 [33X[0;14YGermany[133X
   
   
-  Hans Ulrich Besche
-      Email:    [7Xmailto:hubesche@tu-bs.de[107X
-      Homepage: [7Xhttp://www-public.tu-bs.de/~hubesche/[107X
-      Address:  [33X[0;14YInstitut Computational MathematicsTU Braunschweig[133X
+  Bettina Eick
+      Email:    [7Xmailto:beick@tu-bs.de[107X
+      Homepage: [7Xhttp://www.icm.tu-bs.de/~beick[107X
+      Address:  [33X[0;14YInstitut Computational Mathematics[133X
+                [33X[0;14YTU Braunschweig[133X
                 [33X[0;14YPockelsstr. 14[133X
                 [33X[0;14YD-38106 Braunschweig[133X
                 [33X[0;14YGermany[133X
@@ -51,8 +50,6 @@
                 [33X[0;14YNew Zealand[133X
   
   
-  The GAP Team
-      Email:    [7Xmailto:support@gap-system.org[107X
   
   -------------------------------------------------------
   
@@ -63,16 +60,19 @@
     1.1 [33X[0;0YOverview[133X
     1.2 [33X[0;0YFunction Reference[133X
       1.2-1 SmallGroup
-      1.2-2 AllSmallGroups
-      1.2-3 OneSmallGroup
-      1.2-4 NumberSmallGroups
-      1.2-5 SelectSmallGroups
-      1.2-6 IdSmallGroup
-      1.2-7 IdsOfAllSmallGroups
-      1.2-8 IdGap3SolvableGroup
-      1.2-9 SmallGroupsInformation
-      1.2-10 UnloadSmallGroupsData
-      1.2-11 SMALL_GROUPS_OLD_ORDER
+      1.2-2 SmallGroupsAvailable
+      1.2-3 AllSmallGroups
+      1.2-4 OneSmallGroup
+      1.2-5 NumberSmallGroups
+      1.2-6 NumberSmallGroupsAvailable
+      1.2-7 SelectSmallGroups
+      1.2-8 IdSmallGroup
+      1.2-9 IdGroupsAvailable
+      1.2-10 IdsOfAllSmallGroups
+      1.2-11 IdGap3SolvableGroup
+      1.2-12 SmallGroupsInformation
+      1.2-13 UnloadSmallGroupsData
+      1.2-14 SMALL_GROUPS_OLD_ORDER
   
   
   [32X

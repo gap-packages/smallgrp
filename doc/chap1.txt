@@ -101,6 +101,14 @@
   at  most  100. However, both the organisation and data descriptions of these
   groups has changed in the Small Groups library.[133X
   
+  [33X[0;0YAs  of version 1.4 of this library, the arrangement of groups is the same as
+  in Magma, Version 2.23. In earlier releases of this library, the arrangement
+  in  orders [22Xp^7[122X, [22Xp=3,5,7,11[122X disagreed. An attempt to fix this was instated on
+  version  1.1 of this library, but a wrong permutation was used. If you would
+  like  to  refer  to  index numbers for these orders in older versions of the
+  library,  see [14X1.2-14[114X). The arrangement of all other orders has always agreed
+  and has remained stable.[133X
+  
   
   [1X1.2 [33X[0;0YFunction Reference[133X[101X
   
@@ -114,7 +122,29 @@
   permutation  group.  If  the  groups  of  order [3Xorder[103X are not installed, the
   function reports an error and enters a break loop.[133X
   
-  [1X1.2-2 AllSmallGroups[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( 60, 4 );[127X[104X
+    [4X[28X<pc group of size 60 with 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XStructureDescription( G );[127X[104X
+    [4X[28X"C60"[128X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( 60, 5 );[127X[104X
+    [4X[28XGroup([ (1,2,3,4,5), (1,2,3) ])[128X[104X
+    [4X[25Xgap>[125X [27XStructureDescription( G );[127X[104X
+    [4X[28X"A5"[128X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( 768, 1000000 );[127X[104X
+    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup( [768, 1000000] );[127X[104X
+    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-2 SmallGroupsAvailable[101X
+  
+  [33X[1;0Y[29X[2XSmallGroupsAvailable[102X( [3Xorder[103X ) [32X function[133X
+  
+  [33X[0;0Yreturns [10Xtrue[110X if the library of groups of order [3Xorder[103X is installed, and [10Xfalse[110X
+  otherwise.[133X
+  
+  [1X1.2-3 AllSmallGroups[101X
   
   [33X[1;0Y[29X[2XAllSmallGroups[102X( [3Xarg[103X ) [32X function[133X
   
@@ -136,26 +166,75 @@
   which  have  more  than three prime factors, except those of order [22X512[122X, [22X768[122X,
   [22X1024[122X, [22X1152[122X, [22X1536[122X, [22X1920[122X and those of order [22Xp^n ⋅ q > 1000[122X with [22Xn > 2[122X.[133X
   
-  [1X1.2-3 OneSmallGroup[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XAllSmallGroups( 6 );[127X[104X
+    [4X[28X[ <pc group of size 6 with 2 generators>, [128X[104X
+    [4X[28X  <pc group of size 6 with 2 generators> ][128X[104X
+    [4X[25Xgap>[125X [27XAllSmallGroups( 60, IsNilpotentGroup );[127X[104X
+    [4X[28X[ <pc group of size 60 with 4 generators>, [128X[104X
+    [4X[28X  <pc group of size 60 with 4 generators> ][128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-4 OneSmallGroup[101X
   
   [33X[1;0Y[29X[2XOneSmallGroup[102X( [3Xarg[103X ) [32X function[133X
   
   [33X[0;0Yreturns one group with certain properties as specified by [3Xarg[103X. The permitted
-  arguments are those supported by [2XAllSmallGroups[102X ([14XAllSmallGroups???[114X).[133X
+  arguments are those supported by [2XAllSmallGroups[102X ([14X1.2-3[114X).[133X
   
-  [1X1.2-4 NumberSmallGroups[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := OneSmallGroup( 6, IsAbelian );[127X[104X
+    [4X[28X<pc group of size 6 with 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XStructureDescription( G );[127X[104X
+    [4X[28X"C6"[128X[104X
+    [4X[25Xgap>[125X [27XG := OneSmallGroup( 6, IsAbelian, false );[127X[104X
+    [4X[28X<pc group of size 6 with 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XStructureDescription( G );[127X[104X
+    [4X[28X"S3"[128X[104X
+    [4X[25Xgap>[125X [27XG := OneSmallGroup( Size, [1..1000], IsSolvableGroup, false );[127X[104X
+    [4X[28XGroup([ (1,2,3,4,5), (1,2,3) ])[128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-5 NumberSmallGroups[101X
   
   [33X[1;0Y[29X[2XNumberSmallGroups[102X( [3Xorder[103X ) [32X function[133X
   
   [33X[0;0Yreturns the number of groups of order [3Xorder[103X.[133X
   
-  [1X1.2-5 SelectSmallGroups[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 512 );[127X[104X
+    [4X[28X10494213[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 2^8 * 23 );[127X[104X
+    [4X[28X1083472[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 4096 );[127X[104X
+    [4X[28XError, the library of groups of size 4096 is not available[128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-6 NumberSmallGroupsAvailable[101X
+  
+  [33X[1;0Y[29X[2XNumberSmallGroupsAvailable[102X( [3Xorder[103X ) [32X function[133X
+  
+  [33X[0;0Yreturns  [10Xtrue[110X  if  the  number  of groups of order [3Xorder[103X is known, and [10Xfalse[110X
+  otherwise.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroupsAvailable( 100 );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 100 );[127X[104X
+    [4X[28X16[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroupsAvailable( 4096 );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XNumberSmallGroups( 4096 );[127X[104X
+    [4X[28XError, the library of groups of size 4096 is not available[128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-7 SelectSmallGroups[101X
   
   [33X[1;0Y[29X[2XSelectSmallGroups[102X( [3Xargl[103X, [3Xall[103X, [3Xid[103X ) [32X function[133X
   
   [33X[0;0Yuniversal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.[133X
   
-  [1X1.2-6 IdSmallGroup[101X
+  [1X1.2-8 IdSmallGroup[101X
   
   [33X[1;0Y[29X[2XIdSmallGroup[102X( [3XG[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XIdGroup[102X( [3XG[103X ) [32X attribute[133X
@@ -163,7 +242,21 @@
   [33X[0;0Yreturns  the  library  number  of  [3XG[103X;  that  is, the function returns a pair
   [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X where [3XG[103X is isomorphic to [10XSmallGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X.[133X
   
-  [1X1.2-7 IdsOfAllSmallGroups[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup( GL( 2,3 ) );[127X[104X
+    [4X[28X[ 48, 29 ][128X[104X
+    [4X[25Xgap>[125X [27XIdSmallGroup( Group( (1,2,3,4),(4,5) ) );[127X[104X
+    [4X[28X[ 120, 34 ][128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-9 IdGroupsAvailable[101X
+  
+  [33X[1;0Y[29X[2XIdGroupsAvailable[102X( [3Xorder[103X ) [32X function[133X
+  
+  [33X[0;0Yreturns  [10Xtrue[110X,  if the identification routines for groups of order [3Xorder[103X are
+  installed, otherwise returns [10Xfalse[110X.[133X
+  
+  [1X1.2-10 IdsOfAllSmallGroups[101X
   
   [33X[1;0Y[29X[2XIdsOfAllSmallGroups[102X( [3Xarg[103X ) [32X function[133X
   
@@ -171,7 +264,18 @@
   prevent workspace overflows, if a large number of groups are expected in the
   output.[133X
   
-  [1X1.2-8 IdGap3SolvableGroup[101X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XIdsOfAllSmallGroups( 60, IsNilpotentGroup );[127X[104X
+    [4X[28X[ [ 60, 4 ], [ 60, 13 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIdsOfAllSmallGroups( 60, IsNilpotentGroup, false );[127X[104X
+    [4X[28X[ [ 60, 1 ], [ 60, 2 ], [ 60, 3 ], [ 60, 5 ], [ 60, 6 ], [ 60, 7 ], [128X[104X
+    [4X[28X  [ 60, 8 ], [ 60, 9 ], [ 60, 10 ], [ 60, 11 ], [ 60, 12 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIdsOfAllSmallGroups( Size, 60, IsSupersolvableGroup, true );[127X[104X
+    [4X[28X[ [ 60, 1 ], [ 60, 2 ], [ 60, 3 ], [ 60, 4 ], [ 60, 6 ], [ 60, 7 ], [128X[104X
+    [4X[28X  [ 60, 8 ], [ 60, 10 ], [ 60, 11 ], [ 60, 12 ], [ 60, 13 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X1.2-11 IdGap3SolvableGroup[101X
   
   [33X[1;0Y[29X[2XIdGap3SolvableGroup[102X( [3XG[103X ) [32X attribute[133X
   [33X[1;0Y[29X[2XGap3CatalogueIdGroup[102X( [3XG[103X ) [32X attribute[133X
@@ -180,69 +284,11 @@
   that is, the function returns a pair [10X[[3Xorder[103X[10X, [3Xi[103X[10X][110X meaning that [3XG[103X is isomorphic
   to the group [10XSolvableGroup( [3Xorder[103X[10X, [3Xi[103X[10X )[110X in [5XGAP[105X 3.[133X
   
-  [1X1.2-9 SmallGroupsInformation[101X
+  [1X1.2-12 SmallGroupsInformation[101X
   
   [33X[1;0Y[29X[2XSmallGroupsInformation[102X( [3Xorder[103X ) [32X function[133X
   
   [33X[0;0Yprints information on the groups of the specified order.[133X
-  
-  [1X1.2-10 UnloadSmallGroupsData[101X
-  
-  [33X[1;0Y[29X[2XUnloadSmallGroupsData[102X(  ) [32X function[133X
-  
-  [33X[0;0Y[5XGAP[105X loads all necessary data from the library automatically, but it does not
-  delete  the  data  from  the  workspace  again.  Usually,  this  will be not
-  necessary,  since  the  data is stored in a compressed format. However, if a
-  large  number  of  groups  from  the library have been loaded, then the user
-  might wish to remove the data from the workspace and this can be done by the
-  above function call.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XG := SmallGroup( 768, 1000000 );[127X[104X
-    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
-    [4X[25Xgap>[125X [27XG := SmallGroup( [768, 1000000] );[127X[104X
-    [4X[28X<pc group of size 768 with 9 generators>[128X[104X
-    [4X[25Xgap>[125X [27XAllSmallGroups( 6 );[127X[104X
-    [4X[28X[ <pc group of size 6 with 2 generators>, [128X[104X
-    [4X[28X  <pc group of size 6 with 2 generators> ][128X[104X
-    [4X[25Xgap>[125X [27XAllSmallGroups( Size, 120, IsSolvableGroup, false );[127X[104X
-    [4X[28X[ Group([128X[104X
-    [4X[28X    [ (1,2,4,8)(3,6,9,5)(7,12,13,17)(10,14,11,15)(16,20,21,24)(18,22,[128X[104X
-    [4X[28X        19,23), (1,3,7)(2,5,10)(4,9,13)(6,11,8)(12,16,20)(14,18,[128X[104X
-    [4X[28X        22)(15,19,23)(17,21,24) ]), Group([ (1,2,3,4,5), (1,2) ]), [128X[104X
-    [4X[28X  Group([ (1,2,3,5,4), (1,3)(2,4)(6,7) ]) ][128X[104X
-    [4X[25Xgap>[125X [27XG := OneSmallGroup( 120, IsNilpotentGroup, false );[127X[104X
-    [4X[28X<pc group of size 120 with 5 generators>[128X[104X
-    [4X[25Xgap>[125X [27XIdSmallGroup(G);[127X[104X
-    [4X[28X[ 120, 1 ][128X[104X
-    [4X[25Xgap>[125X [27XG := OneSmallGroup( Size, [1..1000], IsSolvableGroup, false );[127X[104X
-    [4X[28XGroup([ (1,2,3,4,5), (1,2,3) ])[128X[104X
-    [4X[25Xgap>[125X [27XIdSmallGroup(G);[127X[104X
-    [4X[28X[ 60, 5 ][128X[104X
-    [4X[25Xgap>[125X [27XUnloadSmallGroupsData();[127X[104X
-    [4X[25Xgap>[125X [27XIdSmallGroup( GL( 2,3 ) );[127X[104X
-    [4X[28X[ 48, 29 ][128X[104X
-    [4X[25Xgap>[125X [27XIdSmallGroup( Group( (1,2,3,4),(4,5) ) );[127X[104X
-    [4X[28X[ 120, 34 ][128X[104X
-    [4X[25Xgap>[125X [27XIdsOfAllSmallGroups( Size, 60, IsSupersolvableGroup, true );[127X[104X
-    [4X[28X[ [ 60, 1 ], [ 60, 2 ], [ 60, 3 ], [ 60, 4 ], [ 60, 6 ], [ 60, 7 ], [128X[104X
-    [4X[28X  [ 60, 8 ], [ 60, 10 ], [ 60, 11 ], [ 60, 12 ], [ 60, 13 ] ][128X[104X
-    [4X[25Xgap>[125X [27XNumberSmallGroups( 512 );[127X[104X
-    [4X[28X10494213[128X[104X
-    [4X[25Xgap>[125X [27XNumberSmallGroups( 2^8 * 23 );[127X[104X
-    [4X[28X1083472[128X[104X
-  [4X[32X[104X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XNumberSmallGroups( 2^9 * 23 );[127X[104X
-    [4X[28XError, the library of groups of size 11776 is not available called from[128X[104X
-    [4X[28X<function>( <arguments> ) called from read-eval-loop[128X[104X
-    [4X[28XEntering break read-eval-print loop ...[128X[104X
-    [4X[28Xyou can 'quit;' to quit to outer loop, or[128X[104X
-    [4X[28Xyou can 'return;' to continue[128X[104X
-    [4X[26Xbrk>[126X [27Xquit;[127X[104X
-    [4X[28Xgap>[128X[104X
-  [4X[32X[104X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XSmallGroupsInformation( 32 );[127X[104X
@@ -265,17 +311,35 @@
     [4X[28X [128X[104X
   [4X[32X[104X
   
-  [1X1.2-11 SMALL_GROUPS_OLD_ORDER[101X
+  [1X1.2-13 UnloadSmallGroupsData[101X
+  
+  [33X[1;0Y[29X[2XUnloadSmallGroupsData[102X(  ) [32X function[133X
+  
+  [33X[0;0Y[5XGAP[105X loads all necessary data from the library automatically, but it does not
+  delete  the  data  from  the  workspace  again.  Usually,  this  will be not
+  necessary,  since  the  data is stored in a compressed format. However, if a
+  large  number  of  groups  from  the library have been loaded, then the user
+  might wish to remove the data from the workspace and this can be done by the
+  above function call.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XUnloadSmallGroupsData();[127X[104X
+  [4X[32X[104X
+  
+  [1X1.2-14 SMALL_GROUPS_OLD_ORDER[101X
   
   [33X[1;0Y[29X[2XSMALL_GROUPS_OLD_ORDER[102X[32X global variable[133X
   
-  [33X[0;0YIf  set  to  [10Xtrue[110X, then groups of order [22X5^7[122X [22X7^7[122X, and [22X11^7[122X are ordered in the
-  way  they  were orderd up to version 1.0 of the package. If this variable is
-  set  to [10Xfalse[110X, which is the default as of version 1.1, then the permutations
+  [33X[0;0YIf  set to [10Xtrue[110X, then groups of order [22X3^7[122X, [22X5^7[122X, [22X7^7[122X, and [22X11^7[122X are ordered in
+  the  way they were orderd up to version 1.0 of the package. If this variable
+  is  set  to  [10Xfalse[110X, which is the default as of version 1.4, then a different
+  ordering,  that  agrees  with  the  one  in Magma version 2.23, is used. The
+  functions  [10XSMALLGP_PERM[110X[22Xx[122X,  with  [22Xx=3,5,7,11[122X,  give  the  old  index position
+  corresponding  to  a new index position. In releases 1.1-1.3 a misunderstood
+  ordering,    based    on    the    old   ordering   and   the   permutations
   [22X(2,30083)(3,30084)(4,30085)(5,30086)[122X,
   [22X(2,104599)(3,104600)(4,104601)(5,104602)[122X,                                and
-  [22X(2,721053)(3,721054)(4,721055)(5,721059)[122X respectively are applied to the old
-  ordering of groups of that order.[133X
+  [22X(2,721053)(3,721054)(4,721055)(5,721059)[122X respectively were used.[133X
   
   [33X[0;0Y [133X
   
