@@ -106,8 +106,8 @@
   in  orders [22Xp^7[122X, [22Xp=3,5,7,11[122X disagreed. An attempt to fix this was instated on
   version  1.1 of this library, but a wrong permutation was used. If you would
   like  to  refer  to  index numbers for these orders in older versions of the
-  library,  see [14X1.2-14[114X). The arrangement of all other orders has always agreed
-  and has remained stable.[133X
+  library,  see [2XSMALL_GROUPS_OLD_ORDER[102X ([14X1.2-14[114X)). The arrangement of all other
+  orders has always agreed and has remained stable.[133X
   
   
   [1X1.2 [33X[0;0YFunction Reference[133X[101X

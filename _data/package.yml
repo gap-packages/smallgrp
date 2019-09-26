@@ -1,6 +1,6 @@
 name: SmallGrp
-version: 1.4
-date: 2019-09-21
+version: 1.4.1
+date: 2019-09-26
 description: |
     The GAP Small Groups Library
 
@@ -29,7 +29,7 @@ packageinfo: https://gap-packages.github.io/smallgrp/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.4/SmallGrp-1.4.tar.gz
+      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.4.1/SmallGrp-1.4.1.tar.gz
 
 abstract: |
     The <span class="smallgrp">SmallGrp</span> package provides the library of groups of certain "small" orders. The groups are sorted by their orders and they are listed up to isomorphism; that is, for each of the available orders a complete and irredundant list of isomorphism type representatives of groups is given.

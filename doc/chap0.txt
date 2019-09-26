@@ -6,10 +6,10 @@
                          [1X The [5XGAP[105X Small Groups Library [101X
   
   
-                                      1.4
+                                     1.4.1
   
   
-                               21 September 2019
+                               26 September 2019
   
   
                                Hans Ulrich Besche
