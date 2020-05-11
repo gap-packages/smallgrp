@@ -136,13 +136,13 @@ gap> AllSmallGroups(Size, type20, IsAbelian, true);
   <pc group of size 371293 with 5 generators>, 
   <pc group of size 371293 with 5 generators> ]
 
-#
+# We avoid viewing the cyclic groups to avoid the grammatically incorrect output
+# '1 generators' given by older versions of GAP
 gap> type21 := [15625, 117649];;
 gap> List(type21, NrSmallGroups);
 [ 684, 860 ]
-gap> AllSmallGroups(Size, type21, IsAbelian);
-[ <pc group of size 15625 with 1 generators>, 
-  <pc group of size 15625 with 2 generators>, 
+gap> AllSmallGroups(Size, type21, x -> IsAbelian(x) and not IsCyclic(x));
+[ <pc group of size 15625 with 2 generators>, 
   <pc group of size 15625 with 2 generators>, 
   <pc group of size 15625 with 3 generators>, 
   <pc group of size 15625 with 2 generators>, 
@@ -152,7 +152,6 @@ gap> AllSmallGroups(Size, type21, IsAbelian);
   <pc group of size 15625 with 4 generators>, 
   <pc group of size 15625 with 5 generators>, 
   <pc group of size 15625 with 6 generators>, 
-  <pc group of size 117649 with 1 generators>, 
   <pc group of size 117649 with 2 generators>, 
   <pc group of size 117649 with 2 generators>, 
   <pc group of size 117649 with 3 generators>, 
