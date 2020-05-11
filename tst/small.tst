@@ -143,12 +143,14 @@ Error, usage: AllSmallGroups / OneGroup(
              function2, [ values2 ], ... )
 gap> OneSmallGroup(128);
 <pc group of size 128 with 7 generators>
-gap> OneSmallGroup(Size, 3);
-<pc group of size 3 with 1 generators>
+gap> G := OneSmallGroup(Size, 3);;
+gap> Size(G) = 3 and Length(GeneratorsOfGroup(G)) = 1;
+true
 gap> OneSmallGroup(Size, [4, 5]);
 <pc group of size 4 with 2 generators>
-gap> OneSmallGroup(2, 3);
-<pc group of size 2 with 1 generators>
+gap> G := OneSmallGroup(2, 3);;
+gap> Size(G) = 2 and Length(GeneratorsOfGroup(G)) = 1;
+true
 gap> OneSmallGroup(2, Size);
 fail
 gap> StructureDescription(OneSmallGroup(4, [1]));
@@ -302,8 +304,7 @@ gap> FrattinifactorSize(CyclicGroup(IsPermGroup, 2));
 2
 gap> FrattinifactorId(CyclicGroup(IsPermGroup, 2));
 [ 2, 1 ]
-gap> C2 := CyclicGroup(2);
-<pc group of size 2 with 1 generators>
+gap> C2 := CyclicGroup(2);;
 gap> H := DirectProduct(C2, C2, C2, C2, C2, C2, C2, C2, C2);
 <pc group of size 512 with 9 generators>
 gap> StructureDescription(H);

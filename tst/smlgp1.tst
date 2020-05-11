@@ -216,7 +216,8 @@ true
 gap> IsIdenticalObj(SELECT_SMALL_GROUPS_FUNCS[7], f);
 true
 
-#
+# We avoid viewing cyclic groups to avoid the grammatically incorrect output
+# '1 generators' given by older versions of GAP
 gap> SELECT_SMALL_GROUPS_FUNCS[1](7, [IsCyclic], [[true]],
 > SMALL_AVAILABLE_FUNCS[1](7), true, true, fail);
 [ [ 7, 1 ] ]
@@ -229,12 +230,14 @@ fail
 gap> SELECT_SMALL_GROUPS_FUNCS[1](7, [Size], [[7]],
 > SMALL_AVAILABLE_FUNCS[1](7), true, true, [1]);
 [ [ 7, 1 ] ]
-gap> SELECT_SMALL_GROUPS_FUNCS[1](7, [Size], [[7]],
-> SMALL_AVAILABLE_FUNCS[1](7), true, false, [1]);
-[ <pc group of size 7 with 1 generators> ]
-gap> SELECT_SMALL_GROUPS_FUNCS[1](7, [Size], [[7]],
-> SMALL_AVAILABLE_FUNCS[1](7), false, false, [1]);
-<pc group of size 7 with 1 generators>
+gap> x := SELECT_SMALL_GROUPS_FUNCS[1](7, [Size], [[7]],
+> SMALL_AVAILABLE_FUNCS[1](7), true, false, [1]);;
+gap> Length(x) = 1 and Size(x[1]) = 7 and Length(GeneratorsOfGroup(x[1])) = 1;
+true
+gap> x := SELECT_SMALL_GROUPS_FUNCS[1](7, [Size], [[7]],
+> SMALL_AVAILABLE_FUNCS[1](7), false, false, [1]);;
+gap> Size(x) = 7 and Length(GeneratorsOfGroup(x)) = 1;
+true
 gap> SELECT_SMALL_GROUPS_FUNCS[5](45, [IsCyclic], [[true]],
 > SMALL_AVAILABLE_FUNCS[1](45), false, false, fail);
 <pc group of size 45 with 3 generators>
