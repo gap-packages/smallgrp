@@ -351,7 +351,7 @@ end;
 ##                  
 SELECT_SMALL_GROUPS_FUNCS[ 11 ] := function( size, funcs, vals, inforec, all,
                                              id, idList)
-    local result, i, g, ok, j, range;
+    local result, i, g, ok, j, range, nid;
 
     if not IsBound( inforec.number ) then
         inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
@@ -368,7 +368,20 @@ SELECT_SMALL_GROUPS_FUNCS[ 11 ] := function( size, funcs, vals, inforec, all,
         range := idList;
     fi;
     for i in range do                         
-        g := SMALL_GROUP_FUNCS[ inforec.func ]( size, i, inforec );
+        nid:=i;
+        if not SMALL_GROUPS_OLD_ORDER then
+            if size = 3^7 then
+                nid := SMALLGP_PERM3(i);
+            elif size = 5^7 then
+                nid := SMALLGP_PERM5(i);
+            elif size = 7^7 then
+                nid := SMALLGP_PERM7(i);
+            elif size = 11^7 then
+                nid := SMALLGP_PERM11(i);
+            fi;
+        fi;
+
+        g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
         SetIdGroup( g, [ size, i ] );
         ok := true;
         for j in [ 1 .. Length( funcs ) ] do

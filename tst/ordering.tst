@@ -9,6 +9,10 @@ gap> Order(PermList(List([1..NrSmallGroups(7^7)],SMALLGP_PERM7)));
 19308644774268106374
 gap> Order(PermList(List([1..NrSmallGroups(11^7)],SMALLGP_PERM11)));
 4900488315903285563137680
+gap> G := SmallGroup(5^7,656);;
+gap> H := OneSmallGroup(Size,5^7,G->IdGroup(G)[2],656);;
+gap> GapInputPcGroup(G,"G")=GapInputPcGroup(H,"G");
+true
 
 #
 gap> STOP_TEST("ordering,tst");;
