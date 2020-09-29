@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gap-packages/smallgrp.svg?branch=master)](https://travis-ci.org/gap-packages/smallgrp)
+[![Build Status](https://travis-ci.com/gap-packages/smallgrp.svg?branch=master)](https://travis-ci.com/gap-packages/smallgrp)
 [![Code Coverage](https://codecov.io/github/gap-packages/smallgrp/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/smallgrp)
 
 # The SmallGrp GAP package
