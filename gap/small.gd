@@ -646,7 +646,7 @@ DeclareGlobalFunction( "SmallGroup" );
 ##  <Func Name="SelectSmallGroups" Arg='argl, all, id'/>
 ##
 ##  <Description>
-##  universal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.
+##  universal function for 'AllSmallGroups', 'OneSmallGroup' and 'IdsOfAllSmallGroups'.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

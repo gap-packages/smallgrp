@@ -200,7 +200,7 @@ InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
             vals         := [ [ ] ];
             pos          := 1;
         elif not hasSizes then 
-            Error( "usage: AllSmallGroups / OneGroup(\n",
+            Error( "usage: AllSmallGroups / OneSmallGroup(\n",
                    "             Size, [ sizes ],\n",
                    "             function1, [ values1 ],\n",
                    "             function2, [ values2 ], ... )" );
@@ -237,7 +237,7 @@ InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
     for size in sizes do
         inforec := SMALL_AVAILABLE( size );
         if inforec = fail then
-            Error( "AllSmallGroups / OneGroup: groups of order ", size,
+            Error( "AllSmallGroups / OneSmallGroup: groups of order ", size,
                    " not available" );
         fi;
         gs := SELECT_SMALL_GROUPS_FUNCS[ inforec.func ]

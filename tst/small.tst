@@ -122,22 +122,22 @@ Error, Variable: 'vals' must have an assigned value
 gap> OneSmallGroup(Size);
 Error, Variable: 'vals' must have an assigned value
 gap> OneSmallGroup(0);
-Error, usage: AllSmallGroups / OneGroup(
+Error, usage: AllSmallGroups / OneSmallGroup(
              Size, [ sizes ],
              function1, [ values1 ],
              function2, [ values2 ], ... )
 gap> OneSmallGroup(-10);
-Error, usage: AllSmallGroups / OneGroup(
+Error, usage: AllSmallGroups / OneSmallGroup(
              Size, [ sizes ],
              function1, [ values1 ],
              function2, [ values2 ], ... )
 gap> OneSmallGroup(IsAbelian);
-Error, usage: AllSmallGroups / OneGroup(
+Error, usage: AllSmallGroups / OneSmallGroup(
              Size, [ sizes ],
              function1, [ values1 ],
              function2, [ values2 ], ... )
 gap> OneSmallGroup(IsAbelian, true);
-Error, usage: AllSmallGroups / OneGroup(
+Error, usage: AllSmallGroups / OneSmallGroup(
              Size, [ sizes ],
              function1, [ values1 ],
              function2, [ values2 ], ... )
@@ -160,7 +160,7 @@ gap> StructureDescription(OneSmallGroup(4, [2]));
 gap> List(AllSmallGroups(4, [1, 2]), StructureDescription);
 [ "C4", "C2 x C2" ]
 gap> OneSmallGroup(1024);
-Error, AllSmallGroups / OneGroup: groups of order 1024 not available
+Error, AllSmallGroups / OneSmallGroup: groups of order 1024 not available
 gap> G := OneSmallGroup(Size, 8, IsAbelian, true, IsCyclic, [false, true]);;
 gap> StructureDescription(G);
 "C8"
