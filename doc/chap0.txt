@@ -6,10 +6,10 @@
                          [1X The [5XGAP[105X Small Groups Library [101X
   
   
-                                     1.4.1
+                                     1.4.2
   
   
-                               26 September 2019
+                                18 December 2020
   
   
                                Hans Ulrich Besche
@@ -20,22 +20,12 @@
   
   
   
-  Hans Ulrich Besche
-      Email:    [7Xmailto:hubesche@tu-bs.de[107X
-      Homepage: [7Xhttp://www-public.tu-bs.de/~hubesche/[107X
-      Address:  [33X[0;14YInstitut Computational Mathematics[133X
-                [33X[0;14YTU Braunschweig[133X
-                [33X[0;14YPockelsstr. 14[133X
-                [33X[0;14YD-38106 Braunschweig[133X
-                [33X[0;14YGermany[133X
-  
-  
   Bettina Eick
       Email:    [7Xmailto:beick@tu-bs.de[107X
-      Homepage: [7Xhttp://www.icm.tu-bs.de/~beick[107X
-      Address:  [33X[0;14YInstitut Computational Mathematics[133X
+      Homepage: [7Xhttp://www.iaa.tu-bs.de/beick[107X
+      Address:  [33X[0;14YInstitut Analysis und Algebra[133X
                 [33X[0;14YTU Braunschweig[133X
-                [33X[0;14YPockelsstr. 14[133X
+                [33X[0;14YUniversitätsplatz 2[133X
                 [33X[0;14YD-38106 Braunschweig[133X
                 [33X[0;14YGermany[133X
   

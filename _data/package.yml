@@ -1,14 +1,13 @@
 name: SmallGrp
-version: 1.4.1
-date: 2019-09-26
+version: 1.4.2
+date: 2020-12-18
 description: |
     The GAP Small Groups Library
 
 authors:
     - name: Hans Ulrich Besche
-      url: http://www-public.tu-bs.de/~hubesche/
     - name: Bettina Eick
-      url: http://www.icm.tu-bs.de/~beick
+      url: http://www.iaa.tu-bs.de/beick
     - name: Eamonn O'Brien
       url: http://www.math.auckland.ac.nz/~obrien
 
@@ -29,11 +28,11 @@ packageinfo: https://gap-packages.github.io/smallgrp/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.4.1/SmallGrp-1.4.1.tar.gz
+      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.4.2/SmallGrp-1.4.2.tar.gz
 
 abstract: |
     The <span class="smallgrp">SmallGrp</span> package provides the library of groups of certain "small" orders. The groups are sorted by their orders and they are listed up to isomorphism; that is, for each of the available orders a complete and irredundant list of isomorphism type representatives of groups is given.
 
-status: deposited
+status: accepted
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf

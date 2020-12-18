@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.4.1",
-Date := "26/09/2019", # dd/mm/yyyy format
+Version := "1.4.2",
+Date := "18/12/2020", # dd/mm/yyyy format
 License := "Artistic-2.0",
 
 Persons := [
@@ -20,30 +20,20 @@ Persons := [
     IsMaintainer := false,
     FirstNames := "Hans Ulrich",
     LastName := "Besche",
-    WWWHome := "http://www-public.tu-bs.de/~hubesche/",
-    Email := "hubesche@tu-bs.de",
-    PostalAddress := Concatenation(
-               "Institut Computational Mathematics\n",
-               "TU Braunschweig\n",
-               "Pockelsstr. 14\n",
-               " D-38106 Braunschweig\n",
-               " Germany" ),
-    Place := "Braunschweig",
-    Institution := "TU Braunschweig",
   ),
   rec(
     IsAuthor := true,
     IsMaintainer := false,
     FirstNames := "Bettina",
     LastName := "Eick",
-    WWWHome := "http://www.icm.tu-bs.de/~beick",
-    Email := "beick@tu-bs.de",
+    Email         := "beick@tu-bs.de",
+    WWWHome       := "http://www.iaa.tu-bs.de/beick",
     PostalAddress := Concatenation(
-               "Institut Computational Mathematics\n",
+               "Institut Analysis und Algebra\n",
                "TU Braunschweig\n",
-               "Pockelsstr. 14\n",
-               " D-38106 Braunschweig\n",
-               " Germany" ),
+               "Universitätsplatz 2\n",
+               "D-38106 Braunschweig\n",
+               "Germany" ),
     Place := "Braunschweig",
     Institution := "TU Braunschweig",
   ),
@@ -95,7 +85,9 @@ ArchiveFormats := ".tar.gz",
 ##    "dev"           for development versions of packages
 ##    "other"         for all other packages
 ##
-Status := "deposited",
+Status := "accepted",
+CommunicatedBy := "Mike Newman (Canberra)",
+AcceptDate := "02/2002",
 
 AbstractHTML   :=  "The <span class=\"smallgrp\">SmallGrp</span> package \
 provides the library of groups of certain \"small\" orders. The groups are \

@@ -9,6 +9,7 @@
   [2XIdGroupsAvailable[102X 1.2-9 
   [2XIdSmallGroup[102X 1.2-8 
   [2XIdsOfAllSmallGroups[102X 1.2-10 
+  [2XNrSmallGroups[102X 1.2-5 
   [2XNumberSmallGroups[102X 1.2-5 
   [2XNumberSmallGroupsAvailable[102X 1.2-6 
   [2XOneSmallGroup[102X 1.2-4 

@@ -198,6 +198,7 @@
   [1X1.2-5 NumberSmallGroups[101X
   
   [33X[1;0Y[29X[2XNumberSmallGroups[102X( [3Xorder[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XNrSmallGroups[102X( [3Xorder[103X ) [32X function[133X
   
   [33X[0;0Yreturns the number of groups of order [3Xorder[103X.[133X
   
@@ -232,7 +233,8 @@
   
   [33X[1;0Y[29X[2XSelectSmallGroups[102X( [3Xargl[103X, [3Xall[103X, [3Xid[103X ) [32X function[133X
   
-  [33X[0;0Yuniversal function for 'AllGroups', 'OneGroup' and 'IdsOfAllGroups'.[133X
+  [33X[0;0Yuniversal     function    for    'AllSmallGroups',    'OneSmallGroup'    and
+  'IdsOfAllSmallGroups'.[133X
   
   [1X1.2-8 IdSmallGroup[101X
   
@@ -328,7 +330,7 @@
   
   [1X1.2-14 SMALL_GROUPS_OLD_ORDER[101X
   
-  [33X[1;0Y[29X[2XSMALL_GROUPS_OLD_ORDER[102X[32X global variable[133X
+  [33X[1;0Y[29X[2XSMALL_GROUPS_OLD_ORDER[102X [32X global variable[133X
   
   [33X[0;0YIf  set to [10Xtrue[110X, then groups of order [22X3^7[122X, [22X5^7[122X, [22X7^7[122X, and [22X11^7[122X are ordered in
   the  way they were orderd up to version 1.0 of the package. If this variable
