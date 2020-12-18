@@ -701,7 +701,7 @@ UnbindGlobal( "AllGroups" );
 BindGlobal( "AllSmallGroups", function( arg )
     return SelectSmallGroups( arg, true, false );
 end );
-DeclareSynonym( "AllGroups", AllSmallGroups );
+DeclareObsoleteSynonym( "AllGroups", "AllSmallGroups" );
 
 #############################################################################
 ##
@@ -735,7 +735,7 @@ UnbindGlobal( "OneGroup" );
 BindGlobal( "OneSmallGroup", function( arg )
     return SelectSmallGroups( arg, false, false );
 end );
-DeclareSynonym( "OneGroup", OneSmallGroup );
+DeclareObsoleteSynonym( "OneGroup", "OneSmallGroup" );
 
 #############################################################################
 ##
@@ -764,10 +764,10 @@ DeclareSynonym( "OneGroup", OneSmallGroup );
 ##  <#/GAPDoc>
 ##
 UnbindGlobal( "IdsOfAllGroups" );
-BindGlobal( "IdsOfAllGroups", function( arg )
+BindGlobal( "IdsOfAllSmallGroups", function( arg )
     return SelectSmallGroups( arg, true, true );
 end );
-DeclareSynonym( "IdsOfAllSmallGroups", IdsOfAllGroups );
+DeclareSynonym( "IdsOfAllGroups", IdsOfAllSmallGroups );
 
 #############################################################################
 ##
@@ -776,6 +776,7 @@ DeclareSynonym( "IdsOfAllSmallGroups", IdsOfAllGroups );
 ##  <#GAPDoc Label="NumberSmallGroups">
 ##  <ManSection>
 ##  <Func Name="NumberSmallGroups" Arg='order'/>
+##  <Func Name="NrSmallGroups" Arg='order'/>
 ##
 ##  <Description>
 ##  returns the number of groups of order <A>order</A>.
@@ -793,7 +794,7 @@ DeclareSynonym( "IdsOfAllSmallGroups", IdsOfAllGroups );
 ##
 UnbindGlobal( "NumberSmallGroups" );
 DeclareGlobalFunction( "NumberSmallGroups" );
-DeclareSynonym( "NrSmallGroups",NumberSmallGroups );
+DeclareSynonym( "NrSmallGroups", NumberSmallGroups );
 
 #############################################################################
 ##
