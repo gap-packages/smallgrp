@@ -158,7 +158,7 @@ InstallGlobalFunction( NumberSmallGroups, function( size )
         Error( "usage: NumberSmallGroups( order )" ); 
     fi;
     if size = 1024 then 
-        return 49487365422;
+        return 49487367289;
     fi;
 
     inforec := SMALL_AVAILABLE( size );

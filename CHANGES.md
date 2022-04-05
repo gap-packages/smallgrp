@@ -2,8 +2,11 @@ This file describes changes in the smallgrp package.
 
 # 1.5 (YYYY-MM-DD)
 
-  - Replaced the GAP Team as maintainer by Max Horn
-    upon request by the authors
+  - Replaced the GAP Team as maintainer by Max Horn upon request by the
+    authors
+  - Corrected the number of groups of order 2^10 = 1024; it is 49487367289.
+    This error was pointed out by David Burrell. For details refer
+    to his paper "On the number of groups of order 1024", Comm. Alg. (2021), 1–3.
 
 # 1.4.2 (2020-12-18)
   - In release 1.4, the ordering of groups of orders 3^7, 5^7, 7^7, 11^7 was

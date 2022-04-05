@@ -108,7 +108,7 @@ Error, usage: NumberSmallGroups( order )
 gap> NumberSmallGroups(19);
 1
 gap> NumberSmallGroups(1024);
-49487365422
+49487367289
 gap> NumberSmallGroups(3996);
 Error, the library of groups of size 3996 is not available
 gap> NumberSmallGroups(60);
