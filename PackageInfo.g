@@ -42,7 +42,7 @@ Persons := [
     IsMaintainer := false,
     FirstNames := "Eamonn",
     LastName := "O'Brien",
-    WWWHome := "http://www.math.auckland.ac.nz/~obrien",
+    WWWHome := "https://www.math.auckland.ac.nz/~obrien",
     Email := "obrien@math.auckland.ac.nz",
     PostalAddress := Concatenation(
                "Department of Mathematics\n",

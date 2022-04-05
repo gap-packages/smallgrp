@@ -11,7 +11,7 @@ Full information and documentation can be found in the manual, available
 as PDF `doc/manual.pdf` or as HTML `doc/chap0_mj.html`, or on the package
 homepage at
 
-  <http://gap-packages.github.io/smallgrp/>
+  <https://gap-packages.github.io/smallgrp/>
 
 
 ## Bug reports and feature requests
