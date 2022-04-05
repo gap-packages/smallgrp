@@ -54,11 +54,20 @@ Persons := [
     Institution := "University of Auckland",
   ),
   rec(
-    LastName      := "GAP Team",
-    FirstNames    := "The",
     IsAuthor      := false,
     IsMaintainer  := true,
-    Email         := "support@gap-system.org",
+    FirstNames    := "Max",
+    LastName      := "Horn",
+    Email         := "horn@mathematik.uni-kl.de",
+    WWWHome       := "https://www.quendi.de/math",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "TU Kaiserslautern\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "TU Kaiserslautern"
   ),
 ],
 

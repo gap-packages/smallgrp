@@ -1,5 +1,10 @@
 This file describes changes in the smallgrp package.
 
+# 1.5 (YYYY-MM-DD)
+
+  - Replaced the GAP Team as maintainer by Max Horn
+    upon request by the authors
+
 # 1.4.2 (2020-12-18)
   - In release 1.4, the ordering of groups of orders 3^7, 5^7, 7^7, 11^7 was
     aligned with Magma. However, due to an oversight this was not applied to
