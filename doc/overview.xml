@@ -143,6 +143,10 @@ instated on version 1.1 of this library, but a wrong permutation was used. If
 you would like to refer to index numbers for these orders in older versions of
 the library, see <Ref Var="SMALL_GROUPS_OLD_ORDER"/>). The arrangement of
 all other orders has always agreed and has remained stable.
+<P/>
+
+In version 1.5, the number of groups of order 1024 was corrected.
+For more information, refer to <Cite Key="Burrell2021"/>.
 </Section>
 
 <Section Label="Reference">
