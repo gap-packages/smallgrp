@@ -1,6 +1,6 @@
 This file describes changes in the smallgrp package.
 
-# 1.5 (YYYY-MM-DD)
+# 1.5 (2022-04-06)
 
   - Replaced the GAP Team as maintainer by Max Horn upon request by the
     authors
