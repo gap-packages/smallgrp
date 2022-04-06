@@ -109,6 +109,9 @@
   library,  see [2XSMALL_GROUPS_OLD_ORDER[102X ([14X1.2-14[114X)). The arrangement of all other
   orders has always agreed and has remained stable.[133X
   
+  [33X[0;0YIn  version  1.5, the number of groups of order 1024 was corrected. For more
+  information, refer to [Bur21].[133X
+  
   
   [1X1.2 [33X[0;0YFunction Reference[133X[101X
   

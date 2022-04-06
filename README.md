@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/gap-packages/smallgrp.svg?branch=master)](https://travis-ci.com/gap-packages/smallgrp)
+[![Build Status](https://github.com/gap-packages/smallgrp/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/smallgrp/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/smallgrp/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/smallgrp)
 
 # The SmallGrp GAP package
@@ -11,7 +11,7 @@ Full information and documentation can be found in the manual, available
 as PDF `doc/manual.pdf` or as HTML `doc/chap0_mj.html`, or on the package
 homepage at
 
-  <http://gap-packages.github.io/smallgrp/>
+  <https://gap-packages.github.io/smallgrp/>
 
 
 ## Bug reports and feature requests

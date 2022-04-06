@@ -6,10 +6,10 @@
                          [1X The [5XGAP[105X Small Groups Library [101X
   
   
-                                     1.4.2
+                                      1.5
   
   
-                                18 December 2020
+                                  6 April 2022
   
   
                                Hans Ulrich Besche
@@ -32,7 +32,7 @@
   
   Eamonn O'Brien
       Email:    [7Xmailto:obrien@math.auckland.ac.nz[107X
-      Homepage: [7Xhttp://www.math.auckland.ac.nz/~obrien[107X
+      Homepage: [7Xhttps://www.math.auckland.ac.nz/~obrien[107X
       Address:  [33X[0;14YDepartment of Mathematics[133X
                 [33X[0;14YUniversity of Auckland[133X
                 [33X[0;14YPrivate Bag 92019[133X

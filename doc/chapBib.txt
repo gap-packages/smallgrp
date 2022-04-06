@@ -19,6 +19,9 @@
   constructing  small  groups[117X,  [18XInternat.  J.  Algebra  Comput.[118X, [19X12[119X, 5 (2002),
   623–644.
   
+  [[20XBur21[120X]  [16XBurrell,  D.[116X, [17XOn the number of groups of order 1024[117X, [18XCommunications
+  in Algebra[118X (2021), 1–3.
+  
   [[20XDE05[120X]  [16XDietrich,  H.  and  Eick,  B.[116X,  [17XOn the groups of cube-free order[117X, [18XJ.
   Algebra[118X, [19X292[119X, 1 (2005), 122–137.
   

@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.4.2",
-Date := "18/12/2020", # dd/mm/yyyy format
+Version := "1.5",
+Date := "06/04/2022", # dd/mm/yyyy format
 License := "Artistic-2.0",
 
 Persons := [
@@ -42,7 +42,7 @@ Persons := [
     IsMaintainer := false,
     FirstNames := "Eamonn",
     LastName := "O'Brien",
-    WWWHome := "http://www.math.auckland.ac.nz/~obrien",
+    WWWHome := "https://www.math.auckland.ac.nz/~obrien",
     Email := "obrien@math.auckland.ac.nz",
     PostalAddress := Concatenation(
                "Department of Mathematics\n",
@@ -54,11 +54,20 @@ Persons := [
     Institution := "University of Auckland",
   ),
   rec(
-    LastName      := "GAP Team",
-    FirstNames    := "The",
     IsAuthor      := false,
     IsMaintainer  := true,
-    Email         := "support@gap-system.org",
+    FirstNames    := "Max",
+    LastName      := "Horn",
+    Email         := "horn@mathematik.uni-kl.de",
+    WWWHome       := "https://www.quendi.de/math",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "TU Kaiserslautern\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "TU Kaiserslautern"
   ),
 ],
 
