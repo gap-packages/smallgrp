@@ -1,5 +1,6 @@
 name: SmallGrp
-version: 1.5
+version: "1.5"
+license: "Artistic-2.0"
 date: 2022-04-06
 description: |
     The GAP Small Groups Library
@@ -36,3 +37,26 @@ abstract: |
 status: accepted
 doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>BEOH22</span>]   <b class='BibAuthor'>Besche, H. U., Eick, B., O'Brien, E. and Horn, M.</b>,
+     <i class='BibTitle'>SmallGrp, The GAP Small Groups Library,
+             Version 1.5</i>
+     (<span class='BibYear'>2022</span>)<br />
+    (<span class='BibNote'>Refereed GAP package</span>),
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/smallgrp/">https://gap-packages.github.io/smallgrp/</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ SmallGrp1.5,
+      author =           {Besche, H. U. and Eick, B. and O'Brien, E. and Horn, M.},
+      title =            {{SmallGrp}, The GAP Small Groups Library, {V}ersion 1.5},
+      month =            {Apr},
+      year =             {2022},
+      note =             {Refereed GAP package},
+      howpublished =     {\href                                           {https://gap-packages.github.io/smallgrp/}
+                          {\texttt{https://gap-packages.github.io/}\discretionary {}{}{}\texttt{smallgrp/}}},
+      printedkey =       {BEOH22}
+    }
+
