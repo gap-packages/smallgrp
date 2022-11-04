@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.5",
-Date := "06/04/2022", # dd/mm/yyyy format
+Version := "1.5.1",
+Date := "04/11/2022", # dd/mm/yyyy format
 License := "Artistic-2.0",
 
 Persons := [
@@ -107,7 +107,7 @@ type representatives of groups is given.",
 PackageDoc := rec(
   BookName  := "smallgrp",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The GAP Small Groups Library",

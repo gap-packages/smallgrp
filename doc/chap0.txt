@@ -6,10 +6,10 @@
                          [1X The [5XGAP[105X Small Groups Library [101X
   
   
-                                      1.5
+                                     1.5.1
   
   
-                                  6 April 2022
+                                4 November 2022
   
   
                                Hans Ulrich Besche

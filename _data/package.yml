@@ -1,7 +1,7 @@
 name: SmallGrp
-version: "1.5"
+version: "1.5.1"
 license: "Artistic-2.0"
-date: 2022-04-06
+date: 2022-11-04
 description: |
     The GAP Small Groups Library
 
@@ -29,19 +29,19 @@ packageinfo: https://gap-packages.github.io/smallgrp/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.5/SmallGrp-1.5.tar.gz
+      url: https://github.com/gap-packages/SmallGrp/releases/download/v1.5.1/SmallGrp-1.5.1.tar.gz
 
 abstract: |
     The <span class="smallgrp">SmallGrp</span> package provides the library of groups of certain "small" orders. The groups are sorted by their orders and they are listed up to isomorphism; that is, for each of the available orders a complete and irredundant list of isomorphism type representatives of groups is given.
 
 status: accepted
-doc-html: doc/chap0.html
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>BEOH22</span>]   <b class='BibAuthor'>Besche, H. U., Eick, B., O'Brien, E. and Horn, M.</b>,
      <i class='BibTitle'>SmallGrp, The GAP Small Groups Library,
-             Version 1.5</i>
+             Version 1.5.1</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>Refereed GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/smallgrp/">https://gap-packages.github.io/smallgrp/</a></span>.
@@ -49,14 +49,17 @@ citeas: |
     
 
 bibtex: |
-    @misc{ SmallGrp1.5,
-      author =           {Besche, H. U. and Eick, B. and O'Brien, E. and Horn, M.},
-      title =            {{SmallGrp}, The GAP Small Groups Library, {V}ersion 1.5},
-      month =            {Apr},
+    @misc{ SmallGrp1.5.1,
+      author =           {Besche,  H.  U. and Eick, B. and O'Brien, E. and Horn,
+                          M.},
+      title =            {{SmallGrp},  The  GAP  Small Groups Library, {V}ersion
+                          1.5.1},
+      month =            {Nov},
       year =             {2022},
       note =             {Refereed GAP package},
-      howpublished =     {\href                                           {https://gap-packages.github.io/smallgrp/}
-                          {\texttt{https://gap-packages.github.io/}\discretionary {}{}{}\texttt{smallgrp/}}},
+      howpublished =     {\href       {https://gap-packages.github.io/smallgrp/}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {}{}{}\texttt{smallgrp/}}},
       printedkey =       {BEOH22}
     }
 

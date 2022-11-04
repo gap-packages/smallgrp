@@ -26,13 +26,13 @@
   Algebra[118X, [19X292[119X, 1 (2005), 122–137.
   
   [[20XEO99a[120X] [16XEick, B. and O'Brien, E. A.[116X, [17XEnumerating p-groups[117X, [18XJ. Austral. Math.
-  Soc. Ser. A[118X, [19X67[119X, 2 (1999), 191–205, ((Group theory)).
+  Soc. Ser. A[118X, [19X67[119X, 2 (1999), 191–205, (Group theory).
   
   [[20XEO99b[120X]  [16XEick, B. and O'Brien, E. A.[116X ([1m[31mMatzat, B. H., Greuel, G.-M. and Hiss,
   G.[15X, Eds.), [17XThe groups of order 512[117X, in Algorithmic algebra and number theory
-  (Heidelberg,  1997),  Springer,  Berlin  (1999),  379–380,  ((Proceedings of
+  (Heidelberg,  1997),  Springer,  Berlin  (1999),  379–380,  (Proceedings  of
   Abschlusstagung   des   DFG   Schwerpunktes   Algorithmische   Algebra   und
-  Zahlentheorie in Heidelberg)).
+  Zahlentheorie in Heidelberg).
   
   [[20XGir03[120X]  [16XGirnat,  B.[116X,  [17XKlassifikation  der  Gruppen  bis  zur  Ordnung  p^5[117X,
   Staatsexamensarbeit, TU Braunschweig, Braunschweig, Germany (2003).
@@ -41,14 +41,14 @@
   [17XDetermination  of  groups  of  prime-power  order[117X,  in  Group  theory (Proc.
   Miniconf.,  Australian  Nat. Univ., Canberra, 1975), Springer, Lecture Notes
   in  Math.,  [19X573[119X,  Berlin  (1977),  73–84.  Lecture Notes in Math., Vol. 573,
-  ((Lecture Notes in Mathematics, Vol. 573)).
+  (Lecture Notes in Mathematics, Vol. 573).
   
   [[20XNOVL04[120X]  [16XNewman,  M.  F., O'Brien, E. A. and Vaughan-Lee, M. R.[116X, [17XGroups and
   nilpotent  Lie  rings whose order is the sixth power of a prime[117X, [18XJ. Algebra[118X,
   [19X278[119X, 1 (2004), 383–401.
   
   [[20XO'B90[120X]  [16XO'Brien,  E.  A.[116X,  [17XThe  p-group  generation  algorithm[117X, [18XJ. Symbolic
-  Comput.[118X, [19X9[119X, 5-6 (1990), 677–698, ((Computational group theory, Part 1)).
+  Comput.[118X, [19X9[119X, 5-6 (1990), 677–698, (Computational group theory, Part 1).
   
   [[20XO'B91[120X]  [16XO'Brien, E. A.[116X, [17XThe groups of order 256[117X, [18XJ. Algebra[118X, [19X143[119X, 1 (1991),
   219–235.
