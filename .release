@@ -1,8 +1,8 @@
 #!/bin/sh
 # This file is executed by the `release` script from
 # https://github.com/gap-system/ReleaseTools
-echo "Current data file disk space:"
-du -h data
+echo "Current pakage disk space usage:"
+du -hs .
 echo "Compressing data files..."
 for file in id*/*.* small*/*.*
 do
@@ -11,4 +11,4 @@ do
 done
 echo
 echo "Done compressing data file, disk space:"
-du -h data
+du -hs .
