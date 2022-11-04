@@ -315,8 +315,8 @@ SMALL_GROUPS_INFORMATION[ 24 ] := function( size, smav, num )
     local i, set, c;
 
     Print( "\n" );
-    Print( "  The groups of squarefree order have a cylic socle and a " );
-    Print( "cylic socle factor.\n" );
+    Print( "  The groups of squarefree order have a cyclic socle and a " );
+    Print( "cyclic socle factor.\n" );
 
     Print( "\n" );
     i := 0;
@@ -421,7 +421,7 @@ SMALL_GROUPS_INFORMATION[ 26 ] := function( size, smav, num )
    Print( "      only the different digits compared to the head are relevant.\n");
    Print( "      Even the tails occur more or less often and this is used\n");
    Print( "      to improve storage too. Since p^7 is too big the data is\n");
-   Print( "      stored into some remaing holes of SMALL_GROUP_LIB at\n");
+   Print( "      stored into some remaining holes of SMALL_GROUP_LIB at\n");
    Print( "      Primes[ p + 10 ].\n");
 
 end;

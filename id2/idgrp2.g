@@ -28,7 +28,7 @@ end;
 ##
 ##  fpcache is a list of 'fp's which will be used first to preselect a branch
 ##  of the ID_GROUP_TREE
-##  if lookup is set, just the information if the specifed branch exists is
+##  if lookup is set, just the information if the specified branch exists is
 ##  returned (used to investigate if some situaations are unique in small3)
 ##
 ID_GROUP_FUNCS[ 8 ] := function( arg )
@@ -109,7 +109,7 @@ ID_GROUP_FUNCS[ 8 ] := function( arg )
 
         if not lookup and IsBound( branch.desc ) then
             for desc in branch.desc do
-                # reconstruct orignial description list of the test
+                # reconstruct original description list of the test
                 if IsInt( desc ) then
                     ldesc := [ desc mod 1000 ];
                     desc := QuoInt( desc, 1000 );
@@ -123,7 +123,7 @@ ID_GROUP_FUNCS[ 8 ] := function( arg )
                 # evaluate the test
                 fp := EvalFpCoc( coc, desc );
 
-                # split up clusters of classes acording to the result of test
+                # split up clusters of classes according to the result of test
                 sfp := Set( fp );
                 newcls := List( sfp, x-> [ ] );
                 for i in [ 1 .. Length( sfp ) ] do
@@ -177,9 +177,9 @@ ID_GROUP_FUNCS[ 8 ] := function( arg )
                               x -> [ Length( x[ 1 ] ), Length( x ) ] ) );
 
         else
-            # usuall case for level >= 6
+            # usual case for level >= 6
             # make fingerprint calculated above at 'IsBound( desc )' 
-            # independ from the rowing of conjugacy-classes
+            # independent from the rowing of conjugacy-classes
             fp := Pack( Collected( fp ) );
         fi;
 

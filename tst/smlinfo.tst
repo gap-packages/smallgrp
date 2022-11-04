@@ -370,7 +370,7 @@ gap> SmallGroupsInformation(2002);
 
   There are 8 groups of order 2002.
 
-  The groups of squarefree order have a cylic socle and a cylic socle factor.
+  The groups of squarefree order have a cyclic socle and a cyclic socle factor.
 
     1 is abelian
     2 - 8 have socle C_1001 and factor C_2
@@ -382,7 +382,7 @@ gap> SmallGroupsInformation(2010);
 
   There are 12 groups of order 2010.
 
-  The groups of squarefree order have a cylic socle and a cylic socle factor.
+  The groups of squarefree order have a cyclic socle and a cyclic socle factor.
 
     1 is abelian
     2 has socle C_670 and factor C_3
@@ -558,7 +558,7 @@ gap> SmallGroupsInformation(2187);
       only the different digits compared to the head are relevant.
       Even the tails occur more or less often and this is used
       to improve storage too. Since p^7 is too big the data is
-      stored into some remaing holes of SMALL_GROUP_LIB at
+      stored into some remaining holes of SMALL_GROUP_LIB at
       Primes[ p + 10 ].
 
   This size belongs to layer 11 of the SmallGroups library. 

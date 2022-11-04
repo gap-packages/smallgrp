@@ -31,7 +31,7 @@ SMALL_AVAILABLE_FUNCS[ 5 ] := function( size )
     if size in [ 1008, 1040, 1056, 1080, 1120, 1134, 1176, 1200, 1248, 1360,
                  1368, 1404, 1488, 1512, 1560, 1568, 1584, 1620, 1632, 1680,
                  1760, 1764, 1776, 1800, 1824, 1872, 1968, 2000 ] then
-        # every of these sizes is contained in a seperate file
+        # every of these sizes is contained in a separate file
         return rec( func := 8,
                     lib  := 5 );
     fi;

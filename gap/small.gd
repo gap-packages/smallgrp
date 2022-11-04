@@ -13,7 +13,7 @@ DeclareInfoClass( "InfoIdgroup" );
 ##  <Description>
 ##  If set to <C>true</C>, then groups of order <M>3^7</M>, <M>5^7</M>,
 ##  <M>7^7</M>, and <M>11^7</M> are ordered in the way they were
-##  orderd up to version 1.0 of the package. If this variable is
+##  ordered up to version 1.0 of the package. If this variable is
 ##  set to <C>false</C>, which is the default as of version 1.4,
 ##  then a different ordering, that agrees with the one in Magma version
 ##  2.23, is used.

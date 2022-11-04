@@ -266,7 +266,7 @@ classification as well.
 DETERMINATION:
 The nilpotent groups of this layer have been constructed using p-group 
 generation, see [14] and [16]. The 2- and 3-groups of this layer have also 
-been avaliable in the Two- and ThreeGroup library of Gap 3, see [12] and [15]
+been available in the Two- and ThreeGroup library of Gap 3, see [12] and [15]
 also. The non-nilpotent groups in this layer have been determined using the 
 Frattini extension method, the cyclic split extension method and cyclic 
 extension for the non-soluble groups, see [1], [2] and [3]. 
@@ -412,7 +412,7 @@ tree for this purpose. In the invariant tree we have invariants stored for
 groups of type R : Q of order 2^n * r for primes r in 3, 5, 17 and 97. Now 
 we first choose the smallest prime r such that r is congruent 1 mod [Q : K]. 
 The cases that [Q : K] = 2^i for i = 6, 7 or 8 cannot occur here, because
-in this cases Id(Q) and Id(K) are allways sufficient to determine the group.
+in this cases Id(Q) and Id(K) are always sufficient to determine the group.
 
 Then we use that the groups P : Q behave essentially similar to the groups 
 R : Q for the chosen r. Thus we can construct a group R : Q corresponding
@@ -545,7 +545,7 @@ possible combinations arising here, we need only one letter in the 81-alpha-
 bet to describe a single vector of variable bits.
 
 Finally, we note that some of the tailcodes arise for many blocks. These
-tailcodes are stored in a special list. If such a tailcode is occuring
+tailcodes are stored in a special list. If such a tailcode is occurring
 in V, then only the reference to the special list is stored instead of 
 the full tailcode. This special list contains 1890 different tailcodes, 
 2 letters in the alphabet are sufficient to refer a tailcode.
@@ -592,7 +592,7 @@ are used to recall the blocks in a set having the same reference.
 Thus the first list contains the length of the blocks and the second
 list contains the corresponding references. 
 
-Again, in both lists certain patters occur often. In the first list
+Again, in both lists certain patterns occur often. In the first list
 the length `1' appears often. Thus the `1' is not stored explicitly,
 but a blank in this lists has to be considered as `1'. In the second
 list often an entry is the same as the one 2 places bevor. Thus these
@@ -605,7 +605,7 @@ to speed up the method to find the group with a given catalogue number.
 The 18028 groups with normal Sylow 2-subgroup are stored similarly to 
 layer 3. As described for layer 3 we determine a long integer for each
 homomorphism Q -> Aut(P) for Q of order 512 and P the cyclic group of
-order 3. The occuring integers are highly redundant - there are 6774 
+order 3. The occurring integers are highly redundant - there are 6774 
 different ones. Thus we use a list of references again.
 
 The 96437 groups without normal Sylow subgroup are determined using the
@@ -655,7 +655,7 @@ structure will be expanded, but restricted to those parts of the structure
 relevant for the given p when needed. It is cached into SMALL_GROUP_LIB[1]. 
 As parts of this structure contain long ( O(p^2) ) lists of groups which are 
 classified by additional parameters and these lists are not dense, it might 
-be neccessary to set up the complete list of indices to find the presentation 
+be necessary to set up the complete list of indices to find the presentation 
 of a single group.
 
 IDENTIFICATION: 
@@ -775,7 +775,7 @@ earlier layers.
     The GrpConst share package of GAP 4.
 
 [5] Hans Ulrich Besche, Bettina Eick and E. A. O'Brien.
-    A millenium project: constructing small groups.
+    A millennium project: constructing small groups.
     Internat. J. Algebra Comput. 12, 623 - 644 (2002)
 
 [6] Hans Ulrich Besche, Bettina Eick and E. A. O'Brien.

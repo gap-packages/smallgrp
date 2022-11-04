@@ -78,7 +78,7 @@ SMALL_GROUP_FUNCS[ 24 ] := function( size, i, inforec )
     for j in [ 1 .. Length( kpr ) ] do
         op_index := op_indices[ j ];
 
-        # the operation on the "leading coefficient" is allways "1", thus
+        # the operation on the "leading coefficient" is always "1", thus
         # finding the right operation is technical
         lc := 1;
         while kpr[ j ] ^ (lc - 1) < op_index do
@@ -131,7 +131,7 @@ SMALL_GROUP_FUNCS[ 25 ] := function( size, i, inforec )
         Error( "there are just ", n, " groups of size ", size );
     fi;
 
-    # find the apropriate set determined by PSL( 2, p ) and size of frattini
+    # find the appropriate set determined by PSL( 2, p ) and size of frattini
     # factor resp. frattini subgroup
     set := 1;
     while inforec.sets[ set ].number < i do

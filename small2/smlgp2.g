@@ -30,7 +30,7 @@ SMALL_AVAILABLE_FUNCS[ 2 ] := function( size )
     if size in [  64,  96, 128, 160, 192, 240, 288, 320, 336, 400, 416, 432,
                  448, 480, 486, 504, 544, 600, 624, 648, 672, 704, 720, 729,
                  800, 816, 832, 880, 912, 928, 936, 972 ] then
-        # every of these sizes is contained in a seperate file
+        # every of these sizes is contained in a separate file
         return rec( func := 8,
                     lib  := 2 );
     fi;
@@ -119,7 +119,7 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
     local cand, i, j, evalfuncs, evalvals, func, val, prop, g, ok, result,
           expand, intersection, difference, union, p, tmp, os;
 
-    # to mention, which groups will fullfill the properties, lists of this
+    # to mention, which groups will fulfill the properties, lists of this
     # structure are used: [ 1, -3, 5, 8, -11 ] means [ 1,2,3, 5, 8,9,10,11]
 
     expand := function( cand )

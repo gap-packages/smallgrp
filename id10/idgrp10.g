@@ -38,7 +38,7 @@ ID_GROUP_FUNCS[ 24 ] := function( G, inforec )
     p_ind := [ 1 .. Length( primes ) ];
     SortParallel( List( lg, x -> x[ 3 ] ), p_ind );
 
-    # find simultanious matrice 'mat' with operations and K by 'kp'
+    # find simultaneous matrice 'mat' with operations and K by 'kp'
     mat := [];
     kp := [];
     for m in [ 1 .. Length( primes ) - 1 ] do

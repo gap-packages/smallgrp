@@ -3,7 +3,7 @@
 #W  smlgp1.g                 GAP group library             Hans Ulrich Besche
 ##                                               Bettina Eick, Eamonn O'Brien
 ##
-##  This file contains the generic construction of groups with order containg
+##  This file contains the generic construction of groups with order containing
 ##  maximal 3 primes. 
 ##
 

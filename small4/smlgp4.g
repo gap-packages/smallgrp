@@ -3,7 +3,7 @@
 #W  smlgp4.g                 GAP group library             Hans Ulrich Besche
 ##                                               Bettina Eick, Eamonn O'Brien
 ##
-##  This file contains the reading and constrution functions for the groups
+##  This file contains the reading and construction functions for the groups
 ##  of size 2401, 3125 and
 ##  those of size p^n * q with
 ##  p in { 3, 5, 7 } and q a prime <> p,
@@ -123,7 +123,7 @@ SMALL_GROUP_FUNCS[ 17 ] := function( size, i, inforec )
             if not IsBound( SMALL_GROUP_LIB[ nn ][ typ ][ sid ] ) then
                 sid := sid + 1;
             elif IsInt( SMALL_GROUP_LIB[ nn ][ typ ][ sid ] ) then
-                # the entry is refered to one earlier
+                # the entry is referred to one earlier
                 SMALL_GROUP_LIB[ nn ][ typ ][ sid ] := SMALL_GROUP_LIB[ nn ]
                           [ typ ][ -SMALL_GROUP_LIB[ nn ][ typ ][ sid ] ];
             else
