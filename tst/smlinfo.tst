@@ -370,7 +370,8 @@ gap> SmallGroupsInformation(2002);
 
   There are 8 groups of order 2002.
 
-  The groups of squarefree order have a cyclic socle and a cyclic socle factor.
+  The groups of squarefree order have a cyclic socle and a cyclic socle factor\
+.
 
     1 is abelian
     2 - 8 have socle C_1001 and factor C_2
@@ -382,7 +383,8 @@ gap> SmallGroupsInformation(2010);
 
   There are 12 groups of order 2010.
 
-  The groups of squarefree order have a cyclic socle and a cyclic socle factor.
+  The groups of squarefree order have a cyclic socle and a cyclic socle factor\
+.
 
     1 is abelian
     2 has socle C_670 and factor C_3
