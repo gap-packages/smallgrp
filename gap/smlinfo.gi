@@ -215,7 +215,9 @@ SMALL_GROUPS_INFORMATION[ 18 ] := function( size, smav, num )
     Print( "     1 is cyclic. \n");
     Print( "     2 - 10 have rank 2 and p-class 3.\n" );
     Print( "     11 - 386 have rank 2 and p-class 4.\n" );
-    Print( "     387 - 1698 have rank 2 and p-class 5.\n" );
+    Print( "     387 - 444 have rank 2 and p-class 5.\n" );
+    Print( "     445 - 858 have rank 2 and p-class 4.\n" );
+    Print( "     859 - 1698 have rank 2 and p-class 5.\n" );
     Print( "     1699 - 2008 have rank 2 and p-class 6.\n" );
     Print( "     2009 - 2039 have rank 2 and p-class 7.\n" );
     Print( "     2040 - 2044 have rank 2 and p-class 8.\n" );

@@ -276,7 +276,9 @@ gap> SmallGroupsInformation(512);
      1 is cyclic. 
      2 - 10 have rank 2 and p-class 3.
      11 - 386 have rank 2 and p-class 4.
-     387 - 1698 have rank 2 and p-class 5.
+     387 - 444 have rank 2 and p-class 5.
+     445 - 858 have rank 2 and p-class 4.
+     859 - 1698 have rank 2 and p-class 5.
      1699 - 2008 have rank 2 and p-class 6.
      2009 - 2039 have rank 2 and p-class 7.
      2040 - 2044 have rank 2 and p-class 8.
