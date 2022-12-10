@@ -1,5 +1,12 @@
 This file describes changes in the smallgrp package.
 
+# 1.5.2 (2023-02-11)
+
+  - Correct the information printed by `SmallGroupsInformation(512)`;
+    it used to claim that the groups with id 387 - 1698 all have p-class 5,
+    but in fact those with id 445 - 858 only have p-class 4.
+  - Minor janitorial changes
+
 # 1.5.1 (2022-11-04)
 
   - Compress data files to reduce on-disk footprint
