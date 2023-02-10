@@ -336,7 +336,7 @@
   [33X[1;0Y[29X[2XSMALL_GROUPS_OLD_ORDER[102X [32X global variable[133X
   
   [33X[0;0YIf  set to [10Xtrue[110X, then groups of order [22X3^7[122X, [22X5^7[122X, [22X7^7[122X, and [22X11^7[122X are ordered in
-  the  way they were orderd up to version 1.0 of the package. If this variable
+  the way they were ordered up to version 1.0 of the package. If this variable
   is  set  to  [10Xfalse[110X, which is the default as of version 1.4, then a different
   ordering,  that  agrees  with  the  one  in Magma version 2.23, is used. The
   functions  [10XSMALLGP_PERM[110X[22Xx[122X,  with  [22Xx=3,5,7,11[122X,  give  the  old  index position
