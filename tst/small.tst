@@ -182,7 +182,7 @@ gap> StructureDescription(G);
 "C3 : C4"
 gap> G := AllSmallGroups(Size, 12, Size, 12, [1]);
 [  ]
-gap> IdsOfAllGroups(4);
+gap> IdsOfAllSmallGroups(4);
 [ [ 4, 1 ], [ 4, 2 ] ]
 
 ################################################################################
