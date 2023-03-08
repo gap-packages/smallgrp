@@ -58,16 +58,16 @@ Persons := [
     IsMaintainer  := true,
     FirstNames    := "Max",
     LastName      := "Horn",
-    Email         := "horn@mathematik.uni-kl.de",
+    Email         := "mhorn@rptu.de",
     WWWHome       := "https://www.quendi.de/math",
     PostalAddress := Concatenation(
                        "Fachbereich Mathematik\n",
-                       "TU Kaiserslautern\n",
+                       "RPTU Kaiserslautern-Landau\n",
                        "Gottlieb-Daimler-Straße 48\n",
                        "67663 Kaiserslautern\n",
                        "Germany" ),
     Place         := "Kaiserslautern, Germany",
-    Institution   := "TU Kaiserslautern"
+    Institution   := "RPTU Kaiserslautern-Landau"
   ),
 ],
 
