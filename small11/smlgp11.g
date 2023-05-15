@@ -17,7 +17,7 @@ SMALL_AVAILABLE_FUNCS[ 11 ] := function( size )
 
     p := FactorsInt( size );
 
-    if Length( p ) <> 7 or p[ 1 ] = 2 or Length( Set( p ) ) > 1 then
+    if Length( p ) <> 7 or p[ 1 ] = 2 or p[1] > 11 or Length( Set( p ) ) > 1 then
         return fail;
     fi;
 
