@@ -1,5 +1,11 @@
 This file describes changes in the smallgrp package.
 
+# 1.5.3 (2023-05-16)
+
+  - Fix `SmallGroupsAvailable(p^7)` to return `false` when p > 11
+    (unless the `sglppow` package is loaded)
+  - Update contact details for Max Horn
+
 # 1.5.2 (2023-02-11)
 
   - Correct the information printed by `SmallGroupsInformation(512)`;
