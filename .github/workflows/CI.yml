@@ -25,6 +25,7 @@ jobs:
       matrix:
         gap-branch:
           - master
+          - stable-4.13
           - stable-4.12
           - stable-4.11
           - stable-4.10
@@ -38,7 +39,7 @@ jobs:
       - uses: gap-actions/build-pkg@v1
       - uses: gap-actions/run-pkg-tests@v2
       - uses: gap-actions/process-coverage@v2
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
 
   # The documentation job
   manual:
