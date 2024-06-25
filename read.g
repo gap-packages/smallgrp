@@ -1,7 +1,6 @@
 #
 # GAP small groups library
 #
-ReadPackage("smallgrp", "gap/utils.gi");
 ReadPackage("smallgrp", "gap/small.gi");
 
 # read the 3-primes-order stuff, which is placed in the 'small'-directory
