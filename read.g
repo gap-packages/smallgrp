@@ -15,8 +15,17 @@ READ_SMALL_LIB := function()
     local i, s, LoadFunc;
 
     LoadFunc := path ->
-                    {args...} ->
-                    ReadPackage("smallgrp", Concatenation(path, "/", args[1]));
+                function(args...)
+                    local relpath, filename;
+                    relpath := Concatenation(path, "/", args[1]);
+                    filename:= Filename( DirectoriesPackageLibrary( "smallgrp", "" ), relpath );
+                    if filename <> fail and IsReadableFile( filename ) then
+                      Read( filename );
+                      return true;
+                    else
+                      return false;
+                    fi;
+                end;
     s := 1;
     repeat
         s := s + 1;

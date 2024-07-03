@@ -1,5 +1,11 @@
 This file describes changes in the smallgrp package.
 
+# 1.5.4 (2024-MM-DD)
+
+  - Don't attempt to load non-existent source files (this was
+    harmless so far as it failed silently, but in future GAP
+    versions may result in a scary warning or even an error)
+
 # 1.5.3 (2023-05-16)
 
   - Fix `SmallGroupsAvailable(p^7)` to return `false` when p > 11
