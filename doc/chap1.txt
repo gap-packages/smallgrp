@@ -93,8 +93,8 @@
   E. A. O'Brien. A survey on this topic and an account of the history of group
   constructions  can  be found in [BEO02]. Further detailed information on the
   construction  of  this  library  is  available in [New77], [O'B90], [O'B91],
-  [BE99a],  [BE99b],  [BE01],  [BEO01],  [EO99a],  [EO99b], [NOVL04], [Gir03],
-  [DE05],  [OVL05].  The Small Groups library incorporates the [5XGAP[105X 3 libraries
+  [BE99a],  [BE99b],  [BE01],  [BEO01],  [EO99a],  [EO99b],  [NOV04], [Gir03],
+  [DE05],  [OV05].  The  Small Groups library incorporates the [5XGAP[105X 3 libraries
   [10XTwoGroup[110X and [10XThreeGroup[110X. The data from these libraries was directly included
   into  the  Small  Groups  library, and the ordering there was preserved. The
   Small  Groups library replaces the Gap 3 library of solvable groups of order
