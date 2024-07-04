@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.5.3",
-Date := "16/05/2023", # dd/mm/yyyy format
+Version := "1.5.4",
+Date := "04/07/2024", # dd/mm/yyyy format
 License := "Artistic-2.0",
 
 Persons := [

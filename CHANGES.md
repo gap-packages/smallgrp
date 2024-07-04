@@ -1,6 +1,6 @@
 This file describes changes in the smallgrp package.
 
-# 1.5.4 (2024-MM-DD)
+# 1.5.4 (2024-07-04)
 
   - Don't attempt to load non-existent source files (this was
     harmless so far as it failed silently, but in future GAP
