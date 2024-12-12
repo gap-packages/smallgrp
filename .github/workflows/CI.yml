@@ -25,6 +25,8 @@ jobs:
       matrix:
         gap-branch:
           - master
+          - stable-4.14
+          - stable-4.14
           - stable-4.13
           - stable-4.12
           - stable-4.11
@@ -42,7 +44,7 @@ jobs:
         with:
           only-needed: true
       - uses: gap-actions/process-coverage@v2
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
