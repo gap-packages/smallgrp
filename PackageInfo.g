@@ -28,6 +28,7 @@ Persons := [
     LastName := "Eick",
     Email         := "beick@tu-bs.de",
     WWWHome       := "http://www.iaa.tu-bs.de/beick",
+    GitHubUsername := "beick",
     PostalAddress := Concatenation(
                "Institut Analysis und Algebra\n",
                "TU Braunschweig\n",
@@ -42,8 +43,9 @@ Persons := [
     IsMaintainer := false,
     FirstNames := "Eamonn",
     LastName := "O'Brien",
-    WWWHome := "https://www.math.auckland.ac.nz/~obrien",
     Email := "obrien@math.auckland.ac.nz",
+    WWWHome := "https://www.math.auckland.ac.nz/~obrien",
+    GitHubUsername := "eamonnaobrien",
     PostalAddress := Concatenation(
                "Department of Mathematics\n",
                "University of Auckland\n",
@@ -60,6 +62,7 @@ Persons := [
     LastName      := "Horn",
     Email         := "mhorn@rptu.de",
     WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername := "fingolfin",
     PostalAddress := Concatenation(
                        "Fachbereich Mathematik\n",
                        "RPTU Kaiserslautern-Landau\n",
