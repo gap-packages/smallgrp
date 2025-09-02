@@ -25,6 +25,19 @@ jobs:
       - uses: gap-actions/build-pkg-docs@v1
         with:
           use-latex: true
+      - name: "Compress data files"
+        run: |
+          echo "Current pakage disk space usage:"
+          du -cks id* small*
+          echo "Compressing data files..."
+          for file in id*/*.* small*/*.*
+          do
+              gzip -n -f "$file"
+              printf .
+          done
+          echo
+          echo "Done compressing data file, disk space:"
+          du -cks id* small*
       - uses: gap-actions/release-pkg@v1
         with:
           dry-run: ${{ inputs.dry-run }}
