@@ -113,6 +113,10 @@ gap> NumberSmallGroups(3996);
 Error, the library of groups of size 3996 is not available
 gap> NumberSmallGroups(60);
 13
+gap> NumberSmallGroups(5^6);
+684
+gap> NumberSmallGroups(5*7*9*11*13);
+22
 
 ################################################################################
 # SelectSmallGroups GlobalFunction (called by AllSmallGroups or OneSmallGroup)
