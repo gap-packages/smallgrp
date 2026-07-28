@@ -1,5 +1,10 @@
 This file describes changes in the smallgrp package.
 
+# 1.5.5 (2026-07-28)
+
+  - Drop spurious dependency on GAPDoc
+  - Minor janitorial changes
+
 # 1.5.4 (2024-07-04)
 
   - Don't attempt to load non-existent source files (this was
