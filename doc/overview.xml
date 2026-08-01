@@ -52,10 +52,9 @@ The library is organised in 11 layers. Each layer contains the groups of
 certain orders and their corresponding group identification routines. It
 is possible to install the first <M>n</M> layers of the group library and the
 first <M>m</M> layers of the group identification for each <M>1 \leq m \leq n
-\leq 11</M>. This might be useful to save disk space. There is an extensive
-<F>README</F> file for the Small Groups library available in the <C>small</C> directory
-of the &GAP; distribution containing detailed information on the layers.
-A brief description of the layers is given here:
+\leq 11</M>. This might be useful to save disk space. Detailed information
+on the layers is given in Chapter <Ref Chap="Organisation"/>; a brief
+description is given here:
 <List>
 <Mark>(1)</Mark>
 <Item>

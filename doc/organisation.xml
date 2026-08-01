@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Chapter Label="Organisation">
+<Heading>The Organisation of the Small Groups Library</Heading>
+
+This chapter describes how the Small Groups library is organised. It
+includes information on the determination of the groups, on the encoding
+used to store them, and on the algorithms used by the identification
+routines. It is aimed at readers interested in the internals of the
+library; it is not needed in order to use it.
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layers">
+<Heading>Layers</Heading>
+
+The Small Groups library is organised in 11 layers. Each layer contains
+the groups of certain orders:
+
+<List>
+<Mark>Layer 1</Mark>
+<Item>
+ the orders with at most 3 prime factors; that is, the orders of type
+ <M>p</M>, <M>p^2</M>, <M>pq</M>, <M>p^3</M>, <M>pq^2</M> and <M>pqr</M>.
+</Item>
+<Mark>Layer 2</Mark>
+<Item>
+ all remaining orders <M>\leq 1000</M> except 512 and 768.
+</Item>
+<Mark>Layer 3</Mark>
+<Item>
+ all remaining orders of type <M>2^n \cdot p</M> with <M>n \leq 8</M> and
+ <M>p</M> an arbitrary odd prime.
+</Item>
+<Mark>Layer 4</Mark>
+<Item>
+ the orders <M>7^4</M> and <M>5^5</M> and all remaining orders of type
+ <M>q^n \cdot p</M> with <M>q^n</M> dividing <M>3^6</M>, <M>5^5</M> or
+ <M>7^4</M> and <M>p</M> a prime different from <M>q</M>.
+</Item>
+<Mark>Layer 5</Mark>
+<Item>
+ all remaining orders <M>\leq 2000</M> except 512, 1024, 1152, 1536 and
+ 1920.
+</Item>
+<Mark>Layer 6</Mark>
+<Item>
+ the orders 1152 and 1920.
+</Item>
+<Mark>Layer 7</Mark>
+<Item>
+ the order 512.
+</Item>
+<Mark>Layer 8</Mark>
+<Item>
+ the order 1536.
+</Item>
+<Mark>Layer 9</Mark>
+<Item>
+ the remaining groups of order <M>p^4</M>, <M>p^5</M> and <M>p^6</M>.
+</Item>
+<Mark>Layer 10</Mark>
+<Item>
+ the remaining groups of squarefree order and of cubefree order at most
+ 50 000.
+</Item>
+<Mark>Layer 11</Mark>
+<Item>
+ the orders <M>p^7</M> with <M>p = 3,5,7,11</M>.
+</Item>
+</List>
+
+<P/>
+This setup has been chosen for two reasons. First, the organisation in
+layers permits to add new layers (and thus new group orders) without
+changes to the existing catalogue. Secondly, it is possible to install a
+part of the layers only. This might be interesting for computer systems
+with little hard disk space available.
+
+<P/>
+For each layer <M>i</M> there are two internal functions
+<C>SMALL_AVAILABLE_FUNCS[i]( order )</C> and
+<C>ID_AVAILABLE_FUNCS[i]( order )</C>. Both functions return <K>fail</K> if
+the given order is not contained in this layer. Otherwise the functions
+return an information record on the layer and the order. This record
+contains the information needed to handle the groups of the specified
+order internally. If the layer <M>i</M> is not installed, then the entries
+<C>SMALL_AVAILABLE_FUNCS[i]</C> and <C>ID_AVAILABLE_FUNCS[i]</C> are
+unbound.
+
+<P/>
+Moreover, there are two internal header functions
+<C>SMALL_AVAILABLE( order )</C> and <C>ID_AVAILABLE( order )</C>. These two
+functions are used to loop over the layer functions and find the first
+layer containing the given order. If this layer is found, then an
+information record on the order is returned. If there is no installed
+layer containing the groups of this order, then the functions return
+<K>fail</K>.
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Files and Directories">
+<Heading>Files and Directories</Heading>
+
+For each layer <M>x</M> there are either one or two directories in the
+package directory: <F>smallx</F>, or <F>smallx</F> and <F>idx</F>. The
+directory <F>smallx</F> contains the groups of layer <M>x</M> and the
+directory <F>idx</F> contains the corresponding identification routine, if
+available. An exception to this rule is the first layer; here all the code
+for the groups is contained in the files <F>gap/smlgp1.g</F> and
+<F>gap/idgrp1.g</F>. For the layers 7 and 8 there is no identification
+routine available at the moment and thus there are no directories
+<F>id7</F> and <F>id8</F>.
+
+<P/>
+The other relevant files of the package are:
+
+<List>
+<Mark><F>read.g</F></Mark>
+<Item>
+ for loading the small groups catalogue into &GAP;.
+</Item>
+<Mark><F>gap/small.gd</F>, <F>gap/small.gi</F></Mark>
+<Item>
+ these are the files where the main functions for the small groups
+ catalogue are defined.
+</Item>
+<Mark><F>gap/gap3cat.g</F></Mark>
+<Item>
+ identification of a small group in the &GAP;&nbsp;3 <C>SolvableGroup</C>
+ catalogue.
+</Item>
+<Mark><F>gap/smlinfo.gi</F></Mark>
+<Item>
+ the code for the function <Ref Func="SmallGroupsInformation"/>.
+</Item>
+</List>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 1">
+<Heading>Layer 1</Heading>
+
+The groups whose order factorises into at most 3 primes have been
+classified by Hölder, see <Cite Key="Hoelder1893"/>. An algorithm to find
+the isomorphism type of such groups was first implemented in &GAP;&nbsp;3
+by Frank Celler and Hans-Georg Esser.
+
+<P/>
+Hölder's classification distinguishes the groups of the following order
+types. Let <M>p</M>, <M>q</M> and <M>r</M> be different primes with
+<M>p &lt; q &lt; r</M>.
+
+<List>
+<Mark><M>p</M></Mark>
+<Item>
+ 1 cyclic group.
+</Item>
+<Mark><M>p^2</M></Mark>
+<Item>
+ 1 cyclic and 1 elementary abelian group.
+</Item>
+<Mark><M>p^3</M></Mark>
+<Item>
+ 3 abelian groups and 2 extraspecial groups.
+</Item>
+<Mark><M>pq</M></Mark>
+<Item>
+ 1 cyclic group;
+ 1 group of type <M>q:p</M> if <M>q \equiv 1 \bmod p</M>.
+</Item>
+<Mark><M>p^2q</M></Mark>
+<Item>
+ 2 abelian groups;
+ 1 group of type <M>q:p \times p</M> if <M>q \equiv 1 \bmod p</M>;
+ 1 group of type <M>A_4</M> if <M>p = 2</M> and <M>q = 3</M>;
+ 1 group of type <M>(p \times q).p</M> if <M>q \equiv 1 \bmod p</M>;
+ 1 group of type <M>q:C_{p^2}</M> if <M>q \equiv 1 \bmod p^2</M>.
+</Item>
+<Mark><M>pq^2</M></Mark>
+<Item>
+ 2 abelian groups;
+ 1 group of type <M>q:p \times q</M> if <M>q \equiv 1 \bmod p</M>;
+ 1 group of type <M>C_{q^2}:p</M> if <M>q \equiv 1 \bmod p</M>;
+ 1 group of type <M>(q \times q):p</M> if <M>p > 2</M> and
+ <M>q + 1 \equiv 0 \bmod p</M>;
+ groups of type <M>q:p + q:p</M>
+ (1 group for <M>p = 2</M> and <M>(p+1)/2</M> groups otherwise).
+</Item>
+<Mark><M>pqr</M></Mark>
+<Item>
+ 1 cyclic group;
+ 1 group of type <M>q:p \times r</M> if <M>q \equiv 1 \bmod p</M>;
+ 1 group of type <M>r:p \times q</M> if <M>r \equiv 1 \bmod p</M>;
+ 1 group of type <M>r:q \times p</M> if <M>r \equiv 1 \bmod q</M>;
+ 1 group of type <M>r:(p \times q)</M> if <M>r \equiv 1 \bmod pq</M>;
+ <M>p-1</M> groups of type <M>q:p + r:p</M>.
+</Item>
+</List>
+
+<P/>
+The groups in this layer are stored <Q>generically</Q>; that is, using
+functions instead of explicit presentations. The identification routine
+follows the classification as well.
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 2">
+<Heading>Layer 2</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The nilpotent groups of this layer have been constructed using
+<M>p</M>-group generation, see <Cite Key="OBr90"/> and the
+<Package>ANUPQ</Package> package. The 2- and 3-groups of this layer have
+also been available in the <C>TwoGroup</C> and <C>ThreeGroup</C> library of
+&GAP;&nbsp;3, see <Cite Key="JNO90"/> and <Cite Key="OBr91"/>. The
+non-nilpotent groups in this layer have been determined using the Frattini
+extension method, the cyclic split extension method and cyclic extension
+for the non-soluble groups, see <Cite Key="BescheEick98"/>,
+<Cite Key="BescheEick1000"/> and <Cite Key="BescheEick768"/>.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+The solvable groups in this layer are stored by a single long integer
+describing a pc presentation of the group (see <Ref Func="PcGroupCode"
+BookName="ref"/> or <Cite Key="BescheEick98"/>). For <M>p</M>-groups the
+encoded pc presentations are standard presentations and they are equal to
+the presentations known in the 2- and 3-groups libraries of &GAP;&nbsp;3.
+The non-solvable groups are stored by generating permutations.
+</Subsection>
+
+<Subsection><Heading>Selection arguments</Heading>
+For the selection functions the values of the following attributes are
+precomputed and stored:
+<List>
+<Mark>for <M>p</M>-groups</Mark>
+<Item>
+ <Ref Prop="IsAbelian" BookName="ref"/>,
+ <Ref Attr="PClassPGroup" BookName="ref"/>,
+ <Ref Attr="RankPGroup" BookName="ref"/>,
+ <C>FrattinifactorSize</C> and <C>FrattinifactorId</C>.
+</Item>
+<Mark>for non-<M>p</M>-groups</Mark>
+<Item>
+ <Ref Prop="IsAbelian" BookName="ref"/>,
+ <Ref Prop="IsNilpotentGroup" BookName="ref"/>,
+ <Ref Prop="IsSupersolvableGroup" BookName="ref"/>,
+ <Ref Prop="IsSolvableGroup" BookName="ref"/>,
+ <C>LGLength</C>, <C>FrattinifactorSize</C> and <C>FrattinifactorId</C>.
+</Item>
+</List>
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+The identification routine uses invariants of groups to identify a given
+group. The invariants are organised as a tree and stored in
+<C>ID_GROUP_TREE</C>, which contains a leaf for every group. In some cases
+this invariants tree is not sufficient to distinguish all groups. In this
+case the tree is used to reduce to a small number of possible groups and
+then a special random isomorphism test finds the correct group among the
+possible ones.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 3">
+<Heading>Layer 3</Heading>
+
+<Subsection><Heading>Determination</Heading>
+These groups have been determined using the generic variation of the
+cyclic split extension method and the Frattini extension method, see
+<Cite Key="BescheEick768"/>.
+</Subsection>
+
+<Subsection><Heading>Storing: nilpotent groups</Heading>
+For each order in this layer we first list the nilpotent groups <M>P
+\times Q</M> where <M>P</M> is the cyclic group of order <M>p</M> and
+<M>Q</M> is a group of order <M>2^n</M>. These groups are sorted by the
+catalogue number of <M>Q</M> and the group <M>Q</M> is stored in layer 2.
+</Subsection>
+
+<Subsection><Heading>Storing: groups with normal Sylow <M>p</M>-subgroup</Heading>
+Then we consider the remaining groups with normal Sylow
+<M>p</M>-subgroup. These are split extensions of type <M>P : Q</M>. The
+isomorphism type of these groups depends on the isomorphism type of
+<M>Q</M> and the action homomorphism <M>Q \to \mathrm{Aut}(P)</M>. Let
+<M>K</M> be the kernel of this homomorphism with <M>[Q : K] = 2^i</M> for
+some <M>i</M>. We encode the homomorphisms for fixed <M>Q</M> and fixed
+<M>i</M> as follows.
+
+<P/>
+Consider a generator <M>g</M> of <M>P</M> and let <M>g_1, \ldots, g_r</M>
+be a generating set of <M>Q</M> (we choose the first <M>r</M> pc generators
+of <M>Q</M> for <M>r</M> the rank of <M>Q</M>). Consider a homomorphism
+<M>a : Q \to \mathrm{Aut}(P)</M> and let <M>a_i</M> be the image of
+<M>g_i</M>. Clearly, <M>a_i</M> is of the form <M>a_i : g \to g^{l_i}</M>
+with <M>0 \leq l_i \leq 2^i-1</M>. Thus we describe the homomorphism
+<M>a</M> by the sequence <M>l_1, \ldots, l_r</M>. We encode this sequence
+as a <M>(2^i-1)</M>-adic number of length <M>r</M>; that is, we encode this
+sequence as <M>l_1 q^{r-1} + l_2 q^{r-2} + \ldots + l_r q^0</M> where
+<M>q = 2^i</M>. Hence each homomorphism <M>a</M> is encoded as an integer
+and for fixed <M>Q</M> and <M>i</M> we write all these integers into a
+list.
+
+<P/>
+A special case occurs if there are two homomorphisms <M>a</M> and <M>b</M>
+such that <M>a_i = b_i^j</M> for some integer <M>j</M>; that is, the images
+of <M>a</M> are powers of the images of <M>b</M>. In this case <M>a</M> is
+stored directly after <M>b</M> and we only store the integer <M>-j</M>
+instead of the encoding for the sequence <M>l_1, \ldots, l_r</M> for
+<M>a</M>.
+
+<P/>
+Now we consider the case that for certain <M>Q</M> and <M>i</M> we have a
+list <M>L</M> consisting of non-negative integers only; that is, the
+special power-case did not occur for this group <M>Q</M> and index
+<M>i</M>. In some cases we encode such a list <M>L</M> further. Recall that
+the integers in <M>L</M> correspond to different homomorphisms. Thus the
+integers are all different and we may sort them in increasing order. Then
+we can store this sorted list as a binary number; that is, the list
+<M>c_1, \ldots, c_s</M> is encoded as <M>2^{c_1-1} + \ldots +
+2^{c_s-1}</M>. This is only useful if the list <M>L</M> does not contain
+large numbers.
+
+<P/>
+Thus for <M>Q</M> and <M>i</M> we have either a list or an integer stored
+to encode the corresponding homomorphisms. For each index <M>i</M> we write
+all lists or integers into a list such that at position <M>\mathrm{Id}(Q)</M>
+the corresponding list or integer to <M>Q</M> and <M>i</M> is found.
+
+<P/>
+For <M>i = 1</M> this list has no holes, since there exists at least one
+group <M>P : Q</M> with <M>K</M> of index 2 for each group <M>Q</M>. Often
+the entry at position <M>j</M> in this list is equal to the entry at
+position <M>j-1</M>. In this case we delete the entry at position <M>j</M>
+and thus create a hole in the list.
+
+<P/>
+For <M>i > 1</M> there might be holes in the list if there is no group
+<M>P : Q</M> with <M>K</M> of index <M>2^i</M>. Hence the previous idea
+cannot be applied for <M>i > 1</M>. However, in all the lists we have equal
+entries in various places. If this is the case, then we substitute an entry
+in a list by a negative integer <M>-j</M> meaning that the entry at this
+position is equal to the entry at position <M>j</M>.
+
+<P/>
+Finally, if the list for some index <M>i</M> has only few entries left,
+then we substitute the list by a record containing two lists: first the
+non-empty positions and secondly their entries.
+</Subsection>
+
+<Subsection><Heading>Storing: groups with normal Sylow 2-subgroup</Heading>
+Next we consider the remaining groups of type <M>Q : P</M>. These exist for
+a few primes <M>q</M> only. These groups are described by operation
+homomorphisms of the type <M>P \to \mathrm{Aut}(Q)</M>. Here we store the
+catalogue number of <M>Q</M> and a long integer for each such homomorphism
+<M>a : P \to \mathrm{Aut}(Q)</M>. Consider a generator <M>g</M> of
+<M>P</M>. Clearly, we just need to store the image of <M>g</M> for each
+homomorphism <M>a</M>. The image <M>g^a</M> is an automorphism of <M>Q</M>
+and thus we store the images under <M>g^a</M> of a fixed generating set of
+<M>Q</M>. For this purpose we consider a canonical numbering of the
+elements of <M>Q</M> and store the generator images by storing their number
+in the element list. The sequence of these numbers is encoded as a
+<M>(|Q|+1)</M>-adic number; that is, the sequence <M>e_1, \ldots, e_r</M>
+is stored as <M>e_1 q^{r-1} + e_2 q^{r-2} + \ldots + e_r</M> where
+<M>q = |Q| + 1</M>.
+</Subsection>
+
+<Subsection><Heading>Storing: groups without normal Sylow subgroup</Heading>
+Now there are the groups of order <M>2^n \cdot p</M> without any normal
+Sylow subgroup left. These exist for very few primes <M>p</M> only. They
+have been computed as in layer 2 using the Frattini extension method. They
+are stored as described in layer 2 using one long integer for each group.
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+The identification of nilpotent groups <M>P \times Q</M> relies on the
+identification of <M>Q</M> only and this is done as in layer 2. Similarly,
+the groups without normal Sylow subgroup are identified as described in
+layer 2.
+
+<P/>
+For the groups <M>Q : P</M> with normal Sylow <M>q</M>-subgroup we first
+determine the prime <M>p</M> and the isomorphism type of <M>Q</M>. If this
+is not sufficient, then we use the methods as described in layer 2. (Recall
+that there are only finitely many primes <M>p</M> possible here.)
+
+<P/>
+For the groups <M>P : Q</M> with normal Sylow <M>p</M>-subgroup we first
+determine the prime <M>p</M> and the isomorphism type of <M>Q</M> as well.
+Moreover, we compute the centralizer <M>K</M> of <M>P</M> in <M>Q</M> and
+consider its index <M>[Q : K] = 2^i</M>.
+
+<P/>
+In a large number of cases the catalogue numbers <M>\mathrm{Id}(Q)</M> and
+<M>\mathrm{Id}(K)</M> are sufficient to determine the group <M>P:Q</M>
+uniquely. Moreover, this feature is independent of <M>p</M>. We can
+recognise these cases using the tree of invariants: if we can determine
+<M>P:Q</M> uniquely with <M>\mathrm{Id}(Q)</M> and <M>\mathrm{Id}(K)</M>
+only, then there is no node corresponding to this case in the tree.
+
+<P/>
+If there is a node in the tree, then <M>\mathrm{Id}(Q)</M> and
+<M>\mathrm{Id}(K)</M> are not sufficient to determine the group uniquely.
+In this case we apply methods similar to layer 2; that is, we use
+invariants. Since there are infinitely many primes <M>p</M> which might
+turn up here, we need an additional idea to use the invariant tree for this
+purpose. In the invariant tree we have invariants stored for groups of type
+<M>R : Q</M> of order <M>2^n \cdot r</M> for primes <M>r</M> in 3, 5, 17
+and 97. Now we first choose the smallest prime <M>r</M> such that <M>r</M>
+is congruent 1 mod <M>[Q : K]</M>. The cases that <M>[Q : K] = 2^i</M> for
+<M>i = 6, 7</M> or 8 cannot occur here, because in these cases
+<M>\mathrm{Id}(Q)</M> and <M>\mathrm{Id}(K)</M> are always sufficient to
+determine the group.
+
+<P/>
+Then we use that the groups <M>P : Q</M> behave essentially similarly to
+the groups <M>R : Q</M> for the chosen <M>r</M>. Thus we can construct a
+group <M>R : Q</M> corresponding to <M>P : Q</M> and identify <M>R : Q</M>
+instead of <M>P : Q</M>.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 4">
+<Heading>Layer 4</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The groups of order <M>2401 = 7^4</M> and <M>3125 = 5^5</M> have been
+computed using <M>p</M>-group generation as described in layer 2 and they
+are stored and handled similarly. The other groups in this layer have been
+determined as outlined in layer 3 and, again, they are organised
+similarly.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+There is a difference to layer 3 in the compression of the group data; that
+is, the groups in this layer are not compressed as efficiently as the
+groups in layer 3. We consider the groups of type <M>P : Q</M> for <M>P</M>
+the cyclic group of order <M>p</M> and <M>Q</M> a group of order
+<M>q^n</M>. These groups are determined by <M>Q</M> and an operation
+homomorphism <M>Q \to \mathrm{Aut}(P)</M>. As in layer 3 we first compute
+one integer for each operation homomorphism and then proceed to compress
+the lists of integers for each <M>Q</M> and each <M>i</M> where <M>q^i</M>
+is the index of the centralizer of <M>P</M> in <M>Q</M>. Different to layer
+3 we do not compress the lists of non-negative integers to a single integer
+and we do not reduce the list for <M>i = 1</M> further, since in both cases
+the obtained compression is very small.
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+The group identification is essentially similar to the procedure described
+in layer 3. However, for the groups with normal Sylow <M>p</M>-subgroup we
+use a special random isomorphism test additionally to identify groups. It
+is a <Q>special</Q> version of the general algorithm: in the general
+algorithm we use certain sets to choose generating sets from. In this
+special version we restrict these sets suitably. (We use non-trivial
+elements of <M>P</M> and certain elements of <M>Q</M>.) This is necessary,
+since the groups which appear here can be too large to compute explicitly
+the elements sorted in conjugacy classes.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 5">
+<Heading>Layer 5</Heading>
+
+This layer is similar to layer 2.
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 6">
+<Heading>Layer 6</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The nilpotent groups in this layer are determined as direct products of
+<M>p</M>-groups. Most of the groups of orders 1152 and 1920 have a normal
+Sylow 3-subgroup or Hall <M>\{3,5\}</M>-subgroup, respectively. They are
+constructed using the coprime split extension method, see
+<Cite Key="BEO01"/>. The remaining groups of these orders (without normal
+2-complement) have been determined using the Frattini extension method and
+the cyclic split extension method, see also <Cite Key="BescheEick98"/>.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+Only the non-nilpotent groups with normal Sylow 3-subgroup or Hall
+<M>\{3,5\}</M>-subgroup are stored in a special way. The remaining groups
+are organised similarly to layer 2.
+
+<P/>
+For the groups of type <M>P : Q</M> where <M>P</M> is the normal Sylow
+3-subgroup or the Hall <M>\{3,5\}</M>-subgroup and <M>Q</M> is a group of
+order <M>2^7</M> we split a pc presentation in two parts. The first part
+are the relators of <M>Q</M>. These are stored within the groups of order
+<M>2^7</M> and thus can be considered as known. The second part of the
+relators determine <M>P</M> and the operation of <M>Q</M> on <M>P</M>.
+These second parts are stored as long integers. If we consider these second
+parts for all the groups, then we find that they are highly redundant.
+There are only 921 (1722) different long integers for the groups of order
+1152 and 1920, respectively. Thus we store these two sets of long integers
+only.
+
+<P/>
+Then for each group <M>Q</M> of order <M>2^7</M> we store for each
+extension <M>P : Q</M> the position of the corresponding long integer.
+Hence we obtain a list of integers for <M>Q</M>. Again we note that the
+lists of integers obtained for all the groups <M>Q</M> of order <M>2^7</M>
+are highly redundant. There are only 1298 (722) different lists for the
+groups of order 1152 (1920). Thus we can compress the lists using the same
+idea again.
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+The identification of groups of these orders is similar to layer 2.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 7">
+<Heading>Layer 7</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The groups of order 512 have first been enumerated, see
+<Cite Key="EOB98"/> and <Cite Key="EOB99"/>. Later they have been
+determined explicitly using <M>p</M>-group generation, see
+<Cite Key="OBr90"/> and <Cite Key="BEO01"/>. There are 10 494 213 groups of
+this order.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+We introduce a special method to store such groups. Consider a pc
+presentation of a given group of order 512. If we concatenate the exponent
+vectors of the right hand sides of such a presentation, then we obtain a
+bit vector of length 120. This can be used as encoding of a group of order
+512. We compress the list of such encodings further using the following
+method.
+
+<P/>
+First we split the list of all groups of order 512 in sublists containing
+1000 groups each. Let <M>L</M> be such a sublist. We suppose that <M>L</M>
+consists of 1000 bitlists of length 120 and we describe a method to encode
+this list of bitlists in a single vector <M>V</M> using an alphabet of 83
+symbols (81 symbols for the encoding and 2 special symbols as signs).
+
+<P/>
+First we find those indices <M>i</M> in the range 1 to 120 such that for
+all lists in <M>L</M> the entries at position <M>i</M> are fixed. Thus we
+note for each of the 120 entries whether the entries are all 0, all 1 or
+variable in <M>L</M>. There are <M>3^{120}</M> combinations possible which
+we store in a vector of length 30 using 81 symbols. This vector of length
+30 is the initial segment of <M>V</M>. Now we can reduce to consider the
+variable positions only and thus work with bitlists of shorter length.
+
+<P/>
+We split the shorter bitlists in blocks such that the bitlists in each
+block have at most 6 variable entries. For this purpose we start at the
+beginning of <M>L</M> and add bitlists to the current block until the next
+bitlist would lead to more than 6 variable entries for this block. Each
+block can contain 1 up to 64 bitlists. Now we determine a <Q>headcode</Q>
+and a <Q>tailcode</Q> to describe the block. The head and tail codes are
+then concatenated to <M>V</M>. The head contains an encoding of the
+variable bits for this block as above. The tail then describes the vectors
+in the variable bits. Since there are at most 64 possible combinations
+arising here, we need only one letter in the 81-alphabet to describe a
+single vector of variable bits.
+
+<P/>
+Finally, we note that some of the tailcodes arise for many blocks. These
+tailcodes are stored in a special list. If such a tailcode is occurring in
+<M>V</M>, then only the reference to the special list is stored instead of
+the full tailcode. This special list contains 1890 different tailcodes, 2
+letters in the alphabet are sufficient to refer to a tailcode.
+
+<P/>
+To distinguish references and actual tailcodes we use a special sign. Each
+new head begins with a special symbol in <M>V</M>. There are two special
+symbols available for this purpose. One is used if the corresponding
+tailcode is referenced, and the other if it is an ordinary tailcode.
+
+<P/>
+This compression allows to store the groups of order 512 in 4.4 MB.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 8">
+<Heading>Layer 8</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The 408 641 062 groups of order 1536 have been determined using the cyclic
+split extension method and the improved version of the Frattini extension
+method, see <Cite Key="BescheEick98"/> and <Cite Key="BescheEick768"/>.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+We store these groups in a special way as well and we obtain a compression
+to 6.1 MB. The groups are stored using references to the groups of order
+512 of layer 7.
+
+<P/>
+The nilpotent groups <M>C_3 \times Q</M> for <M>Q</M> a group of order 512
+are based on the groups of order 512.
+
+<P/>
+The major part of the groups are the 398 032 384 non-nilpotent groups with
+normal Sylow 3-subgroup. The compression of these groups follows the one
+outlined in layer 3. As described there, for each group <M>Q</M> of order
+512 we compute an integer which determines all groups of type <M>C_3 :
+Q</M>. There are only 15 249 different integers of this type. In a first
+compression we create a list of references to the different integers.
+
+<P/>
+Now we note that a group often has the same reference as the previous one.
+Thus we split the groups of order 512 in sets of 100 000 groups and create
+a record for each set. The record contains two lists which are used to
+recall the blocks in a set having the same reference. Thus the first list
+contains the length of the blocks and the second list contains the
+corresponding references.
+
+<P/>
+Again, in both lists certain patterns occur often. In the first list the
+length <M>1</M> appears often. Thus the <M>1</M> is not stored explicitly,
+but a blank in this list has to be considered as <M>1</M>. In the second
+list often an entry is the same as the one 2 places before. Thus these
+entries are deleted as well and blanks can be reconstructed by this rule.
+
+<P/>
+Additionally we store the number of resulting groups for each integer to
+speed up the method to find the group with a given catalogue number.
+
+<P/>
+The 18 028 groups with normal Sylow 2-subgroup are stored similarly to
+layer 3. As described for layer 3 we determine a long integer for each
+homomorphism <M>Q \to \mathrm{Aut}(P)</M> for <M>Q</M> of order 512 and
+<M>P</M> the cyclic group of order 3. The occurring integers are highly
+redundant &ndash; there are 6774 different ones. Thus we use a list of
+references again.
+
+<P/>
+The 96 437 groups without normal Sylow subgroup are determined using the
+Frattini extension method. As described in layer 2 they can be stored by
+encoding the relators of a pc presentation as long integer. However, the
+relators corresponding to the Frattini factors of the groups are known.
+Thus it is sufficient to store the relators of the Frattini factors once
+for all groups with this factor and encode the remaining relators only.
+Note that there are only 16 different Frattini factors and only 12 of them
+have order less than 1536. The groups are stored in lists corresponding to
+the 12 Frattini factors.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 9">
+<Heading>Layer 9</Heading>
+
+This layer contains the generic construction of groups of order
+<M>p^4</M>, <M>p^5</M> and <M>p^6</M> with order <M>> 3125</M> (those with
+order up to 3125 are contained in the lower layers of the small groups
+library).
+
+<Subsection><Heading>Determination</Heading>
+The groups of order <M>p^4</M> were first determined by Hölder (1893), see
+<Cite Key="Hoelder1893"/>. The groups of order <M>p^5</M> were first
+determined by Bagnera (1898), see <Cite Key="Bagnera1898"/>. The groups of
+order <M>p^6</M> were first (correctly) determined by Newman, O'Brien and
+Vaughan-Lee (2004), see <Cite Key="NOV04"/>.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+The groups of order <M>p^4</M> (<M>p \geq 11</M>) are given by pc
+presentations which are produced at run-time by a function
+<C>SMALL_GROUPS_FUNCS[19]</C> provided by Newman.
+
+<P/>
+The groups of order <M>p^5</M> (<M>p \geq 7</M>) are given by pc
+presentations which are produced at run-time by a function
+<C>SMALL_GROUPS_FUNCS[20]</C> provided by Girnat, see
+<Cite Key="Gir03"/>.
+
+<P/>
+The groups of order <M>p^6</M> (<M>p \geq 5</M>) are given by pc
+presentations which are produced at run-time by a function
+<C>SMALL_GROUPS_FUNCS[21]</C> provided by Newman, O'Brien and Vaughan-Lee,
+see <Cite Key="NOV04"/>.
+
+<P/>
+The groups of order <M>p^6</M> are given as a list of partially repetitive
+structures. These are compressed into the file <F>sml1.z</F>. At run-time,
+this compressed structure will be expanded, but restricted to those parts
+of the structure relevant for the given <M>p</M> when needed. It is cached
+into <C>SMALL_GROUP_LIB[1]</C>. As parts of this structure contain long
+(<M>O(p^2)</M>) lists of groups which are classified by additional
+parameters and these lists are not dense, it might be necessary to set up
+the complete list of indices to find the presentation of a single group.
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+A group of order <M>p^4</M> can be identified and its catalogue number
+found by the function <C>ID_SMALL_GROUPS_FUNCS[19]</C> based on a function
+provided by Newman and modified by Besche.
+
+<P/>
+There is no identification available for the groups of order <M>p^5</M> and
+<M>p^6</M> at present.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 10">
+<Heading>Layer 10</Heading>
+
+<Subsection><Heading>Groups of squarefree order</Heading>
+These groups have first been determined by Hölder (1895), see
+<Cite Key="Hoelder1895"/>. The implemented construction is based on the
+determination given in <Cite Key="DEi05"/>. The key invariants are the
+socle and socle factor.
+
+<P/>
+The groups of squarefree order which are not contained in lower layers are
+given by pc presentations which are produced at run-time by a function
+<C>SMALL_GROUPS_FUNCS[24]</C> written specially for this library. Such a
+group can be identified and its catalogue number found by the function
+<C>ID_SMALL_GROUPS_FUNCS[24]</C>.
+</Subsection>
+
+<Subsection><Heading>Groups of cubefree but not squarefree order</Heading>
+These groups were first determined in <Cite Key="DEi05"/>. Every group with
+cubefree order is either solvable or has a direct decomposition into a
+solvable group and <M>PSL(2,p)</M> for a suitable prime.
+
+<P/>
+The groups of cubefree order <M>&lt; 50000</M> which are not contained in
+lower layers and are not squarefree are given by pc presentations which are
+produced at run-time by a function <C>SMALL_GROUPS_FUNCS[25]</C> written
+specially for this library. Such a group can be identified and its
+catalogue number found by the function <C>ID_SMALL_GROUPS_FUNCS[24]</C>.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Layer 11">
+<Heading>Layer 11</Heading>
+
+<Subsection><Heading>Determination</Heading>
+The groups of order <M>p^7</M> have been determined by O'Brien and
+Vaughan-Lee, see <Cite Key="OV05"/>. This layer contains these groups for
+some small primes: <M>p = 3,5,7,11</M>.
+</Subsection>
+
+<Subsection><Heading>Storing</Heading>
+The groups are encoded by <Ref Func="PcGroupCode" BookName="ref"/> and then
+the various codes are stored in compressed form. See the groups of order
+512 for details. Pc presentations for the groups are produced at run-time
+for these groups.
+</Subsection>
+
+<Subsection><Heading>Identification</Heading>
+There is no identification function available for the groups in this
+layer.
+</Subsection>
+
+</Section>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Concluding remarks">
+<Heading>Concluding remarks</Heading>
+
+The compression of group data for layer 2 has been developed long ago. A
+first version has been used in the <M>p</M>-group generation algorithm and
+thus to encode the 2- and 3-groups library of &GAP;&nbsp;3. This
+compression is described in <Cite Key="BescheEick98"/>.
+
+<P/>
+The remaining compression methods for layers 3 &ndash; 8 have been
+introduced by Hans Ulrich Besche specially for this library. They are
+designed to store the groups in as little space as possible. For different
+layers there are different methods, since certain approaches had been
+successful for certain groups but not for others. Moreover, already
+published layers have not been changed again and thus useful concepts
+sometimes have not been applied to earlier layers.
+
+</Section>
+
+</Chapter>

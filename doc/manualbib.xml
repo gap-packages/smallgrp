@@ -5531,4 +5531,59 @@
   <other type="doi">10.1080/00927872.2021.2006680</other>
 </article></entry>
 
+<entry id="Hoelder1893"><article>
+  <author>
+    <name><first>Otto</first><last>Hölder</last></name>
+  </author>
+  <title>Die Gruppen der Ordnungen <M>p^3</M>, <M>pq^2</M>, <M>pqr</M>,
+    <M>p^4</M></title>
+  <journal>Mathematische Annalen</journal>
+  <year>1893</year>
+  <volume>43</volume>
+  <pages>301&ndash;412</pages>
+  <url>https://doi.org/10.1007/BF01443651</url>
+  <other type="doi">10.1007/BF01443651</other>
+</article></entry>
+
+<entry id="Hoelder1895"><article>
+  <author>
+    <name><first>Otto</first><last>Hölder</last></name>
+  </author>
+  <title>Die Gruppen mit quadratfreier Ordnungszahl</title>
+  <journal>Nachrichten von der Gesellschaft der Wissenschaften zu
+    Göttingen, Mathematisch-Physikalische Klasse</journal>
+  <year>1895</year>
+  <pages>211&ndash;229</pages>
+</article></entry>
+
+<entry id="Bagnera1898"><article>
+  <author>
+    <name><first>Giuseppe</first><last>Bagnera</last></name>
+  </author>
+  <title>La composizione dei gruppi finiti il cui grado è la quinta potenza
+    di un numero primo</title>
+  <journal>Annali di Matematica Pura ed Applicata</journal>
+  <year>1898</year>
+  <volume>1</volume>
+  <pages>137&ndash;228</pages>
+  <url>https://doi.org/10.1007/BF02419192</url>
+  <other type="doi">10.1007/BF02419192</other>
+</article></entry>
+
+<entry id="JNO90"><article>
+  <author>
+    <name><first>Rodney</first><last>James</last></name>
+    <name><first>M. F.</first><last>Newman</last></name>
+    <name><first>E. A.</first><last>O'Brien</last></name>
+  </author>
+  <title>The groups of order 128</title>
+  <journal>Journal of Algebra</journal>
+  <year>1990</year>
+  <volume>129</volume>
+  <number>1</number>
+  <pages>136&ndash;158</pages>
+  <url>https://doi.org/10.1016/0021-8693(90)90244-I</url>
+  <other type="doi">10.1016/0021-8693(90)90244-I</other>
+</article></entry>
+
 </file>
