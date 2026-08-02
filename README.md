@@ -35,6 +35,20 @@ library is organised: how the groups were determined, how they are stored, and
 which algorithms the identification routines use.
 
 
+## Related packages
+
+Groups of further orders are provided by other GAP packages:
+
+  * [SglPPow](https://gap-packages.github.io/sglppow/) provides the groups of
+    order p^7 for primes p > 11 and those of order 3^8. It extends this
+    library: once loaded, its groups are available via `SmallGroup` and
+    friends.
+  * [SOTGrps](https://gap-packages.github.io/sotgrps/) constructs and
+    identifies the groups whose order factorises into at most 4 primes, and
+    those of order p^4 * q. It uses its own functions and its own numbering,
+    which in general differs from the one used here.
+
+
 ## Bug reports and feature requests
 
 Please submit bug reports and feature requests via our GitHub issue tracker:

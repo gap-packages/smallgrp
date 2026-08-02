@@ -148,6 +148,37 @@ In version 1.5, the number of groups of order 1024 was corrected.
 For more information, refer to <Cite Key="Burrell2021"/>.
 </Section>
 
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<Section Label="Related packages">
+<Heading>Related packages</Heading>
+
+Several other &GAP; packages give access to groups of orders which are not
+covered by this library, or which are covered only in part.
+
+<P/>
+<Index Key="SglPPow package"><Package>SglPPow</Package> package</Index>
+The <Package>SglPPow</Package> package provides the groups of order
+<M>p^7</M> for primes <M>p > 11</M> and the groups of order <M>3^8</M>.
+It extends this library: once it is loaded, its groups are available
+through the usual functions
+<Ref Func="SmallGroup" Label="for group order and index"/>,
+<Ref Func="NumberSmallGroups"/> and so on, and
+<Ref Func="SmallGroupsAvailable"/> takes them into account. See
+<URL>https://gap-packages.github.io/sglppow/</URL>.
+
+<P/>
+<Index Key="SOTGrps package"><Package>SOTGrps</Package> package</Index>
+The <Package>SOTGrps</Package> package constructs and identifies the groups
+whose order factorises into at most 4 primes, as well as those of order
+<M>p^4 q</M> for distinct primes <M>p</M> and <M>q</M>. Unlike
+<Package>SglPPow</Package>, it does not extend this library: it comes with
+its own functions <C>SOTGroup</C>, <C>AllSOTGroups</C> and
+<C>IdSOTGroup</C>. Be aware that where the orders covered by both overlap,
+the numbering used by <Package>SOTGrps</Package> in general differs from
+the one used here. See <URL>https://gap-packages.github.io/sotgrps/</URL>.
+
+</Section>
+
 <Section Label="Reference">
   <Heading>Function Reference</Heading>
   <#Include Label="SmallGroup">
