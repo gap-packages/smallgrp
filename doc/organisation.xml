@@ -24,7 +24,7 @@ the groups of certain orders:
 </Item>
 <Mark>Layer 2</Mark>
 <Item>
- all remaining orders <M>\leq 1000</M> except 512 and 768.
+ all remaining orders at most 1000 except 512 and 768.
 </Item>
 <Mark>Layer 3</Mark>
 <Item>
@@ -39,8 +39,7 @@ the groups of certain orders:
 </Item>
 <Mark>Layer 5</Mark>
 <Item>
- all remaining orders <M>\leq 2000</M> except 512, 1024, 1152, 1536 and
- 1920.
+ all remaining orders at most 2000 except 512, 1024, 1152, 1536 and 1920.
 </Item>
 <Mark>Layer 6</Mark>
 <Item>
@@ -739,7 +738,7 @@ cubefree order is either solvable or has a direct decomposition into a
 solvable group and <M>PSL(2,p)</M> for a suitable prime.
 
 <P/>
-The groups of cubefree order <M>&lt; 50000</M> which are not contained in
+The groups of cubefree order at most 50 000 which are not contained in
 lower layers and are not squarefree are given by pc presentations which are
 produced at run-time by a function <C>SMALL_GROUPS_FUNCS[25]</C> written
 specially for this library. Such a group can be identified and its

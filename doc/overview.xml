@@ -61,12 +61,6 @@ The data in this library has been carefully checked and cross-checked.
 It is believed to be reliable. However, no absolute guarantees are given
 and users should, as always, make their own checks in critical cases.
 <P/>
-The data occupies about 30 MB (storing over 400 million groups in about
-200 megabits). The group identification occupies about 47 MB of which
-18 MB is used for the groups in layer (6). More information on the Small 
-Groups library can be found on
-<URL>http://www.icm.tu-bs.de/ag_algebra/software/small/</URL>
-<P/>
 This library has been constructed by Hans Ulrich Besche, Bettina Eick and 
 E.&nbsp;A.&nbsp;O'Brien. A survey on this topic and an account of the history of 
 group constructions can be found in <Cite Key="BEO01"/>. Further detailed 
