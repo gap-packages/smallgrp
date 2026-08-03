@@ -52,60 +52,10 @@ The library is organised in 11 layers. Each layer contains the groups of
 certain orders and their corresponding group identification routines. It
 is possible to install the first <M>n</M> layers of the group library and the
 first <M>m</M> layers of the group identification for each <M>1 \leq m \leq n
-\leq 11</M>. This might be useful to save disk space. Detailed information
-on the layers is given in Chapter <Ref Chap="Organisation"/>; a brief
-description is given here:
-<List>
-<Mark>(1)</Mark>
-<Item>
- the groups whose order factorises into at most 3 primes.
-</Item>
-<Mark>(2)</Mark>
-<Item>
- the remaining groups of order at most 1000 except 512 and 768.
-</Item>
-<Mark>(3)</Mark>
-<Item>
- the remaining groups of order <M>2^n \cdot p</M> with <M>n \leq 8</M> and
-              <M>p</M> an odd prime.
-</Item>
-<Mark>(4)</Mark>
-<Item>
- the remaining groups of order <M>5^5</M>, <M>7^4</M> and of order 
-              <M>q^n \cdot p</M> for <M>q^n</M> dividing <M>3^6</M>, <M>5^5</M> or <M>7^4</M> and 
-              <M>p \neq q</M> a prime.
-</Item>
-<Mark>(5)</Mark>
-<Item>
- the remaining groups of order at most 2000 except 1024,
-              1152, 1536 and 1920.
-</Item>
-<Mark>(6)</Mark>
-<Item>
- the groups of orders 1152 and 1920.
-</Item>
-<Mark>(7)</Mark>
-<Item>
- the groups of order 512.
-</Item>
-<Mark>(8)</Mark>
-<Item>
- the groups of order 1536.
-</Item>
-<Mark>(9)</Mark>
-<Item>
- the remaining groups of order <M>p^n</M> for <M>4 \leq n \leq 6</M>.
-</Item>
-<Mark>(10)</Mark>
-<Item>
- the remaining groups of cubefree order at most 50 000 and
-               of squarefree order.
-</Item>
-<Mark>(11)</Mark>
-<Item>
- the remaining groups of order <M>p^7</M> for <M>p = 3,5,7,11</M>.
-</Item>
-</List>
+\leq 11</M>. This might be useful to save disk space. Which orders belong
+to which layer is described in Chapter <Ref Chap="Organisation"/>, along
+with detailed information on how the groups were determined, how they are
+stored, and how they are identified.
 <P/>
 The data in this library has been carefully checked and cross-checked.
 It is believed to be reliable. However, no absolute guarantees are given
