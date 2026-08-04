@@ -1,6 +1,6 @@
 This file describes changes in the smallgrp package.
 
-# Unreleased
+# 1.6dev
 
   - Merged the old `README` file into `README.md` and the package manual:
     its description of the library's organisation (layers, storage formats,
