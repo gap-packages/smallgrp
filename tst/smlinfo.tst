@@ -48,10 +48,9 @@ gap> SmallGroupsInformation(16);
      10 - 13 have rank 3.
      14 is elementary abelian. 
 
-  For the selection functions the values of the following attributes 
-  are precomputed and stored:
-     IsAbelian, PClassPGroup, RankPGroup, FrattinifactorSize and 
-     FrattinifactorId. 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     PClassPGroup, RankPGroup, FrattinifactorSize and FrattinifactorId.
 
   This size belongs to layer 2 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -143,10 +142,9 @@ gap> SmallGroupsInformation(64);
      260 - 266 have rank 5.
      267 is elementary abelian. 
 
-  For the selection functions the values of the following attributes 
-  are precomputed and stored:
-     IsAbelian, PClassPGroup, RankPGroup, FrattinifactorSize and 
-     FrattinifactorId. 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     PClassPGroup, RankPGroup, FrattinifactorSize and FrattinifactorId.
 
   This size belongs to layer 2 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -171,10 +169,9 @@ gap> SmallGroupsInformation(96);
      220 - 225 have Frattini factor [ 48, 52 ].
      226 - 231 have trivial Frattini subgroup.
 
-  For the selection functions the values of the following attributes 
-  are precomputed and stored:
-     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup, 
-     LGLength, FrattinifactorSize and FrattinifactorId. 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     LGLength, FrattinifactorSize and FrattinifactorId.
 
   This size belongs to layer 2 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -194,10 +191,9 @@ gap> SmallGroupsInformation(256);
      56082 - 56091 have rank 7.
      56092 is elementary abelian. 
 
-  For the selection functions the values of the following attributes 
-  are precomputed and stored:
-     IsAbelian, PClassPGroup, RankPGroup, FrattinifactorSize and 
-     FrattinifactorId. 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     PClassPGroup, RankPGroup, FrattinifactorSize and FrattinifactorId.
 
   This size belongs to layer 2 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -214,6 +210,9 @@ gap> SmallGroupsInformation(768);
      1083473 - 1085323 have a normal Sylow 2-subgroup. 
      1085324 - 1090235 have no normal Sylow subgroup. 
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
+
   This size belongs to layer 3 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -228,6 +227,9 @@ gap> SmallGroupsInformation(1152);
      4657 - 153312 are non-nilpotent with normal Sylow 3-subgroup.
      153313 - 157877 have no normal Sylow 3-subgroup.
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
+
   This size belongs to layer 6 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -239,6 +241,9 @@ gap> SmallGroupsInformation(1920);
      2329 - 236344 have a normal Hall (3,5)-subgroup.
      236345 - 240416 are solvable without normal Hall (3,5)-subgroup.
      240417 - 241004 are not solvable.
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
 
   This size belongs to layer 6 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -253,6 +258,9 @@ gap> SmallGroupsInformation(1536);
      408526598 - 408544625 have a normal Sylow 2-subgroup.
      408544626 - 408641062 have no normal Sylow subgroup.
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
+
   This size belongs to layer 8 of the SmallGroups library. 
   IdSmallGroup is not available for this size. 
  
@@ -264,6 +272,9 @@ gap> SmallGroupsInformation(1029);
   They are sorted by normal Sylow subgroups. 
      1 - 5 are the nilpotent groups.
      6 - 19 have a normal Sylow 7-subgroup. 
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
 
   This size belongs to layer 4 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -307,6 +318,10 @@ gap> SmallGroupsInformation(512);
      10494201 - 10494212 have rank 8 and p-class 2.
      10494213 is elementary abelian.
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     RankPGroup and PClassPGroup.
+
   This size belongs to layer 7 of the SmallGroups library. 
   IdSmallGroup is not available for this size. 
  
@@ -318,6 +333,10 @@ gap> SmallGroupsInformation(14641);
      2 - 10 have rank 2. 
      11 - 14 have rank 3. 
      15 is elementary abelian. 
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup
+     and RankPGroup.
 
   This size belongs to layer 9 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -333,6 +352,9 @@ gap> SmallGroupsInformation(16807);
      43 - 76 have rank 3. 
      77 - 82 have rank 4. 
      83 is elementary abelian. 
+
+  The following selection criteria are indexed for this size:
+     IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup and RankPGroup.
 
   This size belongs to layer 9 of the SmallGroups library. 
   IdSmallGroup is not available for this size. 
@@ -363,6 +385,10 @@ gap> SmallGroupsInformation(15625);
       presentations, most of these have $p$ as the only 
       parameter. 
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     RankPGroup and PClassPGroup.
+
   This size belongs to layer 9 of the SmallGroups library. 
   IdSmallGroup is not available for this size. 
  
@@ -378,6 +404,9 @@ gap> SmallGroupsInformation(2002);
     1 is abelian
     2 - 8 have socle C_1001 and factor C_2
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
+
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -392,6 +421,9 @@ gap> SmallGroupsInformation(2010);
     2 has socle C_670 and factor C_3
     3 - 9 have socle C_1005 and factor C_2
     10 - 12 have socle C_335 and factor C_6
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -409,6 +441,9 @@ gap> SmallGroupsInformation(2004);
     1 - 4 are solvable with Frattini factor of size 1002
     5 - 10 are solvable and Frattini free
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
+
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -424,6 +459,9 @@ gap> SmallGroupsInformation(2028);
     7 - 18 are solvable with Frattini factor of size 156
     19 - 35 are solvable with Frattini factor of size 1014
     36 - 88 are solvable and Frattini free
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -442,6 +480,9 @@ gap> SmallGroupsInformation(2100);
     69 - 164 are solvable and Frattini free
     165 is PSL( 2, 5 ) x F, F solvable and Frattini free of order 35
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
+
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -455,6 +496,9 @@ gap> SmallGroupsInformation(2115);
 
     1 is solvable with Frattini factor of size 705
     2 is solvable and Frattini free
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -472,6 +516,9 @@ gap> SmallGroupsInformation(2340);
     53 - 72 are solvable with Frattini factor of size 1170
     73 - 165 are solvable and Frattini free
     166 - 167 are PSL( 2, 5 ) x F_i, F_i solvable Frattini free of order 39
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -492,6 +539,9 @@ gap> SmallGroupsInformation(2940);
       of order 7
     187 is PSL( 2, 5 ) x F, F solvable and Frattini free of order 49
 
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
+
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
  
@@ -509,6 +559,9 @@ gap> SmallGroupsInformation(3420);
     65 - 141 are solvable and Frattini free
     142 - 143 are PSL( 2, 5 ) x F_i, F_i solvable Frattini free of order 57
     144 is PSL( 2, 19 )
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -532,6 +585,9 @@ gap> SmallGroupsInformation(8820);
     667 - 668 are PSL( 2, 5 ) x G_i, G_i solvable of order 147 with a
       Frattini factor of order 21
     669 - 672 are PSL( 2, 5 ) x F_i, F_i solvable Frattini free of order 147
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup and IsSolvableGroup.
 
   This size belongs to layer 10 of the SmallGroups library. 
   IdSmallGroup is available for this size. 
@@ -564,6 +620,10 @@ gap> SmallGroupsInformation(2187);
       to improve storage too. Since p^7 is too big the data is
       stored into some remaining holes of SMALL_GROUP_LIB at
       Primes[ p + 10 ].
+
+  The following selection criteria are indexed for this size:
+     IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+     RankPGroup and PClassPGroup.
 
   This size belongs to layer 11 of the SmallGroups library. 
   IdSmallGroup is not available for this size. 

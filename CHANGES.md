@@ -2,6 +2,25 @@ This file describes changes in the smallgrp package.
 
 # 1.6dev
 
+  - Selection by `IsAbelian`, `IsNilpotentGroup`, `IsSupersolvableGroup`,
+    `IsSolvableGroup`, `RankPGroup` and `PClassPGroup` now avoids
+    constructing the groups for most orders which had no precomputed data,
+    among them 512, 1152, 1536, 1920, the orders 2^n * q and p^n * q^m, and
+    the squarefree, cubefree and prime power orders. So
+    `IdsOfAllSmallGroups([1 .. 2000], IsSupersolvableGroup, false)` built
+    412 million groups and now builds 3024. `SmallGroupsInformation` reports
+    what a given order offers. Indexing `IsSupersolvableGroup` was Thomas
+    Breuer's suggestion in issue #4
+  - A selection criterion now means the same for every order. They differed
+    in whether `IsSolvable` was accepted for `IsSolvableGroup`, in what
+    `IsSolvableGroup, [true, false]` selected, and in whether a property
+    asked for a non-boolean was rejected
+  - Fix selection by `LGLength`, for which the library stores `false` where
+    the attribute returns `fail`: `AllSmallGroups(240, LGLength, fail)` was
+    empty though there are 8 such groups. Both values work now
+  - Fix a list of group numbers being ignored when every criterion was
+    indexed: `IdsOfAllSmallGroups(96, [1, 2, 3], IsAbelian, true)` returned
+    all abelian groups of order 96
   - Merged the old `README` file into `README.md` and the package manual:
     its description of the library's organisation (layers, storage formats,
     identification algorithms) is now a chapter of the manual

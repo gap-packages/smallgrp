@@ -117,183 +117,10 @@ SMALL_GROUP_FUNCS[ 10 ] := SMALL_GROUP_FUNCS[ 8 ];
 SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
                                             id, idList )
     local cand, i, j, evalfuncs, evalvals, func, val, prop, g, ok, result,
-          expand, intersection, difference, union, p, tmp, os;
+          p, tmp, os;
 
-    # to mention, which groups will fulfill the properties, lists of this
-    # structure are used: [ 1, -3, 5, 8, -11 ] means [ 1,2,3, 5, 8,9,10,11]
-
-    expand := function( cand )
-        local res, i;
-
-        res := [];
-        for i in [ 1 .. Length( cand ) ] do
-            if cand[ i ] > 0 then 
-                Add( res, cand[ i ] );
-            else
-                Append( res, [ cand[ i - 1 ] + 1 .. -cand[ i ] ] );
-            fi;
-        od;
-        return res;
-    end;
-
-    intersection := function( l1, l2 )
-        local p1, p2, s1, s2, e1, e2, rs, re, res;
-
-        res := [ ];
-        p1 := 1; p2 := 1;
-        while p1 <= Length( l1 ) and p2 <= Length( l2 ) do
-            if not IsBound( s1 ) then
-                s1 := l1[ p1 ];
-                if IsBound( l1[ p1 + 1 ] ) and l1[ p1 + 1 ] < 0 then
-                    e1 := - l1[ p1 + 1 ];
-                    p1 := p1 + 1;
-                else
-                    e1 := s1;
-                fi;
-            fi;
-            if not IsBound( s2 ) then
-                s2 := l2[ p2 ];
-                if IsBound( l2[ p2 + 1 ] ) and l2[ p2 + 1 ] < 0 then
-                    e2 := - l2[ p2 + 1 ];
-                    p2 := p2 + 1;
-                else
-                    e2 := s2;
-                fi;
-            fi;
-            if e1 < s2 then
-                p1 := p1 + 1; Unbind( s1 );
-            elif e2 < s1 then
-                p2 := p2 + 1; Unbind( s2 );
-            else
-                rs := Maximum( s1, s2 );
-                re := Minimum( e1, e2 );
-                Add( res, rs );
-                if re <> rs then
-                    Add( res, -re );
-                fi;
-                if e1 < e2 then
-                    p1 := p1 + 1; Unbind( s1 );
-                else
-                    p2 := p2 + 1; Unbind( s2 );
-                fi;
-            fi;
-        od;
-        return res;
-    end;
-
-    difference := function( l1, l2 )
-        local p1, p2, s1, s2, e1, e2, re, res;
-
-        res := [ ];
-        p1 := 1; p2 := 1;
-        while p1 <= Length( l1 ) do
-            if not IsBound( s1 ) then
-                s1 := l1[ p1 ];
-                if IsBound( l1[ p1 + 1 ] ) and l1[ p1 + 1 ] < 0 then
-                    e1 := - l1[ p1 + 1 ];
-                    p1 := p1 + 1;
-                else
-                    e1 := s1;
-                fi;
-            fi;
-            if not IsBound( s2 ) then
-                if IsBound( l2[ p2 ] ) then
-                    s2 := l2[ p2 ];
-                    if IsBound( l2[ p2 + 1 ] ) and l2[ p2 + 1 ] < 0 then
-                        e2 := - l2[ p2 + 1 ];
-                        p2 := p2 + 1;
-                    else
-                        e2 := s2;
-                    fi;
-                else
-                    s2 := AbsInt( l1[ Length( l1 ) ] ) + 1;
-                    e2 := s2;
-                fi;
-            fi;
-
-            if s1 < s2 then
-                Add( res, s1 );
-                re := Minimum( e1, s2 - 1 );
-                if re > s1 then
-                    Add( res, -re );
-                fi;
-                if e1 <= e2 then
-                    p1 := p1 + 1; Unbind( s1 );
-                else
-                    s1 := e2 + 1; p2 := p2 + 1; Unbind( s2 );
-                fi;
-            else # s2 <= s1
-                if e1 <= e2 then
-                    p1 := p1 + 1; Unbind( s1 );
-                else # e2 < e1
-                    s1 := Maximum( e2 + 1, s1 ); p2 := p2 + 1; Unbind( s2 );
-                fi;
-            fi;
-        od;
-        return res;
-    end;
-
-    union := function( l1, l2 )
-        local p1, p2, s1, s2, e1, e2, rs, re, res;
-
-        res := [ ];
-        p1 := 1; p2 := 1;
-        while true do
-            if not IsBound( s1 ) then
-                if IsBound( l1[ p1 ] ) then
-                    s1 := l1[ p1 ];
-                    p1 := p1 + 1;
-                    if IsBound( l1[ p1 ] ) and l1[ p1 ] < 0 then
-                        e1 := - l1[ p1 ];
-                        p1 := p1 + 1;
-                    else 
-                        e1 := s1;
-                    fi;
-                fi;
-            fi;
-            if not IsBound( s2 ) then
-                if IsBound( l2[ p2 ] ) then
-                    s2 := l2[ p2 ];
-                    p2 := p2 + 1;
-                    if IsBound( l2[ p2 ] ) and l2[ p2 ] < 0 then
-                        e2 := - l2[ p2 ];
-                        p2 := p2 + 1;
-                    else
-                        e2 := s2;
-                    fi;
-                fi;
-            fi;
-            if not IsBound( s1 ) and not IsBound( s2 ) then
-                return res;
-            fi;
-            if not IsBound( s1 ) then
-                rs := s2; re := e2; Unbind( s2 );
-            elif not IsBound( s2 ) then
-                rs := s1; re := e1; Unbind( s1 );
-            elif e1 < s2 - 1 then
-                rs := s1; re := e1; Unbind( s1 );
-            elif e2 < s1 - 1 then
-                rs := s2; re := e2; Unbind( s2 );
-            elif e1 < e2 then
-                if s1 < s2 then
-                    s2 := s1;
-                fi;
-                Unbind( s1 );
-            else
-                if s2 < s1 then
-                    s1 := s2;
-                fi;
-                Unbind( s2 );
-            fi;
-            if IsBound( rs ) then
-                Add( res, rs );
-                if re <> rs then
-                    Add( res, -re );
-                fi;
-                Unbind( rs );
-            fi;
-        od;
-    end;
+    # the sets of group numbers read from the data files are translated
+    # into the form described for 'SMALL_IDS_EXPAND'
 
     if not IsBound( inforec.number ) then
         inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
@@ -303,7 +130,7 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
         ReadSmallLib( "prop", inforec.lib, size, [ ] );
     fi;
 
-    cand := [ 1, -inforec.number ];
+    cand := [ [ 1 .. inforec.number ] ];
 
     evalfuncs := [ ];
     evalvals := [ ];
@@ -342,10 +169,11 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
                 else
                     prop := PROPERTIES_SMALL_GROUPS[ size ].isSolvable;
                 fi;
+                prop := SMALL_IDS_FROM_LIBRARY( prop );
                 if val = [ true ] then
-                    cand := intersection( cand, prop );
+                    cand := SMALL_IDS_INTERSECTION( cand, prop );
                 else
-                    cand := difference( cand, prop );
+                    cand := SMALL_IDS_DIFFERENCE( cand, prop );
                 fi;
             fi;
 
@@ -355,11 +183,11 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
                 p := Position(
                       PROPERTIES_SMALL_GROUPS[ size ].lgLength.lgLength, j );
                 if p <> fail then
-                    tmp := union( tmp,
-                         PROPERTIES_SMALL_GROUPS[ size ].lgLength.pos[ p ] );
+                    tmp := SMALL_IDS_UNION( tmp, SMALL_IDS_FROM_LIBRARY(
+                         PROPERTIES_SMALL_GROUPS[size].lgLength.pos[ p ] ) );
                 fi;
             od;
-            cand := intersection( cand, tmp );
+            cand := SMALL_IDS_INTERSECTION( cand, tmp );
 
         elif func in [ RankPGroup, FrattinifactorSize,FrattinifactorId ] then
             if PROPERTIES_SMALL_GROUPS[ size ].frattFacs.frattFacs = [ ] then
@@ -416,8 +244,9 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
                     p := Position(
                       PROPERTIES_SMALL_GROUPS[size].frattFacs.frattFacs, j );
                     if p <> fail then
-                        tmp := union( tmp,
-                          PROPERTIES_SMALL_GROUPS[ size ].frattFacs.pos[p] );
+                        tmp := SMALL_IDS_UNION( tmp,
+                            SMALL_IDS_FROM_LIBRARY( PROPERTIES_SMALL_GROUPS[
+                                          size ].frattFacs.pos[ p ] ) );
                     fi;
                 od;
             else
@@ -426,38 +255,42 @@ SELECT_SMALL_GROUPS_FUNCS[ 8 ] := function( size, funcs, vals, inforec, all,
                                                    frattFacs.frattFacs ) ] do
                     if PROPERTIES_SMALL_GROUPS[size].
                                     frattFacs.frattFacs[ j ][ 1 ] in val then
-                        tmp := union( tmp, PROPERTIES_SMALL_GROUPS[size].
-                                                        frattFacs.pos[ j ] );
+                        tmp := SMALL_IDS_UNION( tmp,
+                            SMALL_IDS_FROM_LIBRARY( PROPERTIES_SMALL_GROUPS[
+                                          size ].frattFacs.pos[ j ] ) );
                     fi;
                 od;
             fi;
-            cand := intersection( cand, tmp );
+            cand := SMALL_IDS_INTERSECTION( cand, tmp );
 
         else
             Add( evalfuncs, func );
             Add( evalvals, val );
         fi;
     od;
+    cand := SMALL_IDS_EXPAND( cand );
+    if idList <> fail then
+        cand := Filtered( cand, x -> x in idList );
+    fi;
+
     if evalfuncs = [ ] and all and id then
-        return List( expand( cand ), x -> [ size, x ] );
+        return List( cand, x -> [ size, x ] );
     fi;
 
     result := [];
-    for i in expand( cand ) do
-        if idList = fail or i in idList then
-            g := SMALL_GROUP_FUNCS[ inforec.func ]( size, i, inforec );
-            SetIdGroup( g, [ size, i ] );
-            ok := true;
-            for j in [ 1 .. Length( evalfuncs ) ] do
-                ok := ok and ( evalfuncs[ j ]( g ) in evalvals[ j ] );
-            od;
-            if all and id and ok then
-                Add( result, [ size, i ] );
-            elif all and ok then
-                Add( result, g );
-            elif ok then
-                return g;
-            fi;
+    for i in cand do
+        g := SMALL_GROUP_FUNCS[ inforec.func ]( size, i, inforec );
+        SetIdGroup( g, [ size, i ] );
+        ok := true;
+        for j in [ 1 .. Length( evalfuncs ) ] do
+            ok := ok and ( evalfuncs[ j ]( g ) in evalvals[ j ] );
+        od;
+        if all and id and ok then
+            Add( result, [ size, i ] );
+        elif all and ok then
+            Add( result, g );
+        elif ok then
+            return g;
         fi;
     od;
 

@@ -231,6 +231,90 @@ SELECT_SMALL_GROUPS_FUNCS[ 26 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
 
 #############################################################################
 ##
+#V SMALLGRP_P7_INDEX
+##
+## The library stores no information on the ranks, the p-classes or the
+## abelian groups of order p^7, and unlike for the orders p^4 and p^6 these
+## cannot be described independently of p. For the two smallest of the four
+## available orders it is cheap enough to determine them once and for all;
+## that is what the following table, computed by brute force, contains. The
+## numbers in it are the ones used by SmallGroup, that is, they already take
+## the ordering described for SMALL_GROUPS_OLD_ORDER into account.
+##
+SMALLGRP_P7_INDEX := [
+  rec( size := 2187,
+       isAbelian :=
+         [ 1, 79, 312, 384, 409, 4070, 5297, 5841, 5866, 7957, 9043, 9093,
+           9271, 9301, 9310 ],
+       rankPGroup :=
+         [
+         [ 1, [ 1 ] ],
+         [ 2, [ [ 2 .. 391 ] ] ],
+         [ 3, [ [ 392 .. 5865 ] ] ],
+         [ 4, [ [ 5866 .. 9092 ] ] ],
+         [ 5, [ [ 9093 .. 9300 ] ] ],
+         [ 6, [ [ 9301 .. 9309 ] ] ],
+         [ 7, [ 9310 ] ] ],
+       pClassPGroup :=
+         [
+         [ 1, [ 9310 ] ],
+         [ 2,
+           [ [ 392 .. 408 ], [ 5866 .. 7226 ], [ 9093 .. 9270 ],
+             [ 9301 .. 9309 ] ] ],
+         [ 3,
+           [ [ 2 .. 63 ], [ 409 .. 4675 ], [ 7227 .. 9042 ],
+             [ 9271 .. 9300 ] ] ],
+         [ 4, [ [ 64 .. 223 ], [ 4676 .. 5840 ], [ 9043 .. 9092 ] ] ],
+         [ 5, [ [ 224 .. 383 ], [ 5841 .. 5865 ] ] ],
+         [ 6, [ [ 384 .. 391 ] ] ],
+         [ 7, [ 1 ] ] ] ),
+  rec( size := 78125,
+       isAbelian :=
+         [ 1, 157, 632, 1284, 1415, 19434, 22215, 23221, 23489, 32332,
+           33958, 34033, 34258, 34288, 34297 ],
+       rankPGroup :=
+         [
+         [ 1, [ 1 ] ],
+         [ 2, [ [ 2 .. 1384 ] ] ],
+         [ 3, [ [ 1385 .. 23488 ] ] ],
+         [ 4, [ [ 23489 .. 34032 ] ] ],
+         [ 5, [ [ 34033 .. 34287 ] ] ],
+         [ 6, [ [ 34288 .. 34296 ] ] ],
+         [ 7, [ 34297 ] ] ],
+       pClassPGroup :=
+         [
+         [ 1, [ 34297 ] ],
+         [ 2,
+           [ [ 1385 .. 1403 ], [ 23489 .. 30086 ], [ 34033 .. 34257 ],
+             [ 34288 .. 34296 ] ] ],
+         [ 3,
+           [ [ 2 .. 95 ], [ 1404 .. 20205 ], [ 30087 .. 33957 ],
+             [ 34258 .. 34287 ] ] ],
+         [ 4, [ [ 96 .. 351 ], [ 20206 .. 23220 ], [ 33958 .. 34032 ] ] ],
+         [ 5, [ [ 352 .. 1283 ], [ 23221 .. 23488 ] ] ],
+         [ 6, [ [ 1284 .. 1384 ] ] ],
+         [ 7, [ 1 ] ] ] ) ];
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 26 ]( size, inforec )
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 26 ] := function( size, inforec )
+    local res, entry;
+
+    res := SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec );
+
+    entry := First( SMALLGRP_P7_INDEX, x -> x.size = size );
+    if entry <> fail then
+        res.isAbelian    := entry.isAbelian;
+        res.rankPGroup   := entry.rankPGroup;
+        res.pClassPGroup := entry.pClassPGroup;
+    fi;
+    return res;
+end;
+
+#############################################################################
+##
 #F NUMBER_SMALL_GROUPS_FUNCS[ 26 ]( size, inforec )
 ##
 ## p ^ 7, p <> 2

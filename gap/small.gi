@@ -85,6 +85,422 @@ SELECT_SMALL_GROUPS_FUNCS := [ ];
 
 #############################################################################
 ##
+#F  SMALL_IDS_EXPAND( <ids> )
+#F  SMALL_IDS_UNION( <ids1>, <ids2> )
+#F  SMALL_IDS_INTERSECTION( <ids1>, <ids2> )
+#F  SMALL_IDS_DIFFERENCE( <ids1>, <ids2> )
+#F  SMALL_IDS_MEMBER( <ids>, <i> )
+##
+##  A set of group numbers is a list of its maximal runs, each a range or a
+##  bare integer: [ 1, [ 5 .. 8 ], 12 ] is [ 1, 5, 6, 7, 8, 12 ]. Some orders
+##  have billions of groups, so the operations below never expand a run.
+##
+##  'SMALL_IDS_FROM_LIBRARY' converts the form the data files use, where a
+##  negative entry -n ends a run starting at its predecessor.
+SMALL_IDS_FIRST := function( run )
+    if IsInt( run ) then
+        return run;
+    fi;
+    return run[ 1 ];
+end;
+
+SMALL_IDS_LAST := function( run )
+    if IsInt( run ) then
+        return run;
+    fi;
+    return run[ Length( run ) ];
+end;
+
+SMALL_IDS_FROM_LIBRARY := function( l )
+    local res, i;
+
+    res := [ ];
+    i := 1;
+    while i <= Length( l ) do
+        if i < Length( l ) and l[ i + 1 ] < 0 then
+            Add( res, [ l[ i ] .. -l[ i + 1 ] ] );
+            i := i + 2;
+        else
+            Add( res, l[ i ] );
+            i := i + 1;
+        fi;
+    od;
+    return res;
+end;
+
+SMALL_IDS_FROM_LIST := function( l )
+    local res, s, e, i;
+
+    res := [ ];
+    s := fail;
+    for i in l do
+        if s = fail then
+            s := i;
+            e := i;
+        elif i = e + 1 then
+            e := i;
+        else
+            Add( res, [ s .. e ] );
+            s := i;
+            e := i;
+        fi;
+    od;
+    if s <> fail then
+        Add( res, [ s .. e ] );
+    fi;
+    return res;
+end;
+
+SMALL_IDS_EXPAND := function( ids )
+    if Length( ids ) = 0 then
+        return [ ];
+    elif Length( ids ) = 1 then
+        if IsInt( ids[ 1 ] ) then
+            return [ ids[ 1 ] ];
+        fi;
+        return ids[ 1 ];
+    fi;
+    return Concatenation( List( ids,
+                                run -> [ SMALL_IDS_FIRST( run )
+                                         .. SMALL_IDS_LAST( run ) ] ) );
+end;
+
+SMALL_IDS_MEMBER := function( ids, i )
+    local run;
+
+    for run in ids do
+        if i <= SMALL_IDS_LAST( run ) then
+            return i >= SMALL_IDS_FIRST( run );
+        fi;
+    od;
+    return false;
+end;
+
+SMALL_IDS_UNION := function( l1, l2 )
+    local all, res, run, s, e;
+
+    # a plain sort would put the integers in front of the ranges
+    all := Concatenation( l1, l2 );
+    SortBy( all, SMALL_IDS_FIRST );
+
+    res := [ ];
+    s := fail;
+    for run in all do
+        if s = fail then
+            s := SMALL_IDS_FIRST( run );
+            e := SMALL_IDS_LAST( run );
+        elif SMALL_IDS_FIRST( run ) <= e + 1 then
+            e := Maximum( e, SMALL_IDS_LAST( run ) );
+        else
+            Add( res, [ s .. e ] );
+            s := SMALL_IDS_FIRST( run );
+            e := SMALL_IDS_LAST( run );
+        fi;
+    od;
+    if s <> fail then
+        Add( res, [ s .. e ] );
+    fi;
+    return res;
+end;
+
+SMALL_IDS_INTERSECTION := function( l1, l2 )
+    local res, p1, p2, s, e;
+
+    res := [ ];
+    p1 := 1;
+    p2 := 1;
+    while p1 <= Length( l1 ) and p2 <= Length( l2 ) do
+        s := Maximum( SMALL_IDS_FIRST( l1[ p1 ] ), SMALL_IDS_FIRST( l2[p2] ) );
+        e := Minimum( SMALL_IDS_LAST( l1[ p1 ] ), SMALL_IDS_LAST( l2[ p2 ] ) );
+        if s <= e then
+            Add( res, [ s .. e ] );
+        fi;
+        if SMALL_IDS_LAST( l1[ p1 ] ) < SMALL_IDS_LAST( l2[ p2 ] ) then
+            p1 := p1 + 1;
+        else
+            p2 := p2 + 1;
+        fi;
+    od;
+    return res;
+end;
+
+SMALL_IDS_DIFFERENCE := function( l1, l2 )
+    local res, run, p, s, e;
+
+    res := [ ];
+    p := 1;
+    for run in l1 do
+        s := SMALL_IDS_FIRST( run );
+        e := SMALL_IDS_LAST( run );
+
+        # skip the runs of l2 lying entirely in front of this one
+        while p <= Length( l2 ) and SMALL_IDS_LAST( l2[ p ] ) < s do
+            p := p + 1;
+        od;
+
+        # cut away the runs of l2 meeting this one
+        while p <= Length( l2 ) and SMALL_IDS_FIRST( l2[ p ] ) <= e
+                                and SMALL_IDS_LAST( l2[ p ] ) <= e do
+            if s < SMALL_IDS_FIRST( l2[ p ] ) then
+                Add( res, [ s .. SMALL_IDS_FIRST( l2[ p ] ) - 1 ] );
+            fi;
+            s := SMALL_IDS_LAST( l2[ p ] ) + 1;
+            p := p + 1;
+        od;
+        if p <= Length( l2 ) and SMALL_IDS_FIRST( l2[ p ] ) <= e then
+            # this run of l2 reaches beyond the current one, so it may meet
+            # the next one as well and must not be skipped
+            if s < SMALL_IDS_FIRST( l2[ p ] ) then
+                Add( res, [ s .. SMALL_IDS_FIRST( l2[ p ] ) - 1 ] );
+            fi;
+        elif s <= e then
+            Add( res, [ s .. e ] );
+        fi;
+    od;
+    return res;
+end;
+
+#############################################################################
+##
+#V  SMALL_GROUPS_PROPERTY_SYNONYMS
+##
+##  a list of pairs [ <old>, <new> ] of functions computing the same value
+##  for a group. The first entry of each pair is one of the deprecated GAP 3
+##  names of a property; 'SMALL_GROUPS_SIMPLIFY_QUERY' replaces it by the
+##  property itself, so that the rest of the code only has to know about the
+##  latter.
+SMALL_GROUPS_PROPERTY_SYNONYMS := [
+    [ IsNilpotent,     IsNilpotentGroup ],
+    [ IsSupersolvable, IsSupersolvableGroup ],
+    [ IsSolvable,      IsSolvableGroup ] ];
+
+#############################################################################
+##
+#V  SMALL_GROUPS_INDEXED_PROPERTIES
+##
+##  a list of triples [ <component>, <property>, <name> ] describing the
+##  properties for which a layer may report information in advance;
+##  <component> is the name of the corresponding component of the records
+##  returned by the functions in 'SMALL_GROUPS_PROPERTIES_FUNCS', and <name>
+##  is the name under which the property is documented.
+SMALL_GROUPS_INDEXED_PROPERTIES := [
+    [ "isAbelian",       IsAbelian,            "IsAbelian" ],
+    [ "isNilpotent",     IsNilpotentGroup,     "IsNilpotentGroup" ],
+    [ "isSupersolvable", IsSupersolvableGroup, "IsSupersolvableGroup" ],
+    [ "isSolvable",      IsSolvableGroup,      "IsSolvableGroup" ] ];
+
+#############################################################################
+##
+#V  SMALL_GROUPS_INDEXED_ATTRIBUTES
+##
+##  as 'SMALL_GROUPS_INDEXED_PROPERTIES', but for attributes which do not
+##  take boolean values. The value of such a component of the records
+##  returned by the functions in 'SMALL_GROUPS_PROPERTIES_FUNCS' is a list
+##  of pairs [ <value>, <ids> ], where <ids> is the compressed list of the
+##  numbers of those groups whose attribute value is <value>.
+SMALL_GROUPS_INDEXED_ATTRIBUTES := [
+    [ "rankPGroup",   RankPGroup,   "RankPGroup" ],
+    [ "pClassPGroup", PClassPGroup, "PClassPGroup" ] ];
+
+#############################################################################
+##
+#F  SMALL_GROUPS_SIMPLIFY_QUERY( funcs, vals )
+##
+##  preprocesses the selection described by <funcs> and <vals> before it is
+##  handed to the selection function of a layer: the deprecated synonyms
+##  listed in 'SMALL_GROUPS_PROPERTY_SYNONYMS' are replaced by the
+##  properties they stand for, and a criterion which admits both 'true' and
+##  'false' for a property is dropped, as every group satisfies it. The
+##  result is a record with the components 'funcs' and 'vals'.
+SMALL_GROUPS_SIMPLIFY_QUERY := function( funcs, vals )
+    local newfuncs, newvals, i, func, val, p;
+
+    newfuncs := [ ];
+    newvals  := [ ];
+    for i in [ 1 .. Length( funcs ) ] do
+        func := funcs[ i ];
+        val  := vals[ i ];
+
+        p := PositionProperty( SMALL_GROUPS_PROPERTY_SYNONYMS,
+                               x -> x[ 1 ] = func );
+        if p <> fail then
+            func := SMALL_GROUPS_PROPERTY_SYNONYMS[ p ][ 2 ];
+        fi;
+
+        if IsProperty( func ) then
+            if not ForAll( val, x -> x = true or x = false ) then
+                Error("SelectSmallGroups: Use Test-Funcs with true or false");
+            elif true in val and false in val then
+                # every group satisfies this criterion, so drop it
+                val := fail;
+            fi;
+        fi;
+
+        if val <> fail then
+            Add( newfuncs, func );
+            Add( newvals, val );
+        fi;
+    od;
+
+    return rec( funcs := newfuncs, vals := newvals );
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_PROPERTIES_FUNCS
+##
+##  A layer installs a function here taking <size> and <inforec>, the latter
+##  with 'number' bound, and returning a record. Its components are named in
+##  'SMALL_GROUPS_INDEXED_PROPERTIES' and 'SMALL_GROUPS_INDEXED_ATTRIBUTES';
+##  each holds the numbers of the groups with that value, as described for
+##  'SMALL_IDS_EXPAND'. An unbound component means the value is not known in
+##  advance.
+##
+##  These are the numbers used by 'SmallGroup', which for 3^7, 5^7, 7^7 and
+##  11^7 differ from those the library stores under (see
+##  'SMALL_GROUPS_OLD_ORDER').
+SMALL_GROUPS_PROPERTIES_FUNCS := [ ];
+
+#############################################################################
+##
+#V  SMALL_GROUPS_512_TYPES
+##
+##  the ranks and p-classes of the groups of order 512; the data is filled in
+##  by the layer containing this order and is used both for the selection
+##  functions and by 'SmallGroupsInformation'
+SMALL_GROUPS_512_TYPES := [ ];
+
+#############################################################################
+##
+#F  SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec )
+##
+##  the properties of the groups in a layer which contains groups of prime
+##  power order only: all of them are nilpotent
+SMALL_GROUPS_PROPERTIES_PGROUP := function( size, inforec )
+    local all;
+
+    all := [ [ 1 .. inforec.number ] ];
+    return rec( isNilpotent     := all,
+                isSupersolvable := all,
+                isSolvable      := all );
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_ABELIAN_IDS( size )
+##
+##  the numbers of the abelian groups of order <size>, as described for
+##  'SMALL_IDS_EXPAND'.
+SMALL_GROUPS_ABELIAN_IDS := function( size )
+    return SMALL_IDS_FROM_LIST( List(
+               IdsOfAllSmallGroups( size, IsAbelian, true ), x -> x[ 2 ] ) );
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_PROPERTIES_TWO_PRIMES( size, inforec )
+##
+##  for a layer of orders q^n * p, p occurring once, sorted by their normal
+##  Sylow subgroups with the nilpotent groups first. Solvable by Burnside.
+##  Supersolvable exactly with a normal Sylow p-subgroup -- cyclic of order
+##  p, with a q-group quotient -- or with a normal Sylow q-subgroup and
+##  q = 1 mod p, the irreducible F_q[C_p]-modules then being 1-dimensional.
+##  Without a normal Sylow subgroup there is no Sylow tower.
+SMALL_GROUPS_PROPERTIES_TWO_PRIMES := function( size, inforec )
+    local q, k;
+
+    if not IsBound( inforec.pos ) then
+        inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec );
+    fi;
+
+    # the type "nil" and the integer types describe the groups with a normal
+    # Sylow p-subgroup; they come first
+    k := 1;
+    while k < Length( inforec.types ) and IsInt( inforec.types[ k + 1 ] ) do
+        k := k + 1;
+    od;
+
+    q := 2;
+    if IsBound( inforec.q ) then
+        q := inforec.q;
+    fi;
+    if q mod inforec.p = 1 and IsBound( inforec.types[ k + 1 ] )
+                           and inforec.types[ k + 1 ] = "p-autos" then
+        k := k + 1;
+    fi;
+
+    # the nilpotent groups are the groups of order q^n times C_p, listed in
+    # the order of the former, so the abelian ones keep their places
+    return rec( isAbelian       := SMALL_GROUPS_ABELIAN_IDS( q ^ inforec.n ),
+                isNilpotent     := [ [ 1 .. inforec.pos[ 2 ] ] ],
+                isSupersolvable := [ [ 1 .. inforec.pos[ k + 1 ] ] ],
+                isSolvable      := [ [ 1 .. inforec.number ] ] );
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_PROPERTY_IDS( size, inforec, funcs, vals )
+##
+##  splits the selection into the part the position decides and the rest,
+##  returning 'ids' for the former and 'funcs' and 'vals' for the latter.
+SMALL_GROUPS_PROPERTY_IDS := function( size, inforec, funcs, vals )
+    local hits, props, ids, evalfuncs, evalvals, i, p, tmp, entry;
+
+    # find those selection criteria which possibly are known in advance; a
+    # property is of no use here unless it is asked for a single value. Each
+    # entry of 'hits' is 'fail' or a pair [ <component>, <isattribute> ].
+    hits := [ ];
+    for i in [ 1 .. Length( funcs ) ] do
+        hits[ i ] := fail;
+        p := PositionProperty( SMALL_GROUPS_INDEXED_PROPERTIES,
+                               x -> x[ 2 ] = funcs[ i ] );
+        if p <> fail then
+            if vals[ i ] in [ [ true ], [ false ] ] then
+                hits[ i ] := [ SMALL_GROUPS_INDEXED_PROPERTIES[p][1], false ];
+            fi;
+        else
+            p := PositionProperty( SMALL_GROUPS_INDEXED_ATTRIBUTES,
+                                   x -> x[ 2 ] = funcs[ i ] );
+            if p <> fail then
+                hits[ i ] := [ SMALL_GROUPS_INDEXED_ATTRIBUTES[p][1], true ];
+            fi;
+        fi;
+    od;
+
+    ids := [ [ 1 .. inforec.number ] ];
+    if ForAll( hits, x -> x = fail ) or
+       not IsBound( SMALL_GROUPS_PROPERTIES_FUNCS[ inforec.func ] ) then
+        return rec( ids := ids, funcs := funcs, vals := vals );
+    fi;
+    props := SMALL_GROUPS_PROPERTIES_FUNCS[ inforec.func ]( size, inforec );
+
+    evalfuncs := [ ];
+    evalvals  := [ ];
+    for i in [ 1 .. Length( funcs ) ] do
+        if hits[ i ] = fail or not IsBound( props.( hits[ i ][ 1 ] ) ) then
+            Add( evalfuncs, funcs[ i ] );
+            Add( evalvals, vals[ i ] );
+        elif hits[ i ][ 2 ] then
+            # an attribute: collect the groups with an admissible value
+            tmp := [ ];
+            for entry in props.( hits[ i ][ 1 ] ) do
+                if entry[ 1 ] in vals[ i ] then
+                    tmp := SMALL_IDS_UNION( tmp, entry[ 2 ] );
+                fi;
+            od;
+            ids := SMALL_IDS_INTERSECTION( ids, tmp );
+        elif vals[ i ] = [ true ] then
+            ids := SMALL_IDS_INTERSECTION( ids, props.( hits[ i ][ 1 ] ) );
+        else
+            ids := SMALL_IDS_DIFFERENCE( ids, props.( hits[ i ][ 1 ] ) );
+        fi;
+    od;
+
+    return rec( ids := ids, funcs := evalfuncs, vals := evalvals );
+end;
+
+#############################################################################
+##
 #V  SMALL_GROUP_LIB
 ##
 ##  This list will contain all data for the group construction read from the
@@ -178,7 +594,7 @@ end );
 ##
 InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
     local sizes, size, i, funcs, vals, gs, inforec, result, hasSizes, pos,
-          idList;
+          idList, query;
 
     sizes := [ ];
     hasSizes := false;
@@ -232,6 +648,10 @@ InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
     elif vals[ pos ] = [ ] then
         vals[ pos ] := [ true ];
     fi;
+
+    query := SMALL_GROUPS_SIMPLIFY_QUERY( funcs, vals );
+    funcs := query.funcs;
+    vals  := query.vals;
 
     result := [ ];
     for size in sizes do

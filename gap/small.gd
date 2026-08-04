@@ -674,17 +674,35 @@ DeclareGlobalFunction( "SelectSmallGroups" );
 ##  The function returns those groups of the specified orders having those
 ##  properties specified by the remaining functions and their values.
 ##  <P/>
-##  Precomputed information is stored for the properties
-##  <Ref BookName="ref" Func="IsAbelian"/>, <Ref BookName="ref" Func="IsNilpotentGroup"/>,
-##  <Ref BookName="ref" Func="IsSupersolvableGroup"/>, <Ref BookName="ref" Func="IsSolvableGroup"/>, 
-##  <Ref BookName="ref" Func="RankPGroup"/>, <Ref BookName="ref" Func="PClassPGroup"/>,
-##  <Ref BookName="ref" Func="LGLength"/>, <C>FrattinifactorSize</C> and 
-##  <C>FrattinifactorId</C> for the groups of order at most
-##  <M>2000</M> which have  more than three prime factors,
-##  except those of order <M>512</M>, <M>768</M>, 
-##  <M>1024</M>, <M>1152</M>, <M>1536</M>, <M>1920</M> and those of order
-##  <M>p^n \cdot q > 1000</M> 
-##  with <M>n > 2</M>. 
+##  Some selection criteria are <E>indexed</E>: their value follows from the
+##  position a group has in the library, so a selection using only such
+##  criteria constructs no group at all. Any other criterion is checked
+##  group by group, at a cost proportional to the number of groups of the
+##  given orders.
+##  <P/>
+##  For the orders whose factorisation has more than three prime factors,
+##  <Ref BookName="ref" Func="IsNilpotentGroup"/>,
+##  <Ref BookName="ref" Func="IsSupersolvableGroup"/> and
+##  <Ref BookName="ref" Func="IsSolvableGroup"/> are indexed, except
+##  <Ref BookName="ref" Func="IsSupersolvableGroup"/> for the cubefree
+##  orders above <M>2000</M> which are not squarefree, and so is
+##  <Ref BookName="ref" Func="IsAbelian"/>, except for <M>p^5</M> with
+##  <M>p \geq 7</M>. For the prime powers <M>p^n</M> with <M>n \geq 4</M>,
+##  <Ref BookName="ref" Func="RankPGroup"/> is indexed except for
+##  <M>p^6</M> with <M>p \geq 11</M> and for <M>7^7</M> and <M>11^7</M>, and
+##  <Ref BookName="ref" Func="PClassPGroup"/> except for those and for
+##  <M>p^4</M> with <M>p \geq 11</M> and <M>p^5</M> with <M>p \geq 7</M>.
+##  <Ref BookName="ref" Func="LGLength"/>, <C>FrattinifactorSize</C> and
+##  <C>FrattinifactorId</C> are indexed for the orders of at most
+##  <M>2000</M> with more than three prime factors, except <M>512</M>,
+##  <M>768</M>, <M>1024</M>, <M>1152</M>, <M>1536</M>, <M>1920</M> and
+##  <M>p^n \cdot q > 1000</M> with <M>n > 2</M>.
+##  <P/>
+##  Orders with at most three prime factors are not indexed; no such order
+##  below <M>50000</M> has more than 13 groups.
+##  <P/>
+##  <Ref Func="SmallGroupsInformation"/> reports which criteria are indexed
+##  for a given order.
 ##  <Example><![CDATA[
 ##  gap> AllSmallGroups( 6 );
 ##  [ <pc group of size 6 with 2 generators>, 
@@ -924,10 +942,9 @@ DeclareGlobalFunction( "IdStandardPresented512Group" );
 ##       45 - 50 have rank 4.
 ##       51 is elementary abelian. 
 ##  
-##    For the selection functions the values of the following attributes 
-##    are precomputed and stored:
-##       IsAbelian, PClassPGroup, RankPGroup, FrattinifactorSize and 
-##       FrattinifactorId. 
+##    The following selection criteria are indexed for this size:
+##       IsAbelian, IsNilpotentGroup, IsSupersolvableGroup, IsSolvableGroup,
+##       PClassPGroup, RankPGroup, FrattinifactorSize and FrattinifactorId.
 ##  
 ##    This size belongs to layer 2 of the SmallGroups library. 
 ##    IdSmallGroup is available for this size. 

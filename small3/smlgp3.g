@@ -351,23 +351,36 @@ end;
 ##                  
 SELECT_SMALL_GROUPS_FUNCS[ 11 ] := function( size, funcs, vals, inforec, all,
                                              id, idList)
-    local result, i, g, ok, j, range, nid;
+    local result, i, g, ok, j, sel, range, nid;
 
     if not IsBound( inforec.number ) then
         inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
     fi;
 
+    # narrow down the candidates using properties which can be decided from
+    # the position of a group in the library
+    sel   := SMALL_GROUPS_PROPERTY_IDS( size, inforec, funcs, vals );
+    funcs := sel.funcs;
+    vals  := sel.vals;
+
     if idList = fail then
-        Info( InfoWarning, 2, "`SelectSmallGroups' checks ", inforec.number,
+        range := SMALL_IDS_EXPAND( sel.ids );
+    else
+        range := Filtered( idList, x -> SMALL_IDS_MEMBER( sel.ids, x ) );
+    fi;
+
+    # if nothing is left to be checked, the groups need not be constructed
+    if funcs = [ ] and all and id then
+        return List( range, x -> [ size, x ] );
+    fi;
+
+    if funcs <> [ ] and idList = fail then
+        Info( InfoWarning, 2, "`SelectSmallGroups' checks ", Length( range ),
                             " grps of size ", size, " with trivial methods");
     fi;
 
     result := [ ];
-    range := [ 1 .. inforec.number ];
-    if idList <> fail then
-        range := idList;
-    fi;
-    for i in range do                         
+    for i in range do
         nid:=i;
         if not SMALL_GROUPS_OLD_ORDER then
             if size = 3^7 then
@@ -396,9 +409,15 @@ SELECT_SMALL_GROUPS_FUNCS[ 11 ] := function( size, funcs, vals, inforec, all,
         fi;
     od;                                                                     
 
-    if all then                                                            
+    if all then
         return result;
-    else                                                                  
-        return fail;                                          
-    fi;                                                       
-end;      
+    else
+        return fail;
+    fi;
+end;
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 11 ]( size, inforec )
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 11 ] := SMALL_GROUPS_PROPERTIES_TWO_PRIMES;

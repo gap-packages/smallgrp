@@ -311,3 +311,21 @@ end;
 #F SELECT_SMALL_GROUPS_FUNCS[ 14 ]( funcs, vals, inforec, all, id, idList )
 ##                  
 SELECT_SMALL_GROUPS_FUNCS[ 14 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 14 ]( size, inforec )
+##
+## the range below is the one described by SMALL_GROUPS_INFORMATION[ 14 ]
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 14 ] := function( size, inforec )
+
+    # 1536 = 2^9 * 3, so all solvable. Supersolvable exactly with a normal
+    # Sylow 3-subgroup, C_3 with a 2-group quotient; otherwise a chief factor
+    # of order 4 occurs, the irreducible F_2[C_3]-modules having dimension 2.
+    # The nilpotent groups are those of order 512 times C_3, in the same order
+    return rec( isAbelian       := SMALL_GROUPS_ABELIAN_IDS( 512 ),
+                isNilpotent     := [ [ 1 .. 10494213 ] ],
+                isSupersolvable := [ [ 1 .. 408526597 ] ],
+                isSolvable      := [ [ 1 .. inforec.number ] ] );
+end;

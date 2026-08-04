@@ -15,11 +15,47 @@ SMALL_GROUPS_INFORMATION := [ ];
 
 #############################################################################
 ##
+#F  SMALL_GROUPS_PRINT_INDEXED( names )
+##
+##  prints the list of those selection criteria whose value the selection
+##  functions know for a size without having to construct a group
+SMALL_GROUPS_PRINT_INDEXED := function( names )
+    local col, i, s;
+
+    if names = [ ] then
+        return;
+    fi;
+
+    Print( "\n  The following selection criteria are indexed for this size:",
+           "\n    " );
+    col := 4;
+    for i in [ 1 .. Length( names ) ] do
+        s := ShallowCopy( names[ i ] );
+        if i < Length( names ) - 1 then
+            Append( s, "," );
+        elif i = Length( names ) and i > 1 then
+            s := Concatenation( "and ", s );
+        fi;
+        if i = Length( names ) then
+            Append( s, "." );
+        fi;
+        if col + Length( s ) + 1 > 78 then
+            Print( "\n    " );
+            col := 4;
+        fi;
+        Print( " ", s );
+        col := col + Length( s ) + 1;
+    od;
+    Print( "\n" );
+end;
+
+#############################################################################
+##
 #F  SmallGroupsInformation( size )
 ##
 ##  ...
 InstallGlobalFunction( SmallGroupsInformation, function( size )
-    local smav, idav, num, lib, t;
+    local smav, idav, num, lib, props, names;
 
     if not IsPosInt(size) then
       ErrorNoReturn("usage: SmallGroupsInformation( size )"); 
@@ -55,6 +91,21 @@ InstallGlobalFunction( SmallGroupsInformation, function( size )
     fi;
  
     SMALL_GROUPS_INFORMATION[ smav.func ]( size, smav, num );
+
+    # report those properties whose value the selection functions can read
+    # off from the position a group has in this list
+    if IsBound( SMALL_GROUPS_PROPERTIES_FUNCS[ smav.func ] ) then
+        if not IsBound( smav.number ) then
+            smav.number := num;
+        fi;
+        props := SMALL_GROUPS_PROPERTIES_FUNCS[ smav.func ]( size, smav );
+        names := List( Filtered( Concatenation(
+                                     SMALL_GROUPS_INDEXED_PROPERTIES,
+                                     SMALL_GROUPS_INDEXED_ATTRIBUTES ),
+                                 t -> IsBound( props.( t[ 1 ] ) ) ),
+                       t -> t[ 3 ] );
+        SMALL_GROUPS_PRINT_INDEXED( names );
+    fi;
 
     Print("\n  This size belongs to layer ",lib,
           " of the SmallGroups library. \n");
@@ -129,15 +180,14 @@ SMALL_GROUPS_INFORMATION[ 8 ] := function( size, smav, num )
         Print("     ", ffid[2], " is elementary abelian. \n");
     fi;
 
-    Print( "\n  For the selection functions the values of the ",
-           "following attributes \n  are precomputed and stored:\n ");
     if IsPrimePowerInt( size ) then
-        Print( "    IsAbelian, PClassPGroup, RankPGroup,",
-               " FrattinifactorSize and \n     FrattinifactorId. \n");
+        SMALL_GROUPS_PRINT_INDEXED( [ "IsAbelian", "IsNilpotentGroup",
+                "IsSupersolvableGroup", "IsSolvableGroup", "PClassPGroup",
+                "RankPGroup", "FrattinifactorSize", "FrattinifactorId" ] );
     else
-        Print( "    IsAbelian, IsNilpotentGroup,", 
-               " IsSupersolvableGroup, IsSolvableGroup, \n     LGLength,",
-               " FrattinifactorSize and FrattinifactorId. \n");
+        SMALL_GROUPS_PRINT_INDEXED( [ "IsAbelian", "IsNilpotentGroup",
+                "IsSupersolvableGroup", "IsSolvableGroup", "LGLength",
+                "FrattinifactorSize", "FrattinifactorId" ] );
     fi;
 end;
 SMALL_GROUPS_INFORMATION[ 9 ] := SMALL_GROUPS_INFORMATION[ 8 ];
@@ -211,40 +261,19 @@ end;
 #F SMALL_GROUPS_INFORMATION[ 18 ]( size, smav, num )
 ##
 SMALL_GROUPS_INFORMATION[ 18 ] := function( size, smav, num )
+    local i, t;
 
     Print( "     1 is cyclic. \n");
-    Print( "     2 - 10 have rank 2 and p-class 3.\n" );
-    Print( "     11 - 386 have rank 2 and p-class 4.\n" );
-    Print( "     387 - 444 have rank 2 and p-class 5.\n" );
-    Print( "     445 - 858 have rank 2 and p-class 4.\n" );
-    Print( "     859 - 1698 have rank 2 and p-class 5.\n" );
-    Print( "     1699 - 2008 have rank 2 and p-class 6.\n" );
-    Print( "     2009 - 2039 have rank 2 and p-class 7.\n" );
-    Print( "     2040 - 2044 have rank 2 and p-class 8.\n" );
-    Print( "     2045 has rank 3 and p-class 2.\n" );
-    Print( "     2046 - 29398 have rank 3 and p-class 3.\n" );
-    Print( "     29399 - 30617 have rank 3 and p-class 4.\n" );
-    Print( "     30618 - 31239 have rank 3 and p-class 3.\n" );
-    Print( "     31240 - 56685 have rank 3 and p-class 4.\n" );
-    Print( "     56686 - 60615 have rank 3 and p-class 5.\n" );
-    Print( "     60616 - 60894 have rank 3 and p-class 6.\n" );
-    Print( "     60895 - 60903 have rank 3 and p-class 7.\n" );
-    Print( "     60904 - 67612 have rank 4 and ", "p-class 2.\n" );
-    Print( "     67613 - 387088 have rank 4 and ", "p-class 3.\n" );
-    Print( "     387089 - 419734 have rank 4 and ", "p-class 4.\n" );
-    Print( "     419735 - 420500 have rank 4 and ", "p-class 5.\n" );
-    Print( "     420501 - 420514 have rank 4 and ", "p-class 6.\n" );
-    Print( "     420515 - 6249623 have rank 5 and ", "p-class 2.\n" );
-    Print( "     6249624 - 7529606 have rank 5 and ", "p-class 3.\n" );
-    Print( "     7529607 - 7532374 have rank 5 and ", "p-class 4.\n" );
-    Print( "     7532375 - 7532392 have rank 5 and ", "p-class 5.\n" );
-    Print( "     7532393 - 10481221 have rank 6 and ", "p-class 2.\n" );
-    Print( "     10481222 - 10493038 have rank 6 and ", "p-class 3.\n" );
-    Print( "     10493039 - 10493061 have rank 6 and ", "p-class 4.\n" );
-    Print( "     10493062 - 10494173 have rank 7 ", "and p-class 2.\n" );
-    Print( "     10494174 - 10494200 have rank 7 ", "and p-class 3.\n" );
-    Print( "     10494201 - 10494212 have rank 8 ", "and p-class 2.\n" );
-    Print( "     10494213 is elementary abelian.\n");
+    for i in [ 2 .. Length( SMALL_GROUPS_512_TYPES ) - 1 ] do
+        t := SMALL_GROUPS_512_TYPES[ i ];
+        if t[ 1 ] = t[ 2 ] then
+            Print( "     ", t[ 1 ], " has rank " );
+        else
+            Print( "     ", t[ 1 ], " - ", t[ 2 ], " have rank " );
+        fi;
+        Print( t[ 3 ], " and p-class ", t[ 4 ], ".\n" );
+    od;
+    Print( "     ", num, " is elementary abelian.\n");
 end;
 
 #############################################################################
