@@ -1,5 +1,11 @@
 This file describes changes in the smallgrp package.
 
+# Unreleased
+
+  - Merged the old `README` file into `README.md` and the package manual:
+    its description of the library's organisation (layers, storage formats,
+    identification algorithms) is now a chapter of the manual
+
 # 1.5.5 (2026-07-28)
 
   - Drop spurious dependency on GAPDoc

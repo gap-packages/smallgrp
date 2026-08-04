@@ -8,6 +8,6 @@ if fail = LoadPackage("AutoDoc", "2016.02.16") then
 fi;
 
 AutoDoc(rec(
-             scaffold := rec( includes := [ "overview.xml" ]
+             scaffold := rec( includes := [ "overview.xml", "organisation.xml" ]
                             , bib := "manualbib.xml" ),
              autodoc := true ));
