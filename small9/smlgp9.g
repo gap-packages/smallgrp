@@ -1076,6 +1076,170 @@ SELECT_SMALL_GROUPS_FUNCS[ 21 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
 
 #############################################################################
 ##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 19 ]( size, inforec )
+##
+## order p^4
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 19 ] := function( size, inforec )
+    local res;
+
+    res := SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec );
+
+    # the ranks are the ones described by SMALL_GROUPS_INFORMATION[ 19 ];
+    # the abelian groups correspond to the partitions of 4
+    res.rankPGroup := [ [ 1, [ 1 ] ], [ 2, [ [ 2 .. 10 ] ] ],
+                        [ 3, [ [ 11 .. 14 ] ] ], [ 4, [ 15 ] ] ];
+    res.isAbelian := [ [ 1 .. 2 ], 5, 11, 15 ];
+    return res;
+end;
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 20 ]( size, inforec )
+##
+## order p^5
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 20 ] := function( size, inforec )
+    local res, p, a, b, c;
+
+    res := SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec );
+
+    # the ranks are the ones described by SMALL_GROUPS_INFORMATION[ 20 ]
+    p := FactorsInt( size )[ 1 ];
+    a := 27 + p     + 2 * GcdInt( p-1, 3 ) + GcdInt( p-1, 4 );
+    b := 54 + 2 * p + 2 * GcdInt( p-1, 3 ) + GcdInt( p-1, 4 );
+    c := 60 + 2 * p + 2 * GcdInt( p-1, 3 ) + GcdInt( p-1, 4 );
+    res.rankPGroup := [ [ 1, [ 1 ] ], [ 2, [ [ 2 .. a ] ] ],
+                        [ 3, [ [ a+1 .. b ] ] ], [ 4, [ [ b+1 .. c ] ] ],
+                        [ 5, [ c+1 ] ] ];
+
+    # the numbers of the abelian groups depend on p here, so they are not
+    # reported; as there are less than 130 groups of order p^5, checking them
+    # one by one is cheap anyway
+    return res;
+end;
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 21 ]( size, inforec )
+##
+## order p^6
+##
+## The groups of order p^6 are ordered by isoclinism family, which for the
+## ranks and the p-classes means that these are spread over more than a
+## hundred ranges. For the two smallest such orders the table below, computed
+## by brute force, lists them anyway; for the larger ones a group has to be
+## constructed in order to determine them.
+##
+SMALLGRP_P6_INDEX := [
+  rec( size := 15625,
+       rankPGroup :=
+         [
+         [ 1, [ 1 ] ],
+         [ 2,
+           [ [ 2 .. 3 ], 5, 13, 17, [ 20 .. 21 ], 25, 36, [ 44 .. 46 ],
+             [ 53 .. 55 ], 57, 60, [ 62 .. 64 ], 74, [ 130 .. 131 ], 133,
+             [ 136 .. 143 ], 145, [ 149 .. 151 ], 181, [ 183 .. 187 ],
+             [ 189 .. 190 ], [ 192 .. 193 ], 196, [ 198 .. 200 ],
+             [ 202 .. 206 ], 212, [ 214 .. 219 ], [ 273 .. 275 ],
+             [ 555 .. 572 ], [ 577 .. 584 ], [ 593 .. 602 ], [ 630 .. 684 ] ] ],
+         [ 3,
+           [ 4, 6, 8, 12, [ 15 .. 16 ], [ 18 .. 19 ], [ 23 .. 24 ],
+             [ 29 .. 30 ], 32, [ 34 .. 35 ], 37, [ 42 .. 43 ], [ 48 .. 52 ],
+             56, [ 58 .. 59 ], 61, 68, [ 70 .. 73 ], 76, 78, 80,
+             [ 82 .. 91 ], [ 105 .. 121 ], 129, 132, [ 134 .. 135 ], 144,
+             [ 146 .. 148 ], [ 152 .. 159 ], [ 161 .. 164 ], 167, 170,
+             [ 172 .. 180 ], 182, 188, 191, [ 194 .. 195 ], 197, 201,
+             [ 207 .. 211 ], 213, [ 220 .. 239 ], [ 284 .. 547 ],
+             [ 573 .. 576 ], [ 585 .. 592 ], [ 603 .. 629 ] ] ],
+         [ 4,
+           [ 7, 9, 14, 22, [ 27 .. 28 ], 31, 33, [ 40 .. 41 ], 47,
+             [ 65 .. 67 ], 69, 75, 77, 79, 81, [ 92 .. 104 ], 123,
+             [ 126 .. 128 ], 160, [ 165 .. 166 ], [ 168 .. 169 ], 171,
+             [ 240 .. 272 ], [ 276 .. 283 ], [ 548 .. 554 ] ] ],
+         [ 5, [ 10, 26, [ 38 .. 39 ], 122, [ 124 .. 125 ] ] ],
+         [ 6, [ 11 ] ] ],
+       pClassPGroup :=
+         [
+         [ 1, [ 11 ] ],
+         [ 2,
+           [ [ 8 .. 10 ], 22, 26, 28, [ 30 .. 31 ], [ 33 .. 34 ],
+             [ 37 .. 42 ], 75, 77, 79, 81, [ 92 .. 122 ], [ 124 .. 128 ],
+             [ 220 .. 272 ], [ 276 .. 283 ] ] ],
+         [ 3,
+           [ [ 5 .. 7 ], [ 14 .. 15 ], [ 18 .. 19 ], [ 23 .. 25 ], 27, 29,
+             32, [ 35 .. 36 ], 43, [ 47 .. 74 ], 76, 78, 80, [ 82 .. 91 ],
+             123, [ 129 .. 186 ], [ 188 .. 190 ], [ 273 .. 274 ],
+             [ 284 .. 554 ], [ 609 .. 629 ] ] ],
+         [ 4,
+           [ [ 3 .. 4 ], 12, [ 16 .. 17 ], [ 20 .. 21 ], [ 44 .. 46 ], 187,
+             [ 191 .. 219 ], 275, [ 555 .. 608 ], [ 669 .. 684 ] ] ],
+         [ 5, [ 2, 13, [ 630 .. 668 ] ] ],
+         [ 6, [ 1 ] ] ] ),
+  rec( size := 117649,
+       rankPGroup :=
+         [
+         [ 1, [ 1 ] ],
+         [ 2,
+           [ [ 2 .. 3 ], 5, 13, 17, [ 20 .. 21 ], 25, 36, [ 44 .. 46 ],
+             [ 53 .. 55 ], 57, 60, [ 62 .. 64 ], 74, [ 136 .. 137 ], 139,
+             [ 142 .. 151 ], 153, [ 157 .. 159 ], 191, [ 193 .. 199 ],
+             [ 201 .. 202 ], [ 204 .. 207 ], 210, [ 214 .. 218 ],
+             [ 220 .. 224 ], 228, [ 232 .. 237 ], [ 299 .. 301 ],
+             [ 699 .. 724 ], [ 731 .. 740 ], [ 749 .. 762 ], [ 794 .. 860 ] ] ],
+         [ 3,
+           [ 4, 6, 8, 12, [ 15 .. 16 ], [ 18 .. 19 ], [ 23 .. 24 ],
+             [ 29 .. 30 ], 32, [ 34 .. 35 ], 37, [ 42 .. 43 ], [ 48 .. 52 ],
+             56, [ 58 .. 59 ], 61, 68, [ 70 .. 73 ], 76, 78, 80,
+             [ 82 .. 93 ], [ 109 .. 127 ], 135, 138, [ 140 .. 141 ], 152,
+             [ 154 .. 156 ], [ 160 .. 169 ], [ 171 .. 174 ], 177, 180,
+             [ 182 .. 190 ], 192, 200, 203, [ 208 .. 209 ], [ 211 .. 213 ],
+             219, [ 225 .. 227 ], [ 229 .. 231 ], [ 238 .. 261 ],
+             [ 312 .. 691 ], [ 725 .. 730 ], [ 741 .. 748 ], [ 763 .. 793 ] ] ],
+         [ 4,
+           [ 7, 9, 14, 22, [ 27 .. 28 ], 31, 33, [ 40 .. 41 ], 47,
+             [ 65 .. 67 ], 69, 75, 77, 79, 81, [ 94 .. 108 ], 129,
+             [ 132 .. 134 ], 170, [ 175 .. 176 ], [ 178 .. 179 ], 181,
+             [ 262 .. 298 ], [ 302 .. 311 ], [ 692 .. 698 ] ] ],
+         [ 5, [ 10, 26, [ 38 .. 39 ], 128, [ 130 .. 131 ] ] ],
+         [ 6, [ 11 ] ] ],
+       pClassPGroup :=
+         [
+         [ 1, [ 11 ] ],
+         [ 2,
+           [ [ 8 .. 10 ], 22, 26, 28, [ 30 .. 31 ], [ 33 .. 34 ],
+             [ 37 .. 42 ], 75, 77, 79, 81, [ 94 .. 128 ], [ 130 .. 134 ],
+             [ 238 .. 298 ], [ 302 .. 311 ] ] ],
+         [ 3,
+           [ [ 5 .. 7 ], [ 14 .. 15 ], [ 18 .. 19 ], [ 23 .. 25 ], 27, 29,
+             32, [ 35 .. 36 ], 43, [ 47 .. 74 ], 76, 78, 80, [ 82 .. 93 ],
+             129, [ 135 .. 198 ], [ 200 .. 202 ], [ 299 .. 300 ],
+             [ 312 .. 698 ], [ 773 .. 793 ] ] ],
+         [ 4,
+           [ [ 3 .. 4 ], 12, [ 16 .. 17 ], [ 20 .. 21 ], [ 44 .. 46 ], 199,
+             [ 203 .. 237 ], 301, [ 699 .. 772 ], [ 837 .. 860 ] ] ],
+         [ 5, [ 2, 13, [ 794 .. 836 ] ] ],
+         [ 6, [ 1 ] ] ] ) ];
+
+SMALL_GROUPS_PROPERTIES_FUNCS[ 21 ] := function( size, inforec )
+    local res, entry;
+
+    res := SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec );
+
+    # the first isoclinism family consists of the 11 abelian groups, one for
+    # each partition of 6
+    res.isAbelian := [ [ 1 .. 11 ] ];
+
+    entry := First( SMALLGRP_P6_INDEX, x -> x.size = size );
+    if entry <> fail then
+        res.rankPGroup   := entry.rankPGroup;
+        res.pClassPGroup := entry.pClassPGroup;
+    fi;
+    return res;
+end;
+
+#############################################################################
+##
 #F NUMBER_SMALL_GROUPS_FUNCS[ 21 ]( size, inforec )
 ##
 ## order p^6 , p >= 6

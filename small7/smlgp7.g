@@ -161,6 +161,88 @@ SELECT_SMALL_GROUPS_FUNCS[ 18 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
 
 #############################################################################
 ##
+#V SMALL_GROUPS_512_TYPES
+##
+## The groups of order 512 are sorted by rank and p-class. Every entry
+## [ <first>, <last>, <rank>, <p-class> ] of this list describes one range of
+## consecutive groups; it is used by SMALL_GROUPS_PROPERTIES_FUNCS[ 18 ] and
+## by SMALL_GROUPS_INFORMATION[ 18 ].
+##
+Append( SMALL_GROUPS_512_TYPES, [
+    [        1,        1, 1, 9 ],
+    [        2,       10, 2, 3 ],
+    [       11,      386, 2, 4 ],
+    [      387,      444, 2, 5 ],
+    [      445,      858, 2, 4 ],
+    [      859,     1698, 2, 5 ],
+    [     1699,     2008, 2, 6 ],
+    [     2009,     2039, 2, 7 ],
+    [     2040,     2044, 2, 8 ],
+    [     2045,     2045, 3, 2 ],
+    [     2046,    29398, 3, 3 ],
+    [    29399,    30617, 3, 4 ],
+    [    30618,    31239, 3, 3 ],
+    [    31240,    56685, 3, 4 ],
+    [    56686,    60615, 3, 5 ],
+    [    60616,    60894, 3, 6 ],
+    [    60895,    60903, 3, 7 ],
+    [    60904,    67612, 4, 2 ],
+    [    67613,   387088, 4, 3 ],
+    [   387089,   419734, 4, 4 ],
+    [   419735,   420500, 4, 5 ],
+    [   420501,   420514, 4, 6 ],
+    [   420515,  6249623, 5, 2 ],
+    [  6249624,  7529606, 5, 3 ],
+    [  7529607,  7532374, 5, 4 ],
+    [  7532375,  7532392, 5, 5 ],
+    [  7532393, 10481221, 6, 2 ],
+    [ 10481222, 10493038, 6, 3 ],
+    [ 10493039, 10493061, 6, 4 ],
+    [ 10493062, 10494173, 7, 2 ],
+    [ 10494174, 10494200, 7, 3 ],
+    [ 10494201, 10494212, 8, 2 ],
+    [ 10494213, 10494213, 9, 1 ] ] );
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 18 ]( size, inforec )
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 18 ] := function( size, inforec )
+    local res, ranks, pclasses, t, p;
+
+    res := SMALL_GROUPS_PROPERTIES_PGROUP( size, inforec );
+
+    # The 30 abelian groups of order 512, one for each partition of 9. They
+    # were determined by running through the ranges of SMALL_GROUPS_512_TYPES
+    # matching the rank and the p-class of each partition.
+    res.isAbelian := [ 1, 859, 1699, 2009, 2040, 2046, 29399, 33712, 56686,
+                       58942, 60616, 60895, 87977, 260300, 387089, 400018,
+                       419735, 420501, 420515, 6249624, 6276915, 7529607,
+                       7532375, 7532393, 10481222, 10493039, 10493062,
+                       10494174, 10494201, 10494213 ];
+
+    ranks := [ ];
+    pclasses := [ ];
+    for t in SMALL_GROUPS_512_TYPES do
+        for p in [ [ ranks, t[ 3 ] ], [ pclasses, t[ 4 ] ] ] do
+            if not IsBound( p[ 1 ][ p[ 2 ] ] ) then
+                p[ 1 ][ p[ 2 ] ] := [ ];
+            fi;
+            p[ 1 ][ p[ 2 ] ] := SMALL_IDS_UNION( p[ 1 ][ p[ 2 ] ],
+                                                 [ [ t[1] .. t[2] ] ] );
+        od;
+    od;
+    res.rankPGroup := List( Filtered( [ 1 .. Length( ranks ) ],
+                                      i -> IsBound( ranks[ i ] ) ),
+                            i -> [ i, ranks[ i ] ] );
+    res.pClassPGroup := List( Filtered( [ 1 .. Length( pclasses ) ],
+                                        i -> IsBound( pclasses[ i ] ) ),
+                              i -> [ i, pclasses[ i ] ] );
+    return res;
+end;
+
+#############################################################################
+##
 #F IdStandardPresented512Group( G )
 ##
 InstallGlobalFunction( IdStandardPresented512Group, function( G )

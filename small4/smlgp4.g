@@ -225,6 +225,12 @@ SELECT_SMALL_GROUPS_FUNCS[ 17 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
 
 #############################################################################
 ##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 17 ]( size, inforec )
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 17 ] := SMALL_GROUPS_PROPERTIES_TWO_PRIMES;
+
+#############################################################################
+##
 #F NUMBER_SMALL_GROUPS_FUNCS[ 17 ]( size, inforec )
 ##
 NUMBER_SMALL_GROUPS_FUNCS[ 17 ] := function( size, inforec )

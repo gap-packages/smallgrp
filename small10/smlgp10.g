@@ -196,6 +196,69 @@ SELECT_SMALL_GROUPS_FUNCS[ 25 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
 
 #############################################################################
 ##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 24 ]( size, inforec )
+##
+## squarefree, not contained in lower layers
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 24 ] := function( size, inforec )
+    local all;
+
+    # the groups of squarefree order have a cyclic socle and a cyclic socle
+    # factor, hence they are supersolvable; the first one is the cyclic
+    # group, in all others the socle factor acts non-trivially on the socle,
+    # so none of them is nilpotent
+    all := [ [ 1 .. inforec.number ] ];
+    return rec( isAbelian       := [ 1 ],
+                isNilpotent     := [ 1 ],
+                isSupersolvable := all,
+                isSolvable      := all );
+end;
+
+#############################################################################
+##
+#F SMALL_GROUPS_PROPERTIES_FUNCS[ 25 ]( size, inforec )
+##
+## cubefree order < 50000, not contained in lower layers
+##
+SMALL_GROUPS_PROPERTIES_FUNCS[ 25 ] := function( size, inforec )
+    local solv, nilp, pos, set;
+
+    if not IsBound( inforec.sets ) then
+        inforec := NUMBER_SMALL_GROUPS_FUNCS[ 25 ]( size, inforec );
+    fi;
+
+    # The groups of cubefree order are either solvable or a direct product
+    # of PSL( 2, p ) with a solvable group; the latter are exactly those in
+    # the sets with 'psl_p' <> 1.
+    #
+    # A finite group is nilpotent if and only if its Frattini factor is.
+    # Each set with 'psl_p' = 1 lists the solvable groups with a fixed order
+    # of the Frattini factor, ordered by that factor, and its first entry is
+    # the one with the elementary abelian - and hence the only nilpotent -
+    # Frattini factor. So exactly the first group of every such set is
+    # nilpotent.
+    solv := [ ];
+    nilp := [ ];
+    pos := 0;
+    for set in inforec.sets do
+        if set.psl_p = 1 then
+            solv := SMALL_IDS_UNION( solv,
+                                [ [ pos + 1 .. pos + set.number ] ] );
+            nilp := SMALL_IDS_UNION( nilp, [ pos + 1 ] );
+        fi;
+        pos := pos + set.number;
+    od;
+
+    # As the order is cubefree, every Sylow subgroup has order p or p^2 and
+    # is therefore abelian. A nilpotent group is the direct product of its
+    # Sylow subgroups, so here the nilpotent and the abelian groups coincide.
+    return rec( isAbelian   := nilp,
+                isNilpotent := nilp,
+                isSolvable  := solv );
+end;
+
+#############################################################################
+##
 #F NUMBER_SMALL_GROUPS_FUNCS[ 24 ]( size, inforec )
 ##
 ## squarefree, not contained in lower layers
