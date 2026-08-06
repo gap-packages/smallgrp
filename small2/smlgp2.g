@@ -45,11 +45,11 @@ end;
 
 #############################################################################
 ##
-#F  CODE_SMALL_GROUP_FUNCS[ 8 .. 9 ]( size, i, inforec )
+#F  CODE_SMALL_GROUP_FROM_LIB( size, i, inforec )
 ##
 ##  fetches the code of the group [ size, i ] from the library data and 
 ##  loads the data if necessary
-CODE_SMALL_GROUP_FUNCS[ 8 ] := function( size, i, inforec )
+CODE_SMALL_GROUP_FROM_LIB := function( size, i, inforec )
     local g;
 
     if not IsBound( SMALL_GROUP_LIB[ size ] ) then
@@ -67,7 +67,8 @@ CODE_SMALL_GROUP_FUNCS[ 8 ] := function( size, i, inforec )
 
     return SMALL_GROUP_LIB[ size ][ i ];
 end;
-CODE_SMALL_GROUP_FUNCS[ 9 ] := CODE_SMALL_GROUP_FUNCS[ 8 ];
+CODE_SMALL_GROUP_FUNCS[ 8 ] := CODE_SMALL_GROUP_FROM_LIB;
+CODE_SMALL_GROUP_FUNCS[ 9 ] := CODE_SMALL_GROUP_FROM_LIB;
 
 #############################################################################
 ##

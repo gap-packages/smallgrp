@@ -47,7 +47,7 @@ ID_GROUP_FUNCS[ 17 ] := function( G, inforec )
         if size = 1053 then
             return 51;
         fi;
-        return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ size, 2 ] );
+        return ID_GROUP_BY_TREE( G, inforec, [ size, 2 ] );
     fi;
 
     sid := IdGroup( SylowSubgroup( G, inforec.q ) )[ 2 ];
@@ -64,7 +64,7 @@ ID_GROUP_FUNCS[ 17 ] := function( G, inforec )
            or ( SMALL_GROUP_LIB[ size ].pnil.syl[ pos + 1 ] <> sid ) then
             return num + pos;
         fi;
-        return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ size, 1, sid ] );
+        return ID_GROUP_BY_TREE( G, inforec, [ size, 1, sid ] );
     fi;
 
     # p-sylow-subgroup is normal
@@ -122,10 +122,10 @@ ID_GROUP_FUNCS[ 17 ] := function( G, inforec )
     if IsBound( c[ n ][ typ ] ) then
         c := c[ n ][ typ ];
         if c > 1 then
-            i := ID_GROUP_FUNCS[ 8 ]( G, inforec,
+            i := ID_GROUP_BY_TREE( G, inforec,
                                     [ nn, typ, sid mod c, sid, cid ], true );
         else
-            i := ID_GROUP_FUNCS[ 8 ]( G, inforec,
+            i := ID_GROUP_BY_TREE( G, inforec,
                                     [ nn, typ, sid, cid ], true );
         fi;
         p := [ ,, [ 7, 19, 109, 163 ],, [ 11, 101, 251 ],, [29, 197 ] ];

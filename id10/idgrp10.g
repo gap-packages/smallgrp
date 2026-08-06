@@ -138,7 +138,7 @@ ID_GROUP_FUNCS[ 25 ] := function( G, inforec )
             if not IsBound( ID_GROUP_TREE.next[ Size( G ) ] ) then
                 ReadSmallLib( "ids", 10, Int( Size(G) / 500 ) + 1, [] );
             fi;
-            return i + 1 + ID_GROUP_FUNCS[ 8 ]( G, rec( lib := 10 ) );
+            return i + 1 + ID_GROUP_BY_TREE( G, rec( lib := 10 ) );
         fi;
     od;
 end;

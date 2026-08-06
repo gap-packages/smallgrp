@@ -501,6 +501,80 @@ end;
 
 #############################################################################
 ##
+#F  SMALL_GROUPS_SELECT_GENERIC( size, funcs, vals, inforec, all, id, idList )
+##
+##  the selection for a layer with no better way: narrow the candidates with
+##  what 'SMALL_GROUPS_PROPERTY_IDS' knows, then construct the rest and test
+##  them.
+SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
+                                        all, id, idList )
+    local result, i, g, ok, j, sel, range, nid;
+
+    if not IsBound( inforec.number ) then
+        inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
+    fi;
+
+    # narrow down the candidates using properties which can be decided from
+    # the position of a group in the library
+    sel   := SMALL_GROUPS_PROPERTY_IDS( size, inforec, funcs, vals );
+    funcs := sel.funcs;
+    vals  := sel.vals;
+
+    if idList = fail then
+        range := SMALL_IDS_EXPAND( sel.ids );
+    else
+        range := Filtered( idList, x -> SMALL_IDS_MEMBER( sel.ids, x ) );
+    fi;
+
+    # if nothing is left to be checked, the groups need not be constructed
+    if funcs = [ ] and all and id then
+        return List( range, x -> [ size, x ] );
+    fi;
+
+    if funcs <> [ ] and idList = fail then
+        Info( InfoWarning, 2, "`SelectSmallGroups' checks ", Length( range ),
+                            " grps of size ", size, " with trivial methods");
+    fi;
+
+    result := [ ];
+    for i in range do
+        nid:=i;
+        if not SMALL_GROUPS_OLD_ORDER then
+            if size = 3^7 then
+                nid := SMALLGP_PERM3(i);
+            elif size = 5^7 then
+                nid := SMALLGP_PERM5(i);
+            elif size = 7^7 then
+                nid := SMALLGP_PERM7(i);
+            elif size = 11^7 then
+                nid := SMALLGP_PERM11(i);
+            fi;
+        fi;
+
+        g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
+        SetIdGroup( g, [ size, i ] );
+        ok := true;
+        for j in [ 1 .. Length( funcs ) ] do
+            ok := ok and funcs[ j ]( g ) in vals[ j ];
+        od;
+        if all and id and ok then
+            Add( result, [ size, i ] );
+        elif all and ok then
+            Add( result, g );
+        elif ok then          
+            return g;                                           
+        fi;
+    od;                                                                     
+
+    if all then
+        return result;
+    else
+        return fail;
+    fi;
+end;
+
+#############################################################################
+##
 #V  SMALL_GROUP_LIB
 ##
 ##  This list will contain all data for the group construction read from the

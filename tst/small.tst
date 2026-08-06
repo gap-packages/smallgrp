@@ -45,10 +45,13 @@ gap> Filtered([1..4000], i -> NumberSmallGroupsAvailable(i) <> SmallGroupsAvaila
 ################################################################################
 gap> Length(SMALL_GROUP_FUNCS) >= 26;
 true
-gap> Number(SMALL_GROUP_FUNCS) >= 24;
+gap> Number(SMALL_GROUP_FUNCS) >= 21;
 true
+
+# 13, 22 and 23 held helpers that were never dispatched to; 15 and 16 are
+# used by ID_GROUP_FUNCS only
 gap> Filtered([1 .. 26], i -> not IsBound(SMALL_GROUP_FUNCS[i]));
-[ 15, 16 ]
+[ 13, 15, 16, 22, 23 ]
 gap> Length(CODE_SMALL_GROUP_FUNCS) >= 10;
 true
 gap> Number(CODE_SMALL_GROUP_FUNCS) >= 3;

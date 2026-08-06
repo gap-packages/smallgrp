@@ -22,6 +22,8 @@ SMALL_AVAILABLE_FUNCS[ 6 ] := function( size )
     return fail;
 end;
 
+DeclareGlobalName( "SMALL_GROUP_1152_1920_FROM_CODE" );
+
 #############################################################################
 ##
 #F SMALL_GROUP_FUNCS[ 12 ]( size, i, inforec )
@@ -35,15 +37,15 @@ SMALL_GROUP_FUNCS[ 12 ] := function( size, i, inforec )
 
     if size = 1152 then
         if i <= 2328 then
-            return SMALL_GROUP_FUNCS[ 13 ]( 32769, 1152, i );
+            return SMALL_GROUP_1152_1920_FROM_CODE( 32769, 1152, i );
         elif i <= 4656 then
-            return SMALL_GROUP_FUNCS[ 13 ]( 0, 1152, i - 2328 );
+            return SMALL_GROUP_1152_1920_FROM_CODE( 0, 1152, i - 2328 );
         else
              i := i - 4656;
         fi;
     elif size = 1920 then
         if i <= 2328 then
-            return SMALL_GROUP_FUNCS[ 13 ]( 0, 1920, i );
+            return SMALL_GROUP_1152_1920_FROM_CODE( 0, 1920, i );
         else
              i := i - 2328;
         fi;
@@ -79,7 +81,7 @@ SMALL_GROUP_FUNCS[ 12 ] := function( size, i, inforec )
             sid := sid + 1;
         od;
 
-        return SMALL_GROUP_FUNCS[ 13 ]( 
+        return SMALL_GROUP_1152_1920_FROM_CODE( 
                  SMALL_GROUP_LIB[ size ].2nil.codes[
                    SMALL_GROUP_LIB[ size ].2nil.codelist[                    
                      SMALL_GROUP_LIB[ size ].2nil.styps[ sid ] ][ i ] ],
@@ -106,13 +108,13 @@ end;
 
 #############################################################################
 ##
-#F SMALL_GROUP_FUNCS[ 13 ]( code, size, sid )
+#F SMALL_GROUP_1152_1920_FROM_CODE( code, size, sid )
 ##
-## similar function to 'RelatorsCode' specialized for groups of size 1152
-## and 1920 with normal (3,5)-Hall-subgroup, for which the relators of the
-## 2-sylow-subgroup are not stored with the group.
+## like 'RelatorsCode', for the groups of order 1152 and 1920 with a normal
+## (3,5)-Hall-subgroup, whose Sylow 2-subgroup relators are not stored with
+## the group but fetched by sid from the groups of order 128
 ##
-SMALL_GROUP_FUNCS[ 13 ] := function( code, size, sid )
+SMALL_GROUP_1152_1920_FROM_CODE := function( code, size, sid )
     local F, gens, i, j, z, z2, rels, trels, rr, g, t, n, uc, indices, ll;
 
     # create free group

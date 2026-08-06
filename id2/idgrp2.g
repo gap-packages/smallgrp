@@ -22,7 +22,7 @@ end;
 
 #############################################################################
 ##
-#F  ID_GROUP_FUNCS[ 8 ]( G, inforec, <fpcache>, <lookup> )
+#F  ID_GROUP_BY_TREE( G, inforec, <fpcache>, <lookup> )
 ##
 ##  standard lookup in identification tree
 ##
@@ -31,7 +31,7 @@ end;
 ##  if lookup is set, just the information if the specified branch exists is
 ##  returned (used to investigate if some situaations are unique in small3)
 ##
-ID_GROUP_FUNCS[ 8 ] := function( arg )
+ID_GROUP_BY_TREE := function( arg )
     local level, branch, indices, fp, l, L, i, j, size,
           coc, desc, adesc, pos, filename, ldesc, Pack, sfp, newcls, lookup,
           cfp, classes, classtyps, sclasstyps, asList, G, inforec, fpcache;              
@@ -218,6 +218,8 @@ ID_GROUP_FUNCS[ 8 ] := function( arg )
     # branch is now a integer
     return branch;
 end;
+
+ID_GROUP_FUNCS[ 8 ] := ID_GROUP_BY_TREE;
 
 #############################################################################
 ##

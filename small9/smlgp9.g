@@ -500,6 +500,9 @@ SMALL_GROUP_FUNCS[ 20 ] := function( size, i, inforec )
     return g;
 end;
 
+DeclareGlobalName( "SMALL_GROUP_P6_NUMBER" );
+DeclareGlobalName( "SMALL_GROUP_P6_EXPONENT" );
+
 #############################################################################
 ##
 #F SMALL_GROUP_FUNCS[ 21 ]( size, i, inforec )
@@ -573,7 +576,7 @@ SMALL_GROUP_FUNCS[ 21 ] := function( size, i, inforec )
                     n := QuoInt( n, 7 );
                     j2 := n mod 50;
                     n := QuoInt( n, 50 );
-                    ri := ri * g^SMALL_GROUP_FUNCS[23]( j2, inforec, fail );
+                    ri := ri * g^SMALL_GROUP_P6_EXPONENT( j2, inforec, fail );
                 od;
                 famRels[ ind ] := famRels[ ind ] / ri;
             od;
@@ -584,7 +587,7 @@ SMALL_GROUP_FUNCS[ 21 ] := function( size, i, inforec )
                 n := QuoInt( n, 9 );
                 c2 := n mod 22;
                 n := QuoInt( n, 22 );
-                mem := rec( num := SMALL_GROUP_FUNCS[ 22 ]( c1, c2, p ),
+                mem := rec( num := SMALL_GROUP_P6_NUMBER( c1, c2, p ),
                             rels := [] );
                 if mem.num > 0 then
                     while n > 0 do
@@ -624,7 +627,7 @@ SMALL_GROUP_FUNCS[ 21 ] := function( size, i, inforec )
     for rel in inforec.groups[ phi ][ j ].famMems[ k ].rels do
         ri := One( F );
         for m in rel.exli do
-            ri := ri * F.(m[1])^SMALL_GROUP_FUNCS[23]( m[2], inforec, i );
+            ri := ri * F.(m[1])^SMALL_GROUP_P6_EXPONENT( m[2], inforec, i );
         od;
         grpRels[ rel.ind ] := grpRels[ rel.ind ] / ri;
     od;
@@ -641,10 +644,12 @@ end;
 
 #############################################################################
 ##
-#F SMALL_GROUP_FUNCS[ 22 ]( c1, c2, p )
+#F SMALL_GROUP_P6_NUMBER( c1, c2, p )
 ##
-## 
-SMALL_GROUP_FUNCS[ 22 ] := function( c1, c2, p )
+## how many groups the parametrised entry ( c1, c2 ) stands for at p; 0 if
+## the condition c1 puts on p fails
+
+SMALL_GROUP_P6_NUMBER := function( c1, c2, p )
 
     if c1 = 0 or
        c1 = 1 and p mod 3 = 1 or
@@ -697,10 +702,11 @@ end;
 
 #############################################################################
 ##
-#F SMALL_GROUP_FUNCS[ 23 ]( j2, inforec )
+#F SMALL_GROUP_P6_EXPONENT( j2, inforec, ii )
 ##
-## 
-SMALL_GROUP_FUNCS[ 23 ] := function( j2, inforec, ii )
+## the exponent the code j2 stands for at p
+
+SMALL_GROUP_P6_EXPONENT := function( j2, inforec, ii )
     local p, pr, nqr, nqrm, squares,
           cart, f, gg, k, r, s, t, x, y, z;
 
