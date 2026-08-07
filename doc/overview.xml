@@ -24,7 +24,7 @@ Currently, the library contains the following groups:
  &nbsp; (<M>907 \; 489</M> groups);
 </Item>
 <Item>
- those of order <M>p^n</M> for <M>n \leq 6</M> and all primes <M>p</M> 
+ those of order <M>p^n</M> for <M>n \leq 6</M> and all primes <M>p</M>;
 </Item>
 <Item>
  those of order <M>q^n \cdot p</M> for <M>q^n</M> dividing <M>2^8</M>, 
@@ -68,23 +68,23 @@ information on the construction of this library is available in <Cite Key="New77
 <Cite Key="OBr90"/>, <Cite Key="OBr91"/>, <Cite Key="BescheEick98"/>, <Cite Key="BescheEick1000"/>, 
 <Cite Key="BescheEick768"/>, <Cite Key="BEO00"/>, <Cite Key="EOB99"/>, <Cite Key="EOB98"/>, <Cite Key="NOV04"/>, 
 <Cite Key="Gir03"/>, <Cite Key="DEi05"/>, <Cite Key="OV05"/>.
- 
+
 <Index Key="TwoGroup library"><C>TwoGroup</C> library</Index>
 <Index Key="ThreeGroup library"><C>ThreeGroup</C> library</Index>
 The Small Groups library incorporates the &GAP;&nbsp;3 libraries <C>TwoGroup</C> and
 <C>ThreeGroup</C>. The data from these libraries was directly included into the
 Small Groups library, and the ordering there was preserved. The Small
-Groups library replaces the Gap 3 library of solvable groups of order at
-most 100. However, both the organisation and data descriptions of these
-groups has changed in the Small Groups library.
+Groups library replaces the &GAP;&nbsp;3 library of solvable groups of order
+at most 100. However, both the organisation and the data descriptions of
+these groups have changed in the Small Groups library.
 <P/>
 
 As of version 1.4 of this library, the arrangement of groups is the same as in
-Magma, Version 2.23. In earlier releases of this library, the arrangement in
+Magma, version 2.23. In earlier releases of this library, the arrangement in
 orders <M>p^7</M>, <M>p=3,5,7,11</M> disagreed. An attempt to fix this was
-instated on version 1.1 of this library, but a wrong permutation was used. If
+made in version 1.1 of this library, but a wrong permutation was used. If
 you would like to refer to index numbers for these orders in older versions of
-the library, see <Ref Var="SMALL_GROUPS_OLD_ORDER"/>). The arrangement of
+the library, see <Ref Var="SMALL_GROUPS_OLD_ORDER"/>. The arrangement of
 all other orders has always agreed and has remained stable.
 <P/>
 

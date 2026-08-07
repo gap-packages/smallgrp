@@ -70,7 +70,7 @@ the groups of certain orders:
 
 <P/>
 This setup has been chosen for two reasons. First, the organisation in
-layers permits to add new layers (and thus new group orders) without
+layers permits adding new layers (and thus new group orders) without
 changes to the existing catalogue. Secondly, it is possible to install a
 part of the layers only. This might be interesting for computer systems
 with little hard disk space available.
@@ -107,9 +107,9 @@ directory <F>smallx</F> contains the groups of layer <M>x</M> and the
 directory <F>idx</F> contains the corresponding identification routine, if
 available. An exception to this rule is the first layer; here all the code
 for the groups is contained in the files <F>gap/smlgp1.g</F> and
-<F>gap/idgrp1.g</F>. For the layers 7 and 8 there is no identification
+<F>gap/idgrp1.g</F>. For the layers 7, 8 and 11 there is no identification
 routine available at the moment and thus there are no directories
-<F>id7</F> and <F>id8</F>.
+<F>id7</F>, <F>id8</F> and <F>id11</F>.
 
 <P/>
 The other relevant files of the package are:
@@ -213,11 +213,11 @@ follows the classification as well.
 The nilpotent groups of this layer have been constructed using
 <M>p</M>-group generation, see <Cite Key="OBr90"/> and the
 <Package>ANUPQ</Package> package. The 2- and 3-groups of this layer have
-also been available in the <C>TwoGroup</C> and <C>ThreeGroup</C> library of
+also been available in the <C>TwoGroup</C> and <C>ThreeGroup</C> libraries of
 &GAP;&nbsp;3, see <Cite Key="JNO90"/> and <Cite Key="OBr91"/>. The
 non-nilpotent groups in this layer have been determined using the Frattini
 extension method, the cyclic split extension method and cyclic extension
-for the non-soluble groups, see <Cite Key="BescheEick98"/>,
+for the non-solvable groups, see <Cite Key="BescheEick98"/>,
 <Cite Key="BescheEick1000"/> and <Cite Key="BescheEick768"/>.
 </Subsection>
 
@@ -408,10 +408,10 @@ In this case we apply methods similar to layer 2; that is, we use
 invariants. Since there are infinitely many primes <M>p</M> which might
 turn up here, we need an additional idea to use the invariant tree for this
 purpose. In the invariant tree we have invariants stored for groups of type
-<M>R : Q</M> of order <M>2^n \cdot r</M> for primes <M>r</M> in 3, 5, 17
-and 97. Now we first choose the smallest prime <M>r</M> such that <M>r</M>
-is congruent 1 mod <M>[Q : K]</M>. The cases that <M>[Q : K] = 2^i</M> for
-<M>i = 6, 7</M> or 8 cannot occur here, because in these cases
+<M>R : Q</M> of order <M>2^n \cdot r</M> for the primes <M>r = 3, 5, 17</M>
+and <M>97</M>. Now we first choose the smallest prime <M>r</M> such that
+<M>r</M> is congruent to 1 modulo <M>[Q : K]</M>. The cases that
+<M>[Q : K] = 2^i</M> for <M>i = 6, 7</M> or 8 cannot occur here, because in these cases
 <M>\mathrm{Id}(Q)</M> and <M>\mathrm{Id}(K)</M> are always sufficient to
 determine the group.
 
@@ -437,7 +437,7 @@ similarly.
 </Subsection>
 
 <Subsection><Heading>Storing</Heading>
-There is a difference to layer 3 in the compression of the group data; that
+There is a difference from layer 3 in the compression of the group data; that
 is, the groups in this layer are not compressed as efficiently as the
 groups in layer 3. We consider the groups of type <M>P : Q</M> for <M>P</M>
 the cyclic group of order <M>p</M> and <M>Q</M> a group of order
@@ -445,8 +445,8 @@ the cyclic group of order <M>p</M> and <M>Q</M> a group of order
 homomorphism <M>Q \to \mathrm{Aut}(P)</M>. As in layer 3 we first compute
 one integer for each operation homomorphism and then proceed to compress
 the lists of integers for each <M>Q</M> and each <M>i</M> where <M>q^i</M>
-is the index of the centralizer of <M>P</M> in <M>Q</M>. Different to layer
-3 we do not compress the lists of non-negative integers to a single integer
+is the index of the centralizer of <M>P</M> in <M>Q</M>. Unlike in layer
+3, we do not compress the lists of non-negative integers to a single integer
 and we do not reduce the list for <M>i = 1</M> further, since in both cases
 the obtained compression is very small.
 </Subsection>
@@ -454,7 +454,7 @@ the obtained compression is very small.
 <Subsection><Heading>Identification</Heading>
 The group identification is essentially similar to the procedure described
 in layer 3. However, for the groups with normal Sylow <M>p</M>-subgroup we
-use a special random isomorphism test additionally to identify groups. It
+additionally use a special random isomorphism test to identify groups. It
 is a <Q>special</Q> version of the general algorithm: in the general
 algorithm we use certain sets to choose generating sets from. In this
 special version we restrict these sets suitably. (We use non-trivial
@@ -552,7 +552,7 @@ symbols (81 symbols for the encoding and 2 special symbols as signs).
 First we find those indices <M>i</M> in the range 1 to 120 such that for
 all lists in <M>L</M> the entries at position <M>i</M> are fixed. Thus we
 note for each of the 120 entries whether the entries are all 0, all 1 or
-variable in <M>L</M>. There are <M>3^{120}</M> combinations possible which
+variable in <M>L</M>. There are <M>3^{120}</M> combinations possible, which
 we store in a vector of length 30 using 81 symbols. This vector of length
 30 is the initial segment of <M>V</M>. Now we can reduce to consider the
 variable positions only and thus work with bitlists of shorter length.
@@ -562,7 +562,7 @@ We split the shorter bitlists in blocks such that the bitlists in each
 block have at most 6 variable entries. For this purpose we start at the
 beginning of <M>L</M> and add bitlists to the current block until the next
 bitlist would lead to more than 6 variable entries for this block. Each
-block can contain 1 up to 64 bitlists. Now we determine a <Q>headcode</Q>
+block can contain from 1 up to 64 bitlists. Now we determine a <Q>headcode</Q>
 and a <Q>tailcode</Q> to describe the block. The head and tail codes are
 then concatenated to <M>V</M>. The head contains an encoding of the
 variable bits for this block as above. The tail then describes the vectors
@@ -574,7 +574,7 @@ single vector of variable bits.
 Finally, we note that some of the tailcodes arise for many blocks. These
 tailcodes are stored in a special list. If such a tailcode is occurring in
 <M>V</M>, then only the reference to the special list is stored instead of
-the full tailcode. This special list contains 1890 different tailcodes, 2
+the full tailcode. This special list contains 1890 different tailcodes, so 2
 letters in the alphabet are sufficient to refer to a tailcode.
 
 <P/>
@@ -584,7 +584,7 @@ symbols available for this purpose. One is used if the corresponding
 tailcode is referenced, and the other if it is an ordinary tailcode.
 
 <P/>
-This compression allows to store the groups of order 512 in 4.4 MB.
+This compression allows the groups of order 512 to be stored in 4.4 MB.
 </Subsection>
 
 </Section>
@@ -661,10 +661,9 @@ the 12 Frattini factors.
 <Section Label="Layer 9">
 <Heading>Layer 9</Heading>
 
-This layer contains the generic construction of groups of order
-<M>p^4</M>, <M>p^5</M> and <M>p^6</M> with order <M>> 3125</M> (those with
-order up to 3125 are contained in the lower layers of the small groups
-library).
+This layer contains the generic construction of the groups of order
+<M>p^4</M>, <M>p^5</M> and <M>p^6</M> greater than 3125 (those of order up
+to 3125 are contained in the lower layers of the Small Groups library).
 
 <Subsection><Heading>Determination</Heading>
 The groups of order <M>p^4</M> were first determined by Hölder (1893), see
@@ -677,18 +676,18 @@ Vaughan-Lee (2004), see <Cite Key="NOV04"/>.
 <Subsection><Heading>Storing</Heading>
 The groups of order <M>p^4</M> (<M>p \geq 11</M>) are given by pc
 presentations which are produced at run-time by a function
-<C>SMALL_GROUPS_FUNCS[19]</C> provided by Newman.
+<C>SMALL_GROUP_FUNCS[19]</C> provided by Newman.
 
 <P/>
 The groups of order <M>p^5</M> (<M>p \geq 7</M>) are given by pc
 presentations which are produced at run-time by a function
-<C>SMALL_GROUPS_FUNCS[20]</C> provided by Girnat, see
+<C>SMALL_GROUP_FUNCS[20]</C> provided by Girnat, see
 <Cite Key="Gir03"/>.
 
 <P/>
 The groups of order <M>p^6</M> (<M>p \geq 5</M>) are given by pc
 presentations which are produced at run-time by a function
-<C>SMALL_GROUPS_FUNCS[21]</C> provided by Newman, O'Brien and Vaughan-Lee,
+<C>SMALL_GROUP_FUNCS[21]</C> provided by Newman, O'Brien and Vaughan-Lee,
 see <Cite Key="NOV04"/>.
 
 <P/>
@@ -704,7 +703,7 @@ the complete list of indices to find the presentation of a single group.
 
 <Subsection><Heading>Identification</Heading>
 A group of order <M>p^4</M> can be identified and its catalogue number
-found by the function <C>ID_SMALL_GROUPS_FUNCS[19]</C> based on a function
+found by the function <C>ID_GROUP_FUNCS[19]</C> based on a function
 provided by Newman and modified by Besche.
 
 <P/>
@@ -727,9 +726,9 @@ socle and socle factor.
 <P/>
 The groups of squarefree order which are not contained in lower layers are
 given by pc presentations which are produced at run-time by a function
-<C>SMALL_GROUPS_FUNCS[24]</C> written specially for this library. Such a
+<C>SMALL_GROUP_FUNCS[24]</C> written specially for this library. Such a
 group can be identified and its catalogue number found by the function
-<C>ID_SMALL_GROUPS_FUNCS[24]</C>.
+<C>ID_GROUP_FUNCS[24]</C>.
 </Subsection>
 
 <Subsection><Heading>Groups of cubefree but not squarefree order</Heading>
@@ -740,9 +739,9 @@ solvable group and <M>PSL(2,p)</M> for a suitable prime.
 <P/>
 The groups of cubefree order at most 50 000 which are not contained in
 lower layers and are not squarefree are given by pc presentations which are
-produced at run-time by a function <C>SMALL_GROUPS_FUNCS[25]</C> written
+produced at run-time by a function <C>SMALL_GROUP_FUNCS[25]</C> written
 specially for this library. Such a group can be identified and its
-catalogue number found by the function <C>ID_SMALL_GROUPS_FUNCS[24]</C>.
+catalogue number found by the function <C>ID_GROUP_FUNCS[25]</C>.
 </Subsection>
 
 </Section>

@@ -62,7 +62,7 @@ The Small Groups Library has been constructed by Hans Ulrich Besche, Bettina
 Eick and Eamonn O'Brien. It is maintained by Max Horn.
 
 
-# License
+## License
 
 The Small Groups Library is free software distributed under
 the [Artistic License 2.0](https://opensource.org/licenses/Artistic-2.0).

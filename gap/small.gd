@@ -646,7 +646,8 @@ DeclareGlobalFunction( "SmallGroup" );
 ##  <Func Name="SelectSmallGroups" Arg='argl, all, id'/>
 ##
 ##  <Description>
-##  universal function for 'AllSmallGroups', 'OneSmallGroup' and 'IdsOfAllSmallGroups'.
+##  universal function for <C>AllSmallGroups</C>, <C>OneSmallGroup</C> and
+##  <C>IdsOfAllSmallGroups</C>.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -666,11 +667,11 @@ DeclareGlobalFunction( "SelectSmallGroups" );
 ##  If <A>arg</A> is a number <M>n</M>, then this function returns all groups
 ##  of order <M>n</M>.
 ##  However, the function can also take several arguments which then
-##  must be organized in pairs <C>function</C> and <C>value</C>.
+##  must be organised in pairs <C>function</C> and <C>value</C>.
 ##  In this case the first function must be <Ref BookName="ref" Func="Size"/>
 ##  and the first value an order or a range of orders.
-##  If value is a list then it is considered a list of possible function
-##  values to include. 
+##  If a value is a list then it is considered a list of possible function
+##  values to include.
 ##  The function returns those groups of the specified orders having those
 ##  properties specified by the remaining functions and their values.
 ##  <P/>
@@ -769,7 +770,7 @@ DeclareObsoleteSynonym( "OneGroup", "OneSmallGroup" );
 ##
 ##  <Description>
 ##  similar to <C>AllSmallGroups</C> but returns ids instead of groups. This may
-##  prevent workspace overflows, if a large number of groups are expected in 
+##  prevent workspace overflows if a large number of groups are expected in
 ##  the output.
 ##  <Example><![CDATA[
 ##  gap> IdsOfAllSmallGroups( 60, IsNilpotentGroup );
@@ -845,10 +846,10 @@ DeclareSynonym( "NrSmallGroups", NumberSmallGroups );
 ##  <Description>
 ##  &GAP; loads all necessary data from the library automatically,
 ##  but it does not delete the data from the workspace again.
-##  Usually, this will be not necessary, since the data is stored in a
-##  compressed format. However, if 
-##  a large number of groups from the library have been loaded, then the user 
-##  might wish to remove the data from the workspace and this can be done by 
+##  Usually, this will not be necessary, since the data is stored in a
+##  compressed format. However, if
+##  a large number of groups from the library have been loaded, then the user
+##  might wish to remove the data from the workspace and this can be done by
 ##  the above function call.
 ##  <Example><![CDATA[
 ##  gap> UnloadSmallGroupsData();
@@ -867,8 +868,8 @@ DeclareGlobalFunction( "UnloadSmallGroupsData" );
 ##  <Func Name="ID_AVAILABLE" Arg='order'/>
 ##
 ##  <Description>
-##  returns false, if the identification routines for groups of order
-##  <A>order</A> is not installed. Otherwise a record with some information
+##  returns false if the identification routines for groups of order
+##  <A>order</A> are not installed. Otherwise a record with some information
 ##  about the identification of groups of order <A>order</A> is returned.
 ##  </Description>
 ##  </ManSection>
@@ -885,8 +886,8 @@ DeclareGlobalFunction( "ID_AVAILABLE" );
 ##  <Func Name="IdGroupsAvailable" Arg='order'/>
 ##
 ##  <Description>
-##  returns <C>true</C>, if the identification routines for groups of
-##  order <A>order</A> are installed, otherwise returns <C>false</C>. 
+##  returns <C>true</C> if the identification routines for groups of
+##  order <A>order</A> are installed, and <C>false</C> otherwise.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
