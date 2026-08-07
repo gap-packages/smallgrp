@@ -104,9 +104,17 @@ gap> IdGroup(G);
 ################################################################################
 # NumberSmallGroups GlobalFunction
 ################################################################################
+gap> NumberSmallGroups();
+Error, usage: NumberSmallGroups( order )
 gap> NumberSmallGroups(fail);
 Error, usage: NumberSmallGroups( order )
 gap> NumberSmallGroups(0);
+Error, usage: NumberSmallGroups( order )
+gap> NumberSmallGroups(Size);
+Error, usage: NumberSmallGroups( order )
+gap> NumberSmallGroups("abc");
+Error, usage: NumberSmallGroups( order )
+gap> NumberSmallGroups([ 1, fail ]);
 Error, usage: NumberSmallGroups( order )
 gap> NumberSmallGroups(19);
 1
@@ -120,6 +128,50 @@ gap> NumberSmallGroups(5^6);
 684
 gap> NumberSmallGroups(5*7*9*11*13);
 22
+
+# orders alone need no group at all
+gap> NumberSmallGroups([]);
+0
+gap> NumberSmallGroups([ 1 .. 100 ]);
+1048
+gap> NumberSmallGroups(Size, [ 1 .. 100 ]);
+1048
+gap> NumberSmallGroups(60, 1024);
+49487367302
+gap> NumberSmallGroups(Size, [ 1000, 3996 ]);
+Error, the library of groups of size 3996 is not available
+
+# with selection criteria
+gap> NumberSmallGroups(96, IsAbelian);
+7
+gap> NumberSmallGroups(96, IsAbelian, false);
+224
+gap> NrSmallGroups(96, IsAbelian) + NrSmallGroups(96, IsAbelian, false)
+>      = NrSmallGroups(96);
+true
+gap> NumberSmallGroups(Size, [ 1 .. 100 ], IsSolvableGroup, false);
+1
+gap> NumberSmallGroups(Size, 60, IsSupersolvableGroup, true);
+11
+gap> ForAll([ 1 .. 100 ], n -> NumberSmallGroups(n, IsNilpotentGroup)
+>          = Length(IdsOfAllSmallGroups(n, IsNilpotentGroup)));
+true
+
+# the indexed criteria come first, whatever order they are given in
+gap> NumberSmallGroups(512, IsAbelian, true, Exponent, 2);
+1
+gap> NumberSmallGroups(512, Exponent, 2, IsAbelian, true);
+1
+
+# a list of group numbers may narrow down the selection
+gap> NumberSmallGroups(60, [ 1 .. 10 ]);
+10
+gap> NumberSmallGroups(60, [ 1 .. 10 ], IsNilpotentGroup);
+1
+
+# selection criteria need the library, even where the number does not
+gap> NumberSmallGroups(1024, IsAbelian);
+Error, AllSmallGroups / OneSmallGroup: groups of order 1024 not available
 
 ################################################################################
 # SelectSmallGroups GlobalFunction (called by AllSmallGroups or OneSmallGroup)

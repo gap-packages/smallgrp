@@ -703,6 +703,10 @@ DeclareGlobalFunction( "SelectSmallGroups" );
 ##  <P/>
 ##  <Ref Func="SmallGroupsInformation"/> reports which criteria are indexed
 ##  for a given order.
+##  <P/>
+##  <Ref Func="IdsOfAllSmallGroups"/> returns the ids of these groups instead
+##  of the groups themselves, and <Ref Func="NumberSmallGroups"/> just their
+##  number.
 ##  <Example><![CDATA[
 ##  gap> AllSmallGroups( 6 );
 ##  [ <pc group of size 6 with 2 generators>, 
@@ -790,11 +794,12 @@ DeclareSynonym( "IdsOfAllGroups", IdsOfAllSmallGroups );
 #############################################################################
 ##
 #F  NumberSmallGroups( <order> )
+#F  NumberSmallGroups( <arg> )
 ##
 ##  <#GAPDoc Label="NumberSmallGroups">
 ##  <ManSection>
-##  <Func Name="NumberSmallGroups" Arg='order'/>
-##  <Func Name="NrSmallGroups" Arg='order'/>
+##  <Func Name="NumberSmallGroups" Arg='order[, func1, val1, ...]'/>
+##  <Func Name="NrSmallGroups" Arg='order[, func1, val1, ...]'/>
 ##
 ##  <Description>
 ##  returns the number of groups of order <A>order</A>.
@@ -806,6 +811,21 @@ DeclareSynonym( "IdsOfAllGroups", IdsOfAllSmallGroups );
 ##  gap> NumberSmallGroups( 4096 );
 ##  Error, the library of groups of size 4096 is not available
 ##  ]]></Example>
+##  <P/>
+##  The function also accepts the arguments of
+##  <Ref Func="AllSmallGroups"/> and counts the groups that function would
+##  return.
+##  <Example><![CDATA[
+##  gap> NumberSmallGroups( [ 1 .. 100 ] );
+##  1048
+##  gap> NumberSmallGroups( 96, IsAbelian );
+##  7
+##  ]]></Example>
+##  <P/>
+##  Orders alone are answered from the numbers of groups. Otherwise the
+##  cost is that of <Ref Func="IdsOfAllSmallGroups"/>: the indexed criteria
+##  are applied first, whatever order the criteria are given in, and only
+##  the groups a remaining criterion must be tested on are constructed.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
