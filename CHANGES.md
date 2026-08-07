@@ -3,6 +3,10 @@ This file describes changes in the smallgrp package.
 # 1.6dev
 
   - Require GAP 4.12
+  - `NumberSmallGroups` now accepts a list of orders and the selection
+    criteria of `AllSmallGroups`, as in `NumberSmallGroups(96, IsAbelian)`.
+    It counts by listing the ids, so it costs what `IdsOfAllSmallGroups`
+    costs (issue #68)
   - Selection by `IsAbelian`, `IsNilpotentGroup`, `IsSupersolvableGroup`,
     `IsSolvableGroup`, `RankPGroup` and `PClassPGroup` now avoids
     constructing the groups for most orders which had no precomputed data,

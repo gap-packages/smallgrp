@@ -638,16 +638,12 @@ end );
 
 #############################################################################
 ##
-#F  NumberSmallGroups(<size>)
+#F  SMALL_GROUPS_NUMBER( <size> )
 ##
-##  returns the  number of groups of the order <size>.
-InstallGlobalFunction( NumberSmallGroups, function( size )
+SMALL_GROUPS_NUMBER := function( size )
     local inforec;
 
-    if not IsPosInt( size ) then 
-        Error( "usage: NumberSmallGroups( order )" ); 
-    fi;
-    if size = 1024 then 
+    if size = 1024 then
         return 49487367289;
     fi;
 
@@ -656,10 +652,51 @@ InstallGlobalFunction( NumberSmallGroups, function( size )
         Error( "the library of groups of size ", size, " is not available" );
     fi;
 
-    if IsBound( inforec.number ) then 
+    if IsBound( inforec.number ) then
         return inforec.number;
     fi;
     return NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec ).number;
+end;
+
+#############################################################################
+##
+#F  NumberSmallGroups(<size>)
+#F  NumberSmallGroups(<arg>)
+##
+##  returns the number of the groups 'AllSmallGroups' would return for <arg>.
+InstallGlobalFunction( NumberSmallGroups, function( arg )
+    local argl, sizes;
+
+    # the classical form, just an order
+    if Length( arg ) = 1 and IsPosInt( arg[ 1 ] ) then
+        return SMALL_GROUPS_NUMBER( arg[ 1 ] );
+    fi;
+
+    # 'Size' may precede the orders
+    argl := arg;
+    if Length( argl ) > 0 and argl[ 1 ] = Size then
+        argl := argl{ [ 2 .. Length( argl ) ] };
+    fi;
+
+    # without a criterion the numbers of the orders just add up. A single
+    # list argument is the orders; a second one would be group numbers and
+    # is left to 'SelectSmallGroups'.
+    sizes := fail;
+    if Length( argl ) = 1 and IsList( argl[ 1 ] ) then
+        sizes := argl[ 1 ];
+    elif Length( argl ) > 0 and ForAll( argl, IsPosInt ) then
+        sizes := argl;
+    fi;
+    if sizes <> fail and ForAll( sizes, IsPosInt ) then
+        return Sum( sizes, SMALL_GROUPS_NUMBER );
+    fi;
+
+    if Length( arg ) <= 1 then
+        Error( "usage: NumberSmallGroups( order )" );
+    fi;
+
+    # so far counting the groups is not cheaper than listing their ids
+    return Length( SelectSmallGroups( arg, true, true ) );
 end );
 
 #############################################################################
