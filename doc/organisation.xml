@@ -298,7 +298,7 @@ of <M>Q</M> for <M>r</M> the rank of <M>Q</M>). Consider a homomorphism
 <M>g_i</M>. Clearly, <M>a_i</M> is of the form <M>a_i : g \to g^{l_i}</M>
 with <M>0 \leq l_i \leq 2^i-1</M>. Thus we describe the homomorphism
 <M>a</M> by the sequence <M>l_1, \ldots, l_r</M>. We encode this sequence
-as a <M>(2^i-1)</M>-adic number of length <M>r</M>; that is, we encode this
+as a <M>2^i</M>-adic number of length <M>r</M>; that is, we encode this
 sequence as <M>l_1 q^{r-1} + l_2 q^{r-2} + \ldots + l_r q^0</M> where
 <M>q = 2^i</M>. Hence each homomorphism <M>a</M> is encoded as an integer
 and for fixed <M>Q</M> and <M>i</M> we write all these integers into a
