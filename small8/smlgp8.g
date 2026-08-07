@@ -310,7 +310,7 @@ end;
 ##                          
 #F SELECT_SMALL_GROUPS_FUNCS[ 14 ]( funcs, vals, inforec, all, id, idList )
 ##                  
-SELECT_SMALL_GROUPS_FUNCS[ 14 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
+SELECT_SMALL_GROUPS_FUNCS[ 14 ] := SMALL_GROUPS_SELECT_GENERIC;
 
 #############################################################################
 ##

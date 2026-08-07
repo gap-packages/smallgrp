@@ -227,7 +227,7 @@ end;
 ##
 #F SELECT_SMALL_GROUPS_FUNCS[ 26 ]( funcs, vals, inforec, all, id )
 ##
-SELECT_SMALL_GROUPS_FUNCS[ 26 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
+SELECT_SMALL_GROUPS_FUNCS[ 26 ] := SMALL_GROUPS_SELECT_GENERIC;
 
 #############################################################################
 ##

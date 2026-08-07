@@ -2,6 +2,7 @@ This file describes changes in the smallgrp package.
 
 # 1.6dev
 
+  - Require GAP 4.12
   - Selection by `IsAbelian`, `IsNilpotentGroup`, `IsSupersolvableGroup`,
     `IsSolvableGroup`, `RankPGroup` and `PClassPGroup` now avoids
     constructing the groups for most orders which had no precomputed data,

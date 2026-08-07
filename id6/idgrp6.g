@@ -46,9 +46,9 @@ ID_GROUP_FUNCS[ 15 ] := function( G, inforec )
 
     if IsSolvable( G ) and IsNormal( G, HallSubgroup( G, [ 3, 5 ] ) ) then
         sid := IdGroup( SylowSubgroup( G, 2 ) )[ 2 ];
-        return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ Size( G ), 1, 
+        return ID_GROUP_BY_TREE( G, inforec, [ Size( G ), 1, 
                ( sid - 1 ) mod 500 + 1, sid ] );
     fi;
 
-    return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ Size( G ), 2 ] );
+    return ID_GROUP_BY_TREE( G, inforec, [ Size( G ), 2 ] );
 end;

@@ -62,7 +62,7 @@ ID_GROUP_FUNCS[ 13 ] := function( G, inforec )
         if size = 768 and not IsBound( ID_GROUP_TREE.next[ 768 ] ) then
             ID_GROUP_TREE.next[ 768 ] := rec( fp:= [ 1, 2 ], next:= [ ] );
         fi;
-        return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ size, 2 ] );
+        return ID_GROUP_BY_TREE( G, inforec, [ size, 2 ] );
     fi;
 
     sid := IdGroup( SylowSubgroup( G, 2 ) )[ 2 ];
@@ -84,7 +84,7 @@ ID_GROUP_FUNCS[ 13 ] := function( G, inforec )
         if size = 768 and not IsBound( ID_GROUP_TREE.next[ 768 ] ) then
             ID_GROUP_TREE.next[ 768 ] := rec( fp:= [ 1, 2 ], next:= [ ] );
         fi;
-        return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ size, 1, sid ] );
+        return ID_GROUP_BY_TREE( G, inforec, [ size, 1, sid ] );
     fi;
 
     # p-sylow-subgroup is normal
@@ -188,10 +188,10 @@ ID_GROUP_FUNCS[ 13 ] := function( G, inforec )
     if IsBound( c[ n ][ typ ] ) then
         c := c[ n ][ typ ];
         if c > 1 then
-            i := ID_GROUP_FUNCS[ 8 ]( G, inforec,
+            i := ID_GROUP_BY_TREE( G, inforec,
                                      [ n, typ, sid mod c, sid, cid ], true );
         else
-            i := ID_GROUP_FUNCS[ 8 ]( G, inforec,
+            i := ID_GROUP_BY_TREE( G, inforec,
                                      [ n, typ, sid, cid ], true );
         fi;
         p := [ 3, 5, 17, 17, 97 ];
@@ -222,10 +222,10 @@ ID_GROUP_FUNCS[ 13 ] := function( G, inforec )
                 fi;
             fi;
             if c > 1 then
-                return ID_GROUP_FUNCS[ 8 ]( G, inforec,
+                return ID_GROUP_BY_TREE( G, inforec,
                                            [ n, typ, sid mod c, sid, cid ] );
             else
-                return ID_GROUP_FUNCS[ 8 ]( G, inforec, [ n, typ, sid,cid] );
+                return ID_GROUP_BY_TREE( G, inforec, [ n, typ, sid,cid] );
             fi;
         fi;
     fi;

@@ -221,7 +221,7 @@ end;
 ##
 #F SELECT_SMALL_GROUPS_FUNCS[ 17 ]
 ##                                                                              
-SELECT_SMALL_GROUPS_FUNCS[ 17 ] := SELECT_SMALL_GROUPS_FUNCS[ 11 ];
+SELECT_SMALL_GROUPS_FUNCS[ 17 ] := SMALL_GROUPS_SELECT_GENERIC;
 
 #############################################################################
 ##
