@@ -353,7 +353,7 @@ non-empty positions and secondly their entries.
 
 <Subsection><Heading>Storing: groups with normal Sylow 2-subgroup</Heading>
 Next we consider the remaining groups of type <M>Q : P</M>. These exist for
-a few primes <M>q</M> only. These groups are described by operation
+a few primes <M>p</M> only. These groups are described by operation
 homomorphisms of the type <M>P \to \mathrm{Aut}(Q)</M>. Here we store the
 catalogue number of <M>Q</M> and a long integer for each such homomorphism
 <M>a : P \to \mathrm{Aut}(Q)</M>. Consider a generator <M>g</M> of
@@ -382,7 +382,7 @@ the groups without normal Sylow subgroup are identified as described in
 layer 2.
 
 <P/>
-For the groups <M>Q : P</M> with normal Sylow <M>q</M>-subgroup we first
+For the groups <M>Q : P</M> with normal Sylow 2-subgroup we first
 determine the prime <M>p</M> and the isomorphism type of <M>Q</M>. If this
 is not sufficient, then we use the methods as described in layer 2. (Recall
 that there are only finitely many primes <M>p</M> possible here.)
