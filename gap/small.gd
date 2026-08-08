@@ -22,8 +22,8 @@ DeclareInfoClass( "InfoIdgroup" );
 ##  In releases 1.1-1.3 a misunderstood ordering, based on the old ordering
 ##  and the permutations <M>(2,30083)(3,30084)(4,30085)(5,30086)</M>,
 ##  <M>(2,104599)(3,104600)(4,104601)(5,104602)</M>, and
-##  <M>(2,721053)(3,721054)(4,721055)(5,721059)</M> respectively
-##  were used.
+##  <M>(2,721053)(3,721054)(4,721055)(5,721056)</M> respectively,
+##  was used.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

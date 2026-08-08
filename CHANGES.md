@@ -26,6 +26,9 @@ This file describes changes in the smallgrp package.
   - Fix a list of group numbers being ignored when every criterion was
     indexed: `IdsOfAllSmallGroups(96, [1, 2, 3], IsAbelian, true)` returned
     all abelian groups of order 96
+  - Correct the permutation for order 11^7 documented under
+    `SMALL_GROUPS_OLD_ORDER`: releases 1.1-1.3 mapped id 5 to 721056, not
+    721059. Only the documentation was wrong, never the code
   - Merged the old `README` file into `README.md` and the package manual:
     its description of the library's organisation (layers, storage formats,
     identification algorithms) is now a chapter of the manual
