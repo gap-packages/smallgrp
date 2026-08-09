@@ -1,6 +1,6 @@
 This file describes changes in the smallgrp package.
 
-# 1.6dev
+# 1.6.0 (2026-08-09)
 
   - Require GAP 4.12
   - `NumberSmallGroups` now accepts a list of orders and the selection
