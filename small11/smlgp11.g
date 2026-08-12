@@ -225,9 +225,10 @@ end;
 
 #############################################################################
 ##
-#F SELECT_SMALL_GROUPS_FUNCS[ 26 ]( funcs, vals, inforec, all, id )
+#F SELECT_SMALL_GROUPS_FUNCS[ 26 ], COUNT_SMALL_GROUPS_FUNCS[ 26 ]
 ##
 SELECT_SMALL_GROUPS_FUNCS[ 26 ] := SMALL_GROUPS_SELECT_GENERIC;
+COUNT_SMALL_GROUPS_FUNCS[ 26 ] := SMALL_GROUPS_COUNT_GENERIC;
 
 #############################################################################
 ##

@@ -347,9 +347,10 @@ end;
 
 #############################################################################
 ##
-#F SELECT_SMALL_GROUPS_FUNCS[ 11 ]
+#F SELECT_SMALL_GROUPS_FUNCS[ 11 ], COUNT_SMALL_GROUPS_FUNCS[ 11 ]
 ##
 SELECT_SMALL_GROUPS_FUNCS[ 11 ] := SMALL_GROUPS_SELECT_GENERIC;
+COUNT_SMALL_GROUPS_FUNCS[ 11 ] := SMALL_GROUPS_COUNT_GENERIC;
 
 #############################################################################
 ##
