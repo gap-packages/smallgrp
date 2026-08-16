@@ -17,10 +17,9 @@ SMALL_GROUPS_LAYERS := rec();
 ##
 #V  SMALL_GROUPS_LAYERS.SmallGrp
 ##
-##  the layers of this package, as one layer: it reads the global arrays a
-##  layer used to be installed in, and so also covers those still added that
-##  way from outside. Converting one of the eleven to the interface below is
-##  then a matter of registering it and letting it shadow this one.
+##  one layer standing for all those installed the old way, by filling
+##  'SMALL_AVAILABLE_FUNCS' and the other global arrays it reads below: the
+##  layers built into this package, and any a package adds that way.
 SMALL_GROUPS_LAYERS.SmallGrp := rec(
     name := "SmallGrp",
     before := [ ],
