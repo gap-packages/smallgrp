@@ -85,6 +85,15 @@ SELECT_SMALL_GROUPS_FUNCS := [ ];
 
 #############################################################################
 ##
+#F  COUNT_SMALL_GROUPS_FUNCS
+##
+##  A layer may install a function here to count a selection rather than
+##  list it, taking <size>, <funcs>, <vals>, <inforec> and <idList>. Without
+##  one the groups are listed and the list measured.
+COUNT_SMALL_GROUPS_FUNCS := [ ];
+
+#############################################################################
+##
 #F  SMALL_IDS_EXPAND( <ids> )
 #F  SMALL_IDS_UNION( <ids1>, <ids2> )
 #F  SMALL_IDS_INTERSECTION( <ids1>, <ids2> )
@@ -347,6 +356,77 @@ end;
 
 #############################################################################
 ##
+#F  SMALL_GROUPS_PARSE_QUERY( argl )
+##
+##  turns the arguments of 'AllSmallGroups' and its kin into a record with
+##  the components 'sizes', 'idList', 'funcs' and 'vals', the latter two as
+##  'SMALL_GROUPS_SIMPLIFY_QUERY' leaves them.
+SMALL_GROUPS_PARSE_QUERY := function( argl )
+    local sizes, i, funcs, vals, hasSizes, pos, idList, query;
+
+    sizes := [ ];
+    hasSizes := false;
+    idList := fail;
+
+    for i in [ 1 .. Length( argl ) ] do
+        if i = 1 and argl[ i ] = Size then
+            ;
+        elif ( not hasSizes ) and IsList( argl[ i ] )
+                              and Length( sizes ) = 1 then
+            idList := argl[ i ];
+        elif ( not hasSizes ) and IsList( argl[ i ] ) then
+            Append( sizes, argl[ i ] );
+        elif ( not hasSizes ) and IsPosInt( argl[ i ] ) then
+            Add( sizes, argl[ i ] );
+        elif ( not hasSizes ) and sizes <> [] and IsFunction( argl[i] ) then
+            hasSizes     := true;
+            funcs        := [ argl[ i ] ];
+            vals         := [ [ ] ];
+            pos          := 1;
+        elif not hasSizes then 
+            Error( "usage: AllSmallGroups / OneSmallGroup(\n",
+                   "             Size, [ sizes ],\n",
+                   "             function1, [ values1 ],\n",
+                   "             function2, [ values2 ], ... )" );
+        elif vals[ pos ] <> [ ] and IsFunction( argl[ i ] ) then
+            pos          := pos + 1;
+            funcs[ pos ] := argl[ i ];
+            vals[ pos ]  := [ ];
+        elif IsFunction( argl[ i ] ) then
+            vals[ pos ]  := [ true ];
+            pos          := pos + 1; 
+            funcs[ pos ] := argl[ i ];
+            vals[ pos ]  := [ ];
+        elif IsList( argl[ i ] ) and vals[ pos ] = [ ] then
+            vals[ pos ]  := argl[ i ];
+        elif IsList( argl[ i ] ) and IsInt( argl[ i ][ 1 ] ) and 
+             IsList( vals[ pos ][ 1 ] ) and IsInt( vals[ pos ][1][ 1 ] ) then
+            Add( vals[ pos ], argl[ i ] );
+        elif IsList( argl[ i ] ) and IsInt( argl[ i ][ 1 ] ) and 
+             IsInt( vals[ pos ][ 1 ] ) then
+            vals[ pos ]  := [ vals[ pos ], argl[ i ] ];
+        else 
+            Add( vals[ pos ], argl[ i ] );
+        fi;
+    od;
+
+    if sizes <> [ ] and ( not IsBound( vals ) ) then
+        funcs := [ ];
+        vals  := [ ];
+    elif vals[ pos ] = [ ] then
+        vals[ pos ] := [ true ];
+    fi;
+
+    query := SMALL_GROUPS_SIMPLIFY_QUERY( funcs, vals );
+    funcs := query.funcs;
+    vals  := query.vals;
+
+    return rec( sizes := sizes, idList := idList,
+                funcs := query.funcs, vals := query.vals );
+end;
+
+#############################################################################
+##
 #F  SMALL_GROUPS_PROPERTIES_FUNCS
 ##
 ##  A layer installs a function here taking <size> and <inforec>, the latter
@@ -501,6 +581,28 @@ end;
 
 #############################################################################
 ##
+#F  SMALL_GROUPS_LIBRARY_NUMBER( size, i )
+##
+##  the number the library stores 'SmallGroup( size, i )' under. The two
+##  differ for the orders 3^7, 5^7, 7^7 and 11^7; see
+##  'SMALL_GROUPS_OLD_ORDER'.
+SMALL_GROUPS_LIBRARY_NUMBER := function( size, i )
+    if SMALL_GROUPS_OLD_ORDER then
+        return i;
+    elif size = 3^7 then
+        return SMALLGP_PERM3( i );
+    elif size = 5^7 then
+        return SMALLGP_PERM5( i );
+    elif size = 7^7 then
+        return SMALLGP_PERM7( i );
+    elif size = 11^7 then
+        return SMALLGP_PERM11( i );
+    fi;
+    return i;
+end;
+
+#############################################################################
+##
 #F  SMALL_GROUPS_SELECT_GENERIC( size, funcs, vals, inforec, all, id, idList )
 ##
 ##  the selection for a layer with no better way: narrow the candidates with
@@ -508,7 +610,7 @@ end;
 ##  them.
 SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
                                         all, id, idList )
-    local result, i, g, ok, j, sel, range, nid;
+    local result, i, g, ok, j, sel, range;
 
     if not IsBound( inforec.number ) then
         inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
@@ -538,20 +640,8 @@ SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
 
     result := [ ];
     for i in range do
-        nid:=i;
-        if not SMALL_GROUPS_OLD_ORDER then
-            if size = 3^7 then
-                nid := SMALLGP_PERM3(i);
-            elif size = 5^7 then
-                nid := SMALLGP_PERM5(i);
-            elif size = 7^7 then
-                nid := SMALLGP_PERM7(i);
-            elif size = 11^7 then
-                nid := SMALLGP_PERM11(i);
-            fi;
-        fi;
-
-        g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
+        g := SMALL_GROUP_FUNCS[ inforec.func ](
+                 size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
         SetIdGroup( g, [ size, i ] );
         ok := true;
         for j in [ 1 .. Length( funcs ) ] do
@@ -571,6 +661,74 @@ SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
     else
         return fail;
     fi;
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_COUNT_GENERIC( size, funcs, vals, inforec, idList )
+##
+##  how many groups 'SMALL_GROUPS_SELECT_GENERIC' would return, without
+##  building the list.
+SMALL_GROUPS_COUNT_GENERIC := function( size, funcs, vals, inforec, idList )
+    local sel, range, n, i, g;
+
+    if not IsBound( inforec.number ) then
+        inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec );
+    fi;
+    sel := SMALL_GROUPS_PROPERTY_IDS( size, inforec, funcs, vals );
+
+    if idList = fail then
+        if sel.funcs = [ ] then
+            return Sum( sel.ids, run -> SMALL_IDS_LAST( run )
+                                        - SMALL_IDS_FIRST( run ) + 1 );
+        fi;
+        range := SMALL_IDS_EXPAND( sel.ids );
+    else
+        range := Filtered( idList, x -> SMALL_IDS_MEMBER( sel.ids, x ) );
+        if sel.funcs = [ ] then
+            return Length( range );
+        fi;
+    fi;
+
+    n := 0;
+    for i in range do
+        g := SMALL_GROUP_FUNCS[ inforec.func ](
+                 size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
+        SetIdGroup( g, [ size, i ] );
+        if ForAll( [ 1 .. Length( sel.funcs ) ],
+                   j -> sel.funcs[ j ]( g ) in sel.vals[ j ] ) then
+            n := n + 1;
+        fi;
+    od;
+    return n;
+end;
+
+#############################################################################
+##
+#F  SMALL_GROUPS_COUNT( argl )
+##
+##  the number of groups the selection <argl> describes.
+SMALL_GROUPS_COUNT := function( argl )
+    local query, n, size, inforec;
+
+    query := SMALL_GROUPS_PARSE_QUERY( argl );
+    n := 0;
+    for size in query.sizes do
+        inforec := SMALL_AVAILABLE( size );
+        if inforec = fail then
+            Error( "NumberSmallGroups: groups of order ", size,
+                   " not available" );
+        fi;
+        if IsBound( COUNT_SMALL_GROUPS_FUNCS[ inforec.func ] ) then
+            n := n + COUNT_SMALL_GROUPS_FUNCS[ inforec.func ]
+                     ( size, query.funcs, query.vals, inforec, query.idList );
+        else
+            n := n + Length( SELECT_SMALL_GROUPS_FUNCS[ inforec.func ]
+                     ( size, query.funcs, query.vals, inforec,
+                       true, true, query.idList ) );
+        fi;
+    od;
+    return n;
 end;
 
 #############################################################################
@@ -597,7 +755,7 @@ PROPERTIES_SMALL_GROUPS := [ ];
 ##  an PcGroup, if the group is soluble and a permutation group otherwise.
 ##  If the groups of this size are not installed, it will return an error.
 InstallGlobalFunction( SmallGroup, function( arg )
-    local inforec, g, size, i, nid;
+    local inforec, g, size, i;
 
     if Length( arg ) = 1 then
         if not IsList( arg[1] ) or Length( arg[1] ) <> 2 then
@@ -618,19 +776,8 @@ InstallGlobalFunction( SmallGroup, function( arg )
     if inforec = fail then
         Error( "the library of groups of size ", size, " is not available" );
     fi;
-    nid := i;
-    if not SMALL_GROUPS_OLD_ORDER then
-        if size = 3^7 then
-            nid := SMALLGP_PERM3(i);
-        elif size = 5^7 then
-            nid := SMALLGP_PERM5(i);
-        elif size = 7^7 then
-            nid := SMALLGP_PERM7(i);
-        elif size = 11^7 then
-            nid := SMALLGP_PERM11(i);
-        fi;
-    fi;
-    g := SMALL_GROUP_FUNCS[ inforec.func ]( size, nid, inforec );
+    g := SMALL_GROUP_FUNCS[ inforec.func ](
+             size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
     SetIdGroup( g, [ size, i ] );
     IsPGroup( g );
     return g;
@@ -695,74 +842,22 @@ InstallGlobalFunction( NumberSmallGroups, function( arg )
         Error( "usage: NumberSmallGroups( order )" );
     fi;
 
-    # so far counting the groups is not cheaper than listing their ids
-    return Length( SelectSmallGroups( arg, true, true ) );
+    return SMALL_GROUPS_COUNT( arg );
 end );
 
 #############################################################################
 ##
 #F  SelectSmallGroups( argl, all, id )
 ##
+
 InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
-    local sizes, size, i, funcs, vals, gs, inforec, result, hasSizes, pos,
-          idList, query;
+    local query, sizes, funcs, vals, idList, size, gs, inforec, result;
 
-    sizes := [ ];
-    hasSizes := false;
-    idList := fail;
-
-    for i in [ 1 .. Length( argl ) ] do
-        if i = 1 and argl[ i ] = Size then
-            ;
-        elif ( not hasSizes ) and IsList( argl[ i ] )
-                              and Length( sizes ) = 1 then
-            idList := argl[ i ];
-        elif ( not hasSizes ) and IsList( argl[ i ] ) then
-            Append( sizes, argl[ i ] );
-        elif ( not hasSizes ) and IsPosInt( argl[ i ] ) then
-            Add( sizes, argl[ i ] );
-        elif ( not hasSizes ) and sizes <> [] and IsFunction( argl[i] ) then
-            hasSizes     := true;
-            funcs        := [ argl[ i ] ];
-            vals         := [ [ ] ];
-            pos          := 1;
-        elif not hasSizes then 
-            Error( "usage: AllSmallGroups / OneSmallGroup(\n",
-                   "             Size, [ sizes ],\n",
-                   "             function1, [ values1 ],\n",
-                   "             function2, [ values2 ], ... )" );
-        elif vals[ pos ] <> [ ] and IsFunction( argl[ i ] ) then
-            pos          := pos + 1;
-            funcs[ pos ] := argl[ i ];
-            vals[ pos ]  := [ ];
-        elif IsFunction( argl[ i ] ) then
-            vals[ pos ]  := [ true ];
-            pos          := pos + 1; 
-            funcs[ pos ] := argl[ i ];
-            vals[ pos ]  := [ ];
-        elif IsList( argl[ i ] ) and vals[ pos ] = [ ] then
-            vals[ pos ]  := argl[ i ];
-        elif IsList( argl[ i ] ) and IsInt( argl[ i ][ 1 ] ) and 
-             IsList( vals[ pos ][ 1 ] ) and IsInt( vals[ pos ][1][ 1 ] ) then
-            Add( vals[ pos ], argl[ i ] );
-        elif IsList( argl[ i ] ) and IsInt( argl[ i ][ 1 ] ) and 
-             IsInt( vals[ pos ][ 1 ] ) then
-            vals[ pos ]  := [ vals[ pos ], argl[ i ] ];
-        else 
-            Add( vals[ pos ], argl[ i ] );
-        fi;
-    od;
-
-    if sizes <> [ ] and ( not IsBound( vals ) ) then
-        funcs := [ ];
-        vals  := [ ];
-    elif vals[ pos ] = [ ] then
-        vals[ pos ] := [ true ];
-    fi;
-
-    query := SMALL_GROUPS_SIMPLIFY_QUERY( funcs, vals );
-    funcs := query.funcs;
-    vals  := query.vals;
+    query  := SMALL_GROUPS_PARSE_QUERY( argl );
+    sizes  := query.sizes;
+    funcs  := query.funcs;
+    vals   := query.vals;
+    idList := query.idList;
 
     result := [ ];
     for size in sizes do

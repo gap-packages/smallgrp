@@ -189,10 +189,12 @@ end;
 
 #############################################################################
 ##
-#F SELECT_SMALL_GROUPS_FUNCS[ 24 .. 25 ]( funcs, vals, inforec, all, id )
+#F SELECT_SMALL_GROUPS_FUNCS[ 24 .. 25 ], COUNT_SMALL_GROUPS_FUNCS[ 24 .. 25 ]
 ##
 SELECT_SMALL_GROUPS_FUNCS[ 24 ] := SMALL_GROUPS_SELECT_GENERIC;
+COUNT_SMALL_GROUPS_FUNCS[ 24 ] := SMALL_GROUPS_COUNT_GENERIC;
 SELECT_SMALL_GROUPS_FUNCS[ 25 ] := SMALL_GROUPS_SELECT_GENERIC;
+COUNT_SMALL_GROUPS_FUNCS[ 25 ] := SMALL_GROUPS_COUNT_GENERIC;
 
 #############################################################################
 ##

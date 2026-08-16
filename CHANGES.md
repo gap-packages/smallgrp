@@ -1,12 +1,17 @@
 This file describes changes in the smallgrp package.
 
+# Unreleased
+
+  - Optimized `NumberSmallGroups` to be much faster in certain cases, for
+    example `NumberSmallGroups(1536, IsSolvableGroup, true)` is now instant
+    instead of running for 90 seconds.
+
 # 1.6.0 (2026-08-09)
 
   - Require GAP 4.12
   - `NumberSmallGroups` now accepts a list of orders and the selection
-    criteria of `AllSmallGroups`, as in `NumberSmallGroups(96, IsAbelian)`.
-    It counts by listing the ids, so it costs what `IdsOfAllSmallGroups`
-    costs (issue #68)
+    criteria of `AllSmallGroups`, as in `NumberSmallGroups(96, IsAbelian)`
+    (issue #68)
   - Selection by `IsAbelian`, `IsNilpotentGroup`, `IsSupersolvableGroup`,
     `IsSolvableGroup`, `RankPGroup` and `PClassPGroup` now avoids
     constructing the groups for most orders which had no precomputed data,

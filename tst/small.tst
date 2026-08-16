@@ -171,7 +171,7 @@ gap> NumberSmallGroups(60, [ 1 .. 10 ], IsNilpotentGroup);
 
 # selection criteria need the library, even where the number does not
 gap> NumberSmallGroups(1024, IsAbelian);
-Error, AllSmallGroups / OneSmallGroup: groups of order 1024 not available
+Error, NumberSmallGroups: groups of order 1024 not available
 
 ################################################################################
 # SelectSmallGroups GlobalFunction (called by AllSmallGroups or OneSmallGroup)

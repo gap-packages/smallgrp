@@ -308,9 +308,10 @@ end;
 
 #############################################################################
 ##                          
-#F SELECT_SMALL_GROUPS_FUNCS[ 14 ]( funcs, vals, inforec, all, id, idList )
+#F SELECT_SMALL_GROUPS_FUNCS[ 14 ], COUNT_SMALL_GROUPS_FUNCS[ 14 ]
 ##                  
 SELECT_SMALL_GROUPS_FUNCS[ 14 ] := SMALL_GROUPS_SELECT_GENERIC;
+COUNT_SMALL_GROUPS_FUNCS[ 14 ] := SMALL_GROUPS_COUNT_GENERIC;
 
 #############################################################################
 ##
