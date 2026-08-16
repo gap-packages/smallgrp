@@ -114,10 +114,10 @@ through the usual functions
 <Index Key="SOTGrps package"><Package>SOTGrps</Package> package</Index>
 The <Package>SOTGrps</Package> package constructs and identifies the groups
 whose order factorises into at most 4 primes, as well as those of order
-<M>p^4 q</M> for distinct primes <M>p</M> and <M>q</M>. Unlike
-<Package>SglPPow</Package>, it does not extend this library: it comes with
-its own functions <C>SOTGroup</C>, <C>AllSOTGroups</C> and
-<C>IdSOTGroup</C>. Be aware that where the orders covered by both overlap,
+<M>p^4 q</M> for distinct primes <M>p</M> and <M>q</M>. It extends this
+library for those of its orders this one does not cover, and comes with its
+own functions <C>SOTGroup</C>, <C>AllSOTGroups</C> and <C>IdSOTGroup</C> for
+all of them. Be aware that where the orders covered by both overlap,
 the numbering used by <Package>SOTGrps</Package> in general differs from
 the one used here. See <URL>https://gap-packages.github.io/sotgrps/</URL>.
 
