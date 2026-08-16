@@ -10,6 +10,9 @@ ReadPackage( "smallgrp", "gap/idgrp1.g" );
 # read the information function
 ReadPackage( "smallgrp", "gap/smlinfo.gi" );
 
+# read the API for adding further layers
+ReadPackage( "smallgrp", "gap/addlayer.gi" );
+
 # read the function-files of the small groups library
 READ_SMALL_LIB := function()
     local i, s, LoadFunc;

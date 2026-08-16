@@ -978,6 +978,93 @@ DeclareGlobalFunction( "IdStandardPresented512Group" );
 DeclareGlobalFunction( "SmallGroupsInformation" );
 
 #############################################################################
+##
+#F  SmallGroupsAddLayer( <desc> )
+##
+##  <#GAPDoc Label="SmallGroupsAddLayer">
+##  <ManSection>
+##  <Func Name="SmallGroupsAddLayer" Arg='desc'/>
+##
+##  <Description>
+##  adds a further layer to the library, described by the record
+##  <A>desc</A>. Its groups then become available through
+##  <Ref Func="SmallGroup" Label="for group order and index"/>,
+##  <Ref Func="NumberSmallGroups"/>, <Ref Func="AllSmallGroups"/> and the
+##  other functions of this chapter. The components of <A>desc</A> are:
+##  <List>
+##  <Mark><C>name</C></Mark>
+##  <Item>
+##    a string naming the layer. It is how other layers refer to this one,
+##    and no two layers may share it.
+##  </Item>
+##  <Mark><C>available</C></Mark>
+##  <Item>
+##    a function taking an order and returning <K>fail</K>, or a record
+##    which is handed to the functions below as <A>inforec</A>. Its
+##    component <C>number</C>, if present, is the number of groups of that
+##    order.
+##  </Item>
+##  <Mark><C>group</C></Mark>
+##  <Item>
+##    a function <C>( <A>order</A>, <A>i</A>, <A>inforec</A> )</C> returning
+##    the <A>i</A>-th group of that order.
+##  </Item>
+##  <Mark><C>id</C></Mark>
+##  <Item>
+##    optional, a function <C>( <A>G</A>, <A>inforec</A> )</C> returning the
+##    number of <A>G</A> in this layer. Without it
+##    <Ref Attr="IdSmallGroup"/> stays unavailable for these orders.
+##  </Item>
+##  <Mark><C>number</C></Mark>
+##  <Item>
+##    optional, a function <C>( <A>order</A>, <A>inforec</A> )</C> returning
+##    the number of groups of that order. Needed only where
+##    <C>available</C> does not report it.
+##  </Item>
+##  <Mark><C>information</C></Mark>
+##  <Item>
+##    optional, a function
+##    <C>( <A>order</A>, <A>inforec</A>, <A>number</A> )</C> printing what
+##    <Ref Func="SmallGroupsInformation"/> should say about that order
+##    beyond the number of groups.
+##  </Item>
+##  <Mark><C>select</C>, <C>count</C></Mark>
+##  <Item>
+##    optional, how <Ref Func="SelectSmallGroups"/> and
+##    <Ref Func="NumberSmallGroups"/> are to work through this layer. By
+##    default the groups of the order are constructed one by one and tested.
+##  </Item>
+##  <Mark><C>before</C>, <C>after</C></Mark>
+##  <Item>
+##    optional lists of names of other layers, to be consulted after
+##    respectively before this one. A name that is not registered is
+##    ignored, so wishing about a package that is not loaded does no harm.
+##    The layers of this package come first, and behind them any layer that
+##    was added without this function.
+##  </Item>
+##  </List>
+##  Where two layers cover an order, the one consulted first wins.
+##  The layers added this way are collected in the record
+##  <C>SMALL_GROUPS_LAYERS</C>, keyed by name.
+##  <Log><![CDATA[
+##  SmallGroupsAddLayer( rec(
+##      name := "SOTGrps",
+##      available := function( order )
+##          if not IsSOTAvailable( order ) then
+##              return fail;
+##          fi;
+##          return rec( number := NumberOfSOTGroups( order ) );
+##      end,
+##      group := { order, i, inforec } -> SOTGroup( order, i ),
+##      id := { G, inforec } -> IdSOTGroup( G )[2] ) );
+##  ]]></Log>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "SmallGroupsAddLayer" );
+
+#############################################################################
 ##  
 #A  IdGap3SolvableGroup( <G> )
 #A  Gap3CatalogueIdGroup( <G> )

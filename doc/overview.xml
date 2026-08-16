@@ -97,7 +97,9 @@ For more information, refer to <Cite Key="Burrell2021"/>.
 <Heading>Related packages</Heading>
 
 Several other &GAP; packages give access to groups of orders which are not
-covered by this library, or which are covered only in part.
+covered by this library, or which are covered only in part. A package can
+make its groups available through the functions of this chapter by calling
+<Ref Func="SmallGroupsAddLayer"/>.
 
 <P/>
 <Index Key="SglPPow package"><Package>SglPPow</Package> package</Index>
@@ -137,6 +139,7 @@ the one used here. See <URL>https://gap-packages.github.io/sotgrps/</URL>.
   <#Include Label="IdsOfAllSmallGroups">
   <#Include Label="IdGap3SolvableGroup">
   <#Include Label="SmallGroupsInformation">
+  <#Include Label="SmallGroupsAddLayer">
   <#Include Label="UnloadSmallGroupsData">
   <#Include Label="SMALL_GROUPS_OLD_ORDER">
 </Section>
