@@ -1009,11 +1009,14 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    a function <C>( <A>order</A>, <A>i</A>, <A>inforec</A> )</C> returning
 ##    the <A>i</A>-th group of that order.
 ##  </Item>
-##  <Mark><C>id</C></Mark>
+##  <Mark><C>id</C>, <C>idAvailable</C></Mark>
 ##  <Item>
 ##    optional, a function <C>( <A>G</A>, <A>inforec</A> )</C> returning the
 ##    number of <A>G</A> in this layer. Without it
-##    <Ref Attr="IdSmallGroup"/> stays unavailable for these orders.
+##    <Ref Attr="IdSmallGroup"/> stays unavailable for these orders. Where
+##    the identification covers fewer orders than the layer, or wants a
+##    record of its own, <C>idAvailable</C> is a second <C>available</C>
+##    used in its place.
 ##  </Item>
 ##  <Mark><C>number</C></Mark>
 ##  <Item>
@@ -1028,6 +1031,14 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    <Ref Func="SmallGroupsInformation"/> should say about that order
 ##    beyond the number of groups.
 ##  </Item>
+##  <Mark><C>properties</C></Mark>
+##  <Item>
+##    optional, a function <C>( <A>order</A>, <A>inforec</A> )</C> reporting
+##    which selection criteria follow from the position a group has in this
+##    layer, so that <Ref Func="SelectSmallGroups"/> and
+##    <Ref Func="NumberSmallGroups"/> need not construct the groups to
+##    decide them.
+##  </Item>
 ##  <Mark><C>select</C>, <C>count</C></Mark>
 ##  <Item>
 ##    optional, how <Ref Func="SelectSmallGroups"/> and
@@ -1039,8 +1050,8 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    optional lists of names of other layers, to be consulted after
 ##    respectively before this one. A name that is not registered is
 ##    ignored, so wishing about a package that is not loaded does no harm.
-##    The layers of this package come first, and behind them any layer that
-##    was added without this function.
+##    The layers of this package are themselves one layer, named
+##    <C>"SmallGrp"</C>, which without a wish to the contrary comes first.
 ##  </Item>
 ##  </List>
 ##  Where two layers cover an order, the one consulted first wins.

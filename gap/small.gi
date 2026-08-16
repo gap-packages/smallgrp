@@ -9,11 +9,21 @@
 
 #############################################################################
 ##
+#V  SMALL_GROUPS_LAYER_LIST
+##
+##  every layer, in the order they are consulted. 'gap/addlayer.gi' puts the
+##  layers of this package into the first entry and appends those registered
+##  by 'SmallGroupsAddLayer'.
+SMALL_GROUPS_LAYER_LIST := [ ];
+
+#############################################################################
+##
 #F  SMALL_AVAILABLE_FUNCS
 ##
 ##  On every level of the small groups library one function is written into
 ##  this list. It will detect those sizes, which are contained in this
-##  library level.
+##  library level. Layers registered by 'SmallGroupsAddLayer' do not appear
+##  here; the layer 'SmallGrp' is what reads this list.
 SMALL_AVAILABLE_FUNCS := [ ];
 
 #############################################################################
@@ -22,20 +32,20 @@ SMALL_AVAILABLE_FUNCS := [ ];
 ##
 ##  returns fail if the library of groups of <size> is not installed.
 ##  Otherwise a record with some information about the construction of the
-##  groups of <size> is returned.
+##  groups of <size> is returned. Its component 'layer' is the layer that
+##  answered, which is how the functions below reach the rest of its methods.
 InstallGlobalFunction( SMALL_AVAILABLE, function( size )
-    local l, r;
+    local layer, r;
 
     if not IsPosInt( size ) then
       Error( "<size> must be a positive integer");
     fi;
 
-    for l in [ 1 .. Length( SMALL_AVAILABLE_FUNCS ) ] do
-        if IsBound( SMALL_AVAILABLE_FUNCS[ l ] ) then
-            r := SMALL_AVAILABLE_FUNCS[ l ]( size );
-            if r <> fail then
-                return r;
-            fi;
+    for layer in SMALL_GROUPS_LAYER_LIST do
+        r := layer.available( size );
+        if r <> fail then
+            r.layer := layer;
+            return r;
         fi;
     od;
     return fail;
@@ -548,11 +558,14 @@ SMALL_GROUPS_PROPERTY_IDS := function( size, inforec, funcs, vals )
     od;
 
     ids := [ [ 1 .. inforec.number ] ];
-    if ForAll( hits, x -> x = fail ) or
-       not IsBound( SMALL_GROUPS_PROPERTIES_FUNCS[ inforec.func ] ) then
+    if ForAll( hits, x -> x = fail )
+       or not IsBound( inforec.layer.properties ) then
         return rec( ids := ids, funcs := funcs, vals := vals );
     fi;
-    props := SMALL_GROUPS_PROPERTIES_FUNCS[ inforec.func ]( size, inforec );
+    props := inforec.layer.properties( size, inforec );
+    if props = fail then
+        return rec( ids := ids, funcs := funcs, vals := vals );
+    fi;
 
     evalfuncs := [ ];
     evalvals  := [ ];
@@ -613,7 +626,7 @@ SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
     local result, i, g, ok, j, sel, range;
 
     if not IsBound( inforec.number ) then
-        inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec);
+        inforec := inforec.layer.numberOf( size, inforec );
     fi;
 
     # narrow down the candidates using properties which can be decided from
@@ -640,7 +653,7 @@ SMALL_GROUPS_SELECT_GENERIC := function( size, funcs, vals, inforec,
 
     result := [ ];
     for i in range do
-        g := SMALL_GROUP_FUNCS[ inforec.func ](
+        g := inforec.layer.group(
                  size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
         SetIdGroup( g, [ size, i ] );
         ok := true;
@@ -673,7 +686,7 @@ SMALL_GROUPS_COUNT_GENERIC := function( size, funcs, vals, inforec, idList )
     local sel, range, n, i, g;
 
     if not IsBound( inforec.number ) then
-        inforec := NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec );
+        inforec := inforec.layer.numberOf( size, inforec );
     fi;
     sel := SMALL_GROUPS_PROPERTY_IDS( size, inforec, funcs, vals );
 
@@ -692,7 +705,7 @@ SMALL_GROUPS_COUNT_GENERIC := function( size, funcs, vals, inforec, idList )
 
     n := 0;
     for i in range do
-        g := SMALL_GROUP_FUNCS[ inforec.func ](
+        g := inforec.layer.group(
                  size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
         SetIdGroup( g, [ size, i ] );
         if ForAll( [ 1 .. Length( sel.funcs ) ],
@@ -719,11 +732,11 @@ SMALL_GROUPS_COUNT := function( argl )
             Error( "NumberSmallGroups: groups of order ", size,
                    " not available" );
         fi;
-        if IsBound( COUNT_SMALL_GROUPS_FUNCS[ inforec.func ] ) then
-            n := n + COUNT_SMALL_GROUPS_FUNCS[ inforec.func ]
+        if IsBound( inforec.layer.count ) then
+            n := n + inforec.layer.count
                      ( size, query.funcs, query.vals, inforec, query.idList );
         else
-            n := n + Length( SELECT_SMALL_GROUPS_FUNCS[ inforec.func ]
+            n := n + Length( inforec.layer.select
                      ( size, query.funcs, query.vals, inforec,
                        true, true, query.idList ) );
         fi;
@@ -776,7 +789,7 @@ InstallGlobalFunction( SmallGroup, function( arg )
     if inforec = fail then
         Error( "the library of groups of size ", size, " is not available" );
     fi;
-    g := SMALL_GROUP_FUNCS[ inforec.func ](
+    g := inforec.layer.group(
              size, SMALL_GROUPS_LIBRARY_NUMBER( size, i ), inforec );
     SetIdGroup( g, [ size, i ] );
     IsPGroup( g );
@@ -802,7 +815,7 @@ SMALL_GROUPS_NUMBER := function( size )
     if IsBound( inforec.number ) then
         return inforec.number;
     fi;
-    return NUMBER_SMALL_GROUPS_FUNCS[ inforec.func ]( size, inforec ).number;
+    return inforec.layer.numberOf( size, inforec ).number;
 end;
 
 #############################################################################
@@ -866,7 +879,7 @@ InstallGlobalFunction( SelectSmallGroups, function( argl, all, id )
             Error( "AllSmallGroups / OneSmallGroup: groups of order ", size,
                    " not available" );
         fi;
-        gs := SELECT_SMALL_GROUPS_FUNCS[ inforec.func ]
+        gs := inforec.layer.select
                              ( size, funcs, vals, inforec, all, id, idList );
         if all then
             Append( result, gs );
@@ -893,14 +906,15 @@ ID_AVAILABLE_FUNCS := [ ];
 #F ID_AVAILABLE
 ##
 InstallGlobalFunction( ID_AVAILABLE, function( size )
-    local l, r;
+    local layer, r;
 
     if not IsInt( size ) then return fail; fi;
 
-    for l in [ 1 .. Length( ID_AVAILABLE_FUNCS ) ] do
-        if IsBound( ID_AVAILABLE_FUNCS[ l ] ) then
-            r := ID_AVAILABLE_FUNCS[ l ]( size );
-            if r <> fail then 
+    for layer in SMALL_GROUPS_LAYER_LIST do
+        if IsBound( layer.idAvailable ) then
+            r := layer.idAvailable( size );
+            if r <> fail then
+                r.layer := layer;
                 return r;
             fi;
         fi;
@@ -958,7 +972,7 @@ function( G )
         G := PcGroupCode( CodePcGroup( G ), Size( G ) );
     fi;
 
-    id := ID_GROUP_FUNCS[ inforec.func ]( G, inforec );
+    id := inforec.layer.id( G, inforec );
 
     if not SMALL_GROUPS_OLD_ORDER then
         if size = 3^7 then

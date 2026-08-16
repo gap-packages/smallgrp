@@ -1,6 +1,6 @@
 gap> START_TEST("addlayer.tst");
-gap> saved := rec( small := ShallowCopy( SMALL_AVAILABLE_FUNCS ),
->                  id := ShallowCopy( ID_AVAILABLE_FUNCS ) );;
+gap> saved := rec( layers := ShallowCopy( SMALL_GROUPS_LAYER_LIST ),
+>                  avail  := ShallowCopy( SMALL_AVAILABLE_FUNCS ) );;
 
 #
 # The layers below are stand-ins. None of the orders they claim -- 2016,
@@ -48,15 +48,15 @@ gap> SmallGroupsInformation( 2016 );
 
   Namely the cyclic and the dihedral one.
 
-  This size belongs to layer 12 of the SmallGroups library. 
+  This size belongs to the layer "two of them". 
   IdSmallGroup is available for this size. 
  
 
 #
 # The layer is registered by name, behind the layers of this library.
 #
-gap> SMALL_GROUPS_LAYERS.("two of them").lib > 11;
-true
+gap> Position( SMALL_GROUPS_LAYER_LIST, SMALL_GROUPS_LAYERS.("two of them") );
+2
 gap> SmallGroupsAddLayer( rec( name := "two of them",
 >                              available := ReturnFail,
 >                              group := ReturnFail ) );
@@ -107,8 +107,8 @@ gap> NumberSmallGroups( 2025 );
 gap> claim( "gamma", 5, rec( after := [ "beta" ], before := [ "alpha" ] ) );
 gap> NumberSmallGroups( 2025 );
 4
-gap> List( [ "beta", "gamma", "alpha" ], n -> SMALL_GROUPS_LAYERS.( n ).lib );
-[ 13, 14, 15 ]
+gap> List( SMALL_GROUPS_LAYER_LIST, l -> l.name );
+[ "SmallGrp", "two of them", "beta", "gamma", "alpha" ]
 
 # a wish about a layer that is not registered is ignored
 gap> claim( "delta", 6, rec( after := [ "not loaded" ] ) );
@@ -169,7 +169,7 @@ gap> SmallGroupsAddLayer( rec(
 >            fi;
 >            return [ CyclicGroup( order ), CyclicGroup( order ) ];
 >        end ) );
-gap> IsBound( COUNT_SMALL_GROUPS_FUNCS[ SMALL_GROUPS_LAYERS.selective.func ] );
+gap> IsBound( SMALL_GROUPS_LAYERS.selective.count );
 false
 gap> IdsOfAllSmallGroups( 2052, IsAbelian, true );
 [ [ 2052, 1 ], [ 2052, 2 ] ]
@@ -195,45 +195,68 @@ Error, the 'available' function of layer confused must return 'fail' or a reco\
 rd
 
 #
-# A layer added the old way, by filling the arrays directly, keeps its slot,
-# and the registered layers move behind it.
+# A layer added the old way, by filling the arrays directly, is picked up by
+# the layer "SmallGrp": it needs no slot of its own here, and registering a
+# further layer leaves it where it is.
 #
-gap> old := Length( SMALL_AVAILABLE_FUNCS ) + 1;;
-gap> SMALL_AVAILABLE_FUNCS[ old ] := function( order )
+gap> SMALL_AVAILABLE_FUNCS[ Length( SMALL_AVAILABLE_FUNCS ) + 1 ] :=
+>    function( order )
 >        if order <> 2079 then
 >            return fail;
 >        fi;
->        return rec( lib := old, func := 1000, number := 9 );
+>        return rec( lib := 12, func := 1000, number := 9 );
 >    end;;
 gap> NumberSmallGroups( 2079 );
 9
+gap> SMALL_AVAILABLE( 2079 ).layer.name;
+"SmallGrp"
 gap> claim( "epsilon", 8, rec() );
-gap> ForAll( RecNames( SMALL_GROUPS_LAYERS ),
->            n -> SMALL_GROUPS_LAYERS.( n ).lib > old );
-true
 gap> NumberSmallGroups( 2079 );
 9
 gap> NumberSmallGroups( 2025 );
 4
 
-# being contiguous, they can still meet a wish that spans that layer
+# a wish is met wherever the layers sit
 gap> claim( "zeta", 9, rec( before := [ "beta" ] ) );
-gap> SMALL_GROUPS_LAYERS.zeta.lib < SMALL_GROUPS_LAYERS.beta.lib;
-true
-gap> SMALL_GROUPS_LAYERS.zeta.lib > old;
-true
+gap> List( SMALL_GROUPS_LAYER_LIST, l -> l.name );
+[ "SmallGrp", "two of them", "delta", "counted", "selective", "confused", 
+  "epsilon", "zeta", "beta", "gamma", "alpha" ]
 gap> NumberSmallGroups( 2079 );
 9
+
+#
+# a layer may put itself in front of this library, and then answers for an
+# order this library covers
+#
+gap> NumberSmallGroups( 96 );
+231
+gap> SmallGroupsAddLayer( rec(
+>        name := "in front",
+>        before := [ "SmallGrp" ],
+>        available := function( order )
+>            if order <> 96 then
+>                return fail;
+>            fi;
+>            return rec( number := 1 );
+>        end,
+>        group := { order, i, inforec } -> CyclicGroup( order ) ) );
+gap> Position( SMALL_GROUPS_LAYER_LIST, SMALL_GROUPS_LAYERS.("in front") )
+>    < Position( SMALL_GROUPS_LAYER_LIST, SMALL_GROUPS_LAYERS.SmallGrp );
+true
+gap> NumberSmallGroups( 96 );
+1
 
 #
 # put the library back as it was, so the stand-ins do not follow the rest of
 # the tests around
 #
-gap> SMALL_GROUPS_LAYERS := rec();;
-gap> SMALL_AVAILABLE_FUNCS := saved.small;;
-gap> ID_AVAILABLE_FUNCS := saved.id;;
+gap> SMALL_GROUPS_LAYERS := rec( SmallGrp := saved.layers[1] );;
+gap> SMALL_GROUPS_LAYER_LIST := saved.layers;;
+gap> SMALL_AVAILABLE_FUNCS := saved.avail;;
 gap> List( [ 2016, 2025, 2040, 2052 ], SmallGroupsAvailable );
 [ false, false, false, false ]
+gap> NumberSmallGroups( 96 );
+231
 
 #
 gap> STOP_TEST( "addlayer.tst", 1);

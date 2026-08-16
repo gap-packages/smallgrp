@@ -74,15 +74,10 @@ InstallGlobalFunction( SmallGroupsInformation, function( size )
         return;
     fi; 
 
-    lib := 1;
-    if IsBound( smav.lib ) then
-        lib := smav.lib;
-    fi;
-    
     if IsBound( smav.number ) then
         num := smav.number;
     else
-        num := NUMBER_SMALL_GROUPS_FUNCS[ smav.func ]( size, smav ).number;
+        num := smav.layer.numberOf( size, smav ).number;
     fi;
     if num = 1 then 
         Print("\n  There is 1 group of order ",size,".\n");
@@ -90,25 +85,37 @@ InstallGlobalFunction( SmallGroupsInformation, function( size )
         Print("\n  There are ",num," groups of order ",size,".\n" );
     fi;
  
-    SMALL_GROUPS_INFORMATION[ smav.func ]( size, smav, num );
+    smav.layer.information( size, smav, num );
 
     # report those properties whose value the selection functions can read
     # off from the position a group has in this list
-    if IsBound( SMALL_GROUPS_PROPERTIES_FUNCS[ smav.func ] ) then
+    if IsBound( smav.layer.properties ) then
         if not IsBound( smav.number ) then
             smav.number := num;
         fi;
-        props := SMALL_GROUPS_PROPERTIES_FUNCS[ smav.func ]( size, smav );
-        names := List( Filtered( Concatenation(
-                                     SMALL_GROUPS_INDEXED_PROPERTIES,
-                                     SMALL_GROUPS_INDEXED_ATTRIBUTES ),
-                                 t -> IsBound( props.( t[ 1 ] ) ) ),
-                       t -> t[ 3 ] );
-        SMALL_GROUPS_PRINT_INDEXED( names );
+        props := smav.layer.properties( size, smav );
+        if props <> fail then
+            names := List( Filtered( Concatenation(
+                                         SMALL_GROUPS_INDEXED_PROPERTIES,
+                                         SMALL_GROUPS_INDEXED_ATTRIBUTES ),
+                                     t -> IsBound( props.( t[ 1 ] ) ) ),
+                           t -> t[ 3 ] );
+            SMALL_GROUPS_PRINT_INDEXED( names );
+        fi;
     fi;
 
-    Print("\n  This size belongs to layer ",lib,
-          " of the SmallGroups library. \n");
+    if IsBound( smav.lib ) then
+        lib := smav.lib;
+    else
+        lib := 1;
+    fi;
+    if smav.layer.name = "SmallGrp" then
+        Print("\n  This size belongs to layer ",lib,
+              " of the SmallGroups library. \n");
+    else
+        Print("\n  This size belongs to the layer \"",smav.layer.name,
+              "\". \n");
+    fi;
 
     if idav <> fail then 
         Print("  IdSmallGroup is available for this size. \n \n");
