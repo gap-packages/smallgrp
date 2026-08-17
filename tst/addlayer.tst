@@ -148,6 +148,19 @@ gap> NumberSmallGroups( 2040 );
 gap> NumberSmallGroups( 2040, IsAbelian, true );
 42
 
+# a layer has to report the number one way or the other
+gap> SmallGroupsAddLayer( rec(
+>        name := "countless",
+>        available := function( order )
+>            if order = 2064 then
+>                return rec();
+>            fi;
+>            return fail;
+>        end,
+>        group := ReturnFail ) );
+gap> NumberSmallGroups( 2064 );
+Error, layer countless reports no number of groups of order 2064
+
 #
 # A layer that selects for itself: no generic count is installed over it, so
 # the counting goes through its own selection.
@@ -219,8 +232,8 @@ gap> NumberSmallGroups( 2025 );
 # a wish is met wherever the layers sit
 gap> claim( "zeta", 9, rec( before := [ "beta" ] ) );
 gap> List( SMALL_GROUPS_LAYER_LIST, l -> l.name );
-[ "SmallGrp", "two of them", "delta", "counted", "selective", "confused", 
-  "epsilon", "zeta", "beta", "gamma", "alpha" ]
+[ "SmallGrp", "two of them", "delta", "counted", "countless", "selective", 
+  "confused", "epsilon", "zeta", "beta", "gamma", "alpha" ]
 gap> NumberSmallGroups( 2079 );
 9
 
@@ -253,8 +266,8 @@ gap> NumberSmallGroups( 96 );
 gap> SMALL_GROUPS_LAYERS := rec( SmallGrp := saved.layers[1] );;
 gap> SMALL_GROUPS_LAYER_LIST := saved.layers;;
 gap> SMALL_AVAILABLE_FUNCS := saved.avail;;
-gap> List( [ 2016, 2025, 2040, 2052 ], SmallGroupsAvailable );
-[ false, false, false, false ]
+gap> List( [ 2016, 2025, 2040, 2052, 2064 ], SmallGroupsAvailable );
+[ false, false, false, false, false ]
 gap> NumberSmallGroups( 96 );
 231
 
