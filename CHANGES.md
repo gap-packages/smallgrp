@@ -1,6 +1,7 @@
 This file describes changes in the smallgrp package.
 
-# Unreleased
+# 1.7.0 (2026-08-18)
+
 
   - Added `SmallGroupsAddLayer` as a clean interface for extending the
     Small Groups Library by a further layer.
