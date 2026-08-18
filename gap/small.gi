@@ -943,13 +943,13 @@ InstallMethod( IdGroup,
                [ IsGroup ],
                0,
 function( G )
-    local inforec, size, id;
+    local idrec, size, id;
 
     size := Size( G );
     if size = 1 then return [ 1, 1 ]; fi;
 
-    inforec := ID_AVAILABLE( size );
-    if inforec = fail then
+    idrec := ID_AVAILABLE( size );
+    if idrec = fail then
         Error( "the group identification for groups of size ", size,
                " is not available" );
     fi;
@@ -972,7 +972,7 @@ function( G )
         G := PcGroupCode( CodePcGroup( G ), Size( G ) );
     fi;
 
-    id := inforec.layer.id( G, inforec );
+    id := idrec.layer.id( G, idrec );
 
     if not SMALL_GROUPS_OLD_ORDER then
         if size = 3^7 then

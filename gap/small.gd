@@ -994,35 +994,40 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##  <List>
 ##  <Mark><C>name</C></Mark>
 ##  <Item>
-##    a string naming the layer. It is how other layers refer to this one,
-##    and no two layers may share it.
+##    a string naming the layer. Must be unique. Can be used by other
+##    layers to refer to this one.
 ##  </Item>
 ##  <Mark><C>available</C></Mark>
 ##  <Item>
-##    a function taking an order and returning <K>fail</K>, or a record
-##    which is handed to the functions below as <A>inforec</A>. Its
-##    component <C>number</C>, if present, is the number of groups of that
-##    order.
+##    a function taking an order and either returning <K>fail</K>, to indicate
+##    this layer does not handle the given order; or else a record
+##    which is handed to the functions below as <A>inforec</A>. The component
+##    <C>number</C> of the returned record, if present, is the number of groups
+##    of that order.
 ##  </Item>
 ##  <Mark><C>group</C></Mark>
 ##  <Item>
 ##    a function <C>( <A>order</A>, <A>i</A>, <A>inforec</A> )</C> returning
 ##    the <A>i</A>-th group of that order.
 ##  </Item>
-##  <Mark><C>id</C>, <C>idAvailable</C></Mark>
+##  <Mark> <C>idAvailable</C></Mark>
 ##  <Item>
-##    optional, a function <C>( <A>G</A>, <A>inforec</A> )</C> returning the
-##    number of <A>G</A> in this layer. Without it
-##    <Ref Attr="IdSmallGroup"/> stays unavailable for these orders. Where
-##    the identification covers fewer orders than the layer, or wants a
-##    record of its own, <C>idAvailable</C> is a second <C>available</C>
-##    used in its place.
+##    optional, a function taking an order and either returning <K>fail</K>,
+##    to indicate this layer does not handle identification of groups of the
+##    given order; or else a record which is handed to the function <C>id</C>
+##    below as <A>odrec</A>.
+##  </Item>
+##  <Mark><C>id</C></Mark>
+##  <Item>
+##    optional, a function <C>( <A>G</A>, <A>idrec</A> )</C> returning the
+##    index of <A>G</A> among the groups of its order. Without it
+##    <Ref Attr="IdSmallGroup"/> stays unavailable for these orders.
 ##  </Item>
 ##  <Mark><C>number</C></Mark>
 ##  <Item>
 ##    optional, a function <C>( <A>order</A>, <A>inforec</A> )</C> returning
-##    the number of groups of that order. Needed only where
-##    <C>available</C> does not report it.
+##    the number of groups of that order. Only needed if <C>available</C>
+##    does not report this count.
 ##  </Item>
 ##  <Mark><C>information</C></Mark>
 ##  <Item>
@@ -1034,10 +1039,10 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##  <Mark><C>properties</C></Mark>
 ##  <Item>
 ##    optional, a function <C>( <A>order</A>, <A>inforec</A> )</C> reporting
-##    which selection criteria follow from the position a group has in this
-##    layer, so that <Ref Func="SelectSmallGroups"/> and
-##    <Ref Func="NumberSmallGroups"/> need not construct the groups to
-##    decide them.
+##    which selection criteria the <C>select</C> and <C>count</C> functions
+##    of this layer can deduce from the position of the groups alone, so that
+##    <Ref Func="SelectSmallGroups"/> and <Ref Func="NumberSmallGroups"/>
+##    need not construct the groups to decide these criteria.
 ##  </Item>
 ##  <Mark><C>select</C>, <C>count</C></Mark>
 ##  <Item>
@@ -1055,8 +1060,6 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##  </Item>
 ##  </List>
 ##  Where two layers cover an order, the one consulted first wins.
-##  The layers added this way are collected in the record
-##  <C>SMALL_GROUPS_LAYERS</C>, keyed by name.
 ##  <Log><![CDATA[
 ##  SmallGroupsAddLayer( rec(
 ##      name := "SOTGrps",

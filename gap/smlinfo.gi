@@ -61,14 +61,12 @@ InstallGlobalFunction( SmallGroupsInformation, function( size )
       ErrorNoReturn("usage: SmallGroupsInformation( size )"); 
     fi;
 
-    smav := SMALL_AVAILABLE( size );
-    idav := ID_AVAILABLE( size );
-
     if size = 1024 then
         Print( "The groups of size 1024 are not available. \n");
         return;
     fi;
 
+    smav := SMALL_AVAILABLE( size );
     if smav = fail then
         Print( "The groups of size ", size, " are not available. \n");
         return;
@@ -117,6 +115,7 @@ InstallGlobalFunction( SmallGroupsInformation, function( size )
               "\". \n");
     fi;
 
+    idav := ID_AVAILABLE( size );
     if idav <> fail then 
         Print("  IdSmallGroup is available for this size. \n \n");
     else        
