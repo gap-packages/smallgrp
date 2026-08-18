@@ -260,14 +260,46 @@ gap> NumberSmallGroups( 96 );
 1
 
 #
+# 'idAvailable' where the identification covers fewer orders than the groups
+#
+gap> SmallGroupsAddLayer( rec(
+>        name := "half identified",
+>        available := function( order )
+>            if order in [ 2072, 2080 ] then
+>                return rec( number := 1 );
+>            fi;
+>            return fail;
+>        end,
+>        group := { order, i, inforec } -> CyclicGroup( order ),
+>        idAvailable := function( order )
+>            if order = 2072 then
+>                return rec();
+>            fi;
+>            return fail;
+>        end,
+>        id := { G, idrec } -> 1 ) );
+gap> List( [ 2072, 2080 ], SmallGroupsAvailable );
+[ true, true ]
+gap> List( [ 2072, 2080 ], IdGroupsAvailable );
+[ true, false ]
+gap> IdGroup( CyclicGroup( 2072 ) );
+[ 2072, 1 ]
+
+# on its own it identifies nothing
+gap> SmallGroupsAddLayer( rec( name := "no id", available := ReturnFail,
+>                              group := ReturnFail,
+>                              idAvailable := ReturnFail ) );
+Error, <desc>.idAvailable is of no use without <desc>.id
+
+#
 # put the library back as it was, so the stand-ins do not follow the rest of
 # the tests around
 #
 gap> SMALL_GROUPS_LAYERS := rec( SmallGrp := saved.layers[1] );;
 gap> SMALL_GROUPS_LAYER_LIST := saved.layers;;
 gap> SMALL_AVAILABLE_FUNCS := saved.avail;;
-gap> List( [ 2016, 2025, 2040, 2052, 2064 ], SmallGroupsAvailable );
-[ false, false, false, false, false ]
+gap> List( [ 2016, 2025, 2040, 2052, 2064, 2072 ], SmallGroupsAvailable );
+[ false, false, false, false, false, false ]
 gap> NumberSmallGroups( 96 );
 231
 

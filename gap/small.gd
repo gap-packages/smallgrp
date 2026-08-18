@@ -1015,7 +1015,10 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    optional, a function taking an order and either returning <K>fail</K>,
 ##    to indicate this layer does not handle identification of groups of the
 ##    given order; or else a record which is handed to the function <C>id</C>
-##    below as <A>idrec</A>.
+##    below as <A>idrec</A>. Defaults to <C>available</C>, so it is only
+##    needed where the identification covers other orders than the
+##    construction, or wants a record of its own. If <C>idAvailable</C> is
+##    defined then <C>id</C> must also be provided.
 ##  </Item>
 ##  <Mark><C>id</C></Mark>
 ##  <Item>

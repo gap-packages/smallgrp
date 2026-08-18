@@ -180,6 +180,9 @@ InstallGlobalFunction( SmallGroupsAddLayer, function( desc )
             Error( "<desc>.", comp, " must be a list of layer names" );
         fi;
     od;
+    if IsBound( desc.idAvailable ) and not IsBound( desc.id ) then
+        Error( "<desc>.idAvailable is of no use without <desc>.id" );
+    fi;
 
     layer := ShallowCopy( desc );
     for comp in [ "before", "after" ] do
