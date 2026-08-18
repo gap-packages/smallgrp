@@ -1010,12 +1010,12 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    a function <C>( <A>order</A>, <A>i</A>, <A>inforec</A> )</C> returning
 ##    the <A>i</A>-th group of that order.
 ##  </Item>
-##  <Mark> <C>idAvailable</C></Mark>
+##  <Mark><C>idAvailable</C></Mark>
 ##  <Item>
 ##    optional, a function taking an order and either returning <K>fail</K>,
 ##    to indicate this layer does not handle identification of groups of the
 ##    given order; or else a record which is handed to the function <C>id</C>
-##    below as <A>odrec</A>.
+##    below as <A>idrec</A>.
 ##  </Item>
 ##  <Mark><C>id</C></Mark>
 ##  <Item>
