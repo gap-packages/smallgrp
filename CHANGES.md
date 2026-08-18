@@ -2,7 +2,9 @@ This file describes changes in the smallgrp package.
 
 # Unreleased
 
-  - Optimized `NumberSmallGroups` to be much faster in certain cases, for
+  - Added `SmallGroupsAddLayer` as a clean interface for extending the
+    Small Groups Library by a further layer.
+  - Optimized `NumberSmallGroups` to be much faster in certain cases. For
     example `NumberSmallGroups(1536, IsSolvableGroup, true)` is now instant
     instead of running for 90 seconds.
 
