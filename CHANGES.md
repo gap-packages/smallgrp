@@ -1,5 +1,10 @@
 This file describes changes in the smallgrp package.
 
+# Unreleased
+
+  - Suggest the packages `SglPPow` and `SOTGrps`, which extend the Small
+    Groups Library by further orders
+
 # 1.7.0 (2026-08-18)
 
 
