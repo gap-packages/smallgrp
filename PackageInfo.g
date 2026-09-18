@@ -120,7 +120,7 @@ Dependencies := rec(
   GAP := ">= 4.12",
   NeededOtherPackages := [ ],
   SuggestedOtherPackages := [
-    [ "sglppow", ">= 2.7" ],
+    [ "sglppow", ">= 2.6" ],
     [ "sotgrps", ">= 1.4" ],
   ],
   ExternalConditions := [ ],
