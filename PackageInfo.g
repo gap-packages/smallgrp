@@ -10,7 +10,7 @@ SetPackageInfo( rec(
 
 PackageName := "SmallGrp",
 Subtitle := "The GAP Small Groups Library",
-Version := "1.7.0",
+Version := "1.7.0dev",
 Date := "18/08/2026", # dd/mm/yyyy format
 License := "Artistic-2.0",
 
@@ -119,7 +119,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.12",
   NeededOtherPackages := [ ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ [ "sotgrps", ">= 1.4" ] ],
   ExternalConditions := [ ],
 ),
 

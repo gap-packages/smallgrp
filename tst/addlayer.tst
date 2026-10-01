@@ -1,6 +1,15 @@
 gap> START_TEST("addlayer.tst");
 gap> saved := rec( layers := ShallowCopy( SMALL_GROUPS_LAYER_LIST ),
+>                  byName := ShallowCopy( SMALL_GROUPS_LAYERS ),
 >                  avail  := ShallowCopy( SMALL_AVAILABLE_FUNCS ) );;
+
+#
+# Other packages -- SOTGrps, say -- register layers of their own. Hide them
+# for this test, so that the stand-ins below are the only company the layer
+# of this library has.
+#
+gap> SMALL_GROUPS_LAYERS := rec( SmallGrp := SMALL_GROUPS_LAYERS.SmallGrp );;
+gap> SMALL_GROUPS_LAYER_LIST := [ SMALL_GROUPS_LAYERS.SmallGrp ];;
 
 #
 # The layers below are stand-ins. None of the orders they claim -- 2016,
@@ -295,7 +304,7 @@ Error, <desc>.idAvailable is of no use without <desc>.id
 # put the library back as it was, so the stand-ins do not follow the rest of
 # the tests around
 #
-gap> SMALL_GROUPS_LAYERS := rec( SmallGrp := saved.layers[1] );;
+gap> SMALL_GROUPS_LAYERS := saved.byName;;
 gap> SMALL_GROUPS_LAYER_LIST := saved.layers;;
 gap> SMALL_AVAILABLE_FUNCS := saved.avail;;
 gap> List( [ 2016, 2025, 2040, 2052, 2064, 2072 ], SmallGroupsAvailable );
