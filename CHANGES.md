@@ -1,5 +1,10 @@
 This file describes changes in the smallgrp package.
 
+## Unreleased
+
+  - Suggest the package `SOTGrps`, which extends the Small Groups Library
+    by further orders
+
 ## 1.7.0 (2026-08-18)
 
   - Added `SmallGroupsAddLayer` as a clean interface for extending the

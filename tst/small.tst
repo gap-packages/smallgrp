@@ -2,6 +2,13 @@
 #
 gap> START_TEST("small.tst");
 
+#
+# What is available below is the coverage of this library, so hide the layers
+# other packages -- SOTGrps, say -- register.
+#
+gap> savedLayers := ShallowCopy( SMALL_GROUPS_LAYER_LIST );;
+gap> SMALL_GROUPS_LAYER_LIST := [ SMALL_GROUPS_LAYERS.SmallGrp ];;
+
 ################################################################################
 # SMALL_AVAILABLE
 ################################################################################
@@ -374,4 +381,5 @@ gap> FrattinifactorId(H);
 Error, FrattinifactorId: IdGroup for groups of size 512 not available
 
 #
+gap> SMALL_GROUPS_LAYER_LIST := savedLayers;;
 gap> STOP_TEST("small.tst");
