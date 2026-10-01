@@ -1,0 +1,13 @@
+#!/bin/sh
+# This file is executed by the `release.yml` workflow
+echo "Current package disk space usage:"
+du -cks id* small*
+echo "Compressing data files..."
+for file in id*/*.* small*/*.*
+do
+    gzip -n -f "$file"
+    printf .
+done
+echo
+echo "Done compressing data file, disk space:"
+du -cks id* small*
