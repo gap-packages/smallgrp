@@ -630,4 +630,77 @@ gap> SmallGroupsInformation(2187);
  
 
 #
+# SmallGroupsInformationRecord returns what SmallGroupsInformation prints
+#
+gap> r := SmallGroupsInformationRecord( 96 );;
+gap> [ r.order, r.number, r.layer, r.layerNumber, r.idAvailable, r.sortedBy ];
+[ 96, 231, "SmallGrp", 2, true, "Frattini factor" ]
+gap> r.ranges[ 1 ];
+rec( from := 1, text := "Frattini factor [ 6, 1 ]", to := 1, 
+  values := rec( FrattinifactorId := [ 6, 1 ] ) )
+gap> r.ranges[ Length( r.ranges ) ];
+rec( from := 226, text := "trivial Frattini subgroup", to := 231, 
+  values := rec( FrattinifactorSize := 96 ) )
+gap> r.indexed;
+[ "IsAbelian", "IsNilpotentGroup", "IsSupersolvableGroup", "IsSolvableGroup", 
+  "LGLength", "FrattinifactorSize", "FrattinifactorId" ]
+gap> r := SmallGroupsInformationRecord( 512 );;
+gap> r.ranges[ 2 ];
+rec( from := 2, text := "rank 2 and p-class 3", to := 10, 
+  values := rec( PClassPGroup := 3, RankPGroup := 2 ) )
+gap> List( r.ranges{ [ 1, Length( r.ranges ) ] }, x -> [ x.from, x.text ] );
+[ [ 1, "cyclic" ], [ 10494213, "elementary abelian" ] ]
+gap> [ r.layerNumber, r.idAvailable, r.sources ];
+[ 7, false, [ "EOB98", "EOB99", "OBr90", "BEO01" ] ]
+gap> r := SmallGroupsInformationRecord( 1536 );;
+gap> List( r.ranges, x -> [ x.from, x.to, x.text ] );
+[ [ 1, 10494213, "nilpotent" ], 
+  [ 10494214, 408526597, "normal Sylow 3-subgroup" ], 
+  [ 408526598, 408544625, "normal Sylow 2-subgroup" ], 
+  [ 408544626, 408641062, "no normal Sylow subgroup" ] ]
+gap> r := SmallGroupsInformationRecord( 2010 );;
+gap> List( r.ranges, x -> [ x.from, x.to, x.text ] );
+[ [ 1, 1, "abelian" ], [ 2, 2, "socle C_670 and factor C_3" ], 
+  [ 3, 9, "socle C_1005 and factor C_2" ], 
+  [ 10, 12, "socle C_335 and factor C_6" ] ]
+gap> r := SmallGroupsInformationRecord( 30 );;
+gap> [ r.ranges, r.sources ];
+[ [  ], [ "Hoelder1893" ] ]
+gap> SmallGroupsInformationRecord( 1024 );
+fail
+
+# the ranges list all groups, in order, and agree with the groups
+gap> covers := function( n )
+>      local r, prev, x;
+>      r := SmallGroupsInformationRecord( n );
+>      prev := 0;
+>      for x in r.ranges do
+>        if x.from <> prev + 1 or x.to < x.from then
+>          return false;
+>        fi;
+>        prev := x.to;
+>      od;
+>      return prev = r.number;
+>    end;;
+gap> Filtered( [ 32, 96, 243, 486, 512, 729, 768, 1152, 1536, 1920, 2010, 2401,
+>                3645, 11^4, 7^5, 17325 ], n -> not covers( n ) );
+[  ]
+gap> agrees := function( n )
+>      local x, G, nam;
+>      for x in SmallGroupsInformationRecord( n ).ranges do
+>        for G in [ SmallGroup( n, x.from ), SmallGroup( n, x.to ) ] do
+>          for nam in RecNames( x.values ) do
+>            if ValueGlobal( nam )( G ) <> x.values.( nam ) then
+>              return [ x, nam ];
+>            fi;
+>          od;
+>        od;
+>      od;
+>      return true;
+>    end;;
+gap> Filtered( [ 32, 96, 512, 1152, 1920, 2010, 2401, 11^4, 7^5 ],
+>              n -> agrees( n ) <> true );
+[  ]
+
+#
 gap> STOP_TEST("smlinfo.tst");

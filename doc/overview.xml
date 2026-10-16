@@ -139,6 +139,7 @@ the one used here. See <URL>https://gap-packages.github.io/sotgrps/</URL>.
   <#Include Label="IdsOfAllSmallGroups">
   <#Include Label="IdGap3SolvableGroup">
   <#Include Label="SmallGroupsInformation">
+  <#Include Label="SmallGroupsInformationRecord">
   <#Include Label="SmallGroupsAddLayer">
   <#Include Label="UnloadSmallGroupsData">
   <#Include Label="SMALL_GROUPS_OLD_ORDER">

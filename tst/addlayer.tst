@@ -60,6 +60,11 @@ gap> SmallGroupsInformation( 2016 );
   This size belongs to the layer "two of them". 
   IdSmallGroup is available for this size. 
  
+gap> r := SmallGroupsInformationRecord( 2016 );;
+gap> [ r.layer, r.number, r.idAvailable, r.indexed, r.ranges ];
+[ "two of them", 2, true, [  ], [  ] ]
+gap> IsBound( r.layerNumber ) or IsBound( r.description );
+false
 
 #
 # The layer is registered by name, behind the layers of this library.
@@ -232,6 +237,9 @@ gap> NumberSmallGroups( 2079 );
 9
 gap> SMALL_AVAILABLE( 2079 ).layer.name;
 "SmallGrp"
+gap> r := SmallGroupsInformationRecord( 2079 );;
+gap> [ r.layer, r.layerNumber, r.number, r.ranges, IsBound( r.sources ) ];
+[ "SmallGrp", 12, 9, [  ], false ]
 gap> claim( "epsilon", 8, rec() );
 gap> NumberSmallGroups( 2079 );
 9
@@ -301,14 +309,50 @@ gap> SmallGroupsAddLayer( rec( name := "no id", available := ReturnFail,
 Error, <desc>.idAvailable is of no use without <desc>.id
 
 #
+# 'informationRecord' describes the groups of an order as data; its
+# 'description' is what 'SmallGroupsInformation' prints
+#
+gap> SmallGroupsAddLayer( rec(
+>        name := "described",
+>        available := function( order )
+>            if order <> 2088 then
+>                return fail;
+>            fi;
+>            return rec( number := 1 );
+>        end,
+>        group := { order, i, inforec } -> CyclicGroup( order ),
+>        informationRecord := function( order, inforec, num )
+>            return rec( description := "\n  Just the cyclic one.\n",
+>                        ranges := [ rec( from := 1, to := 1,
+>                                         text := "cyclic",
+>                                         values := rec( IsCyclic := true ) ) ],
+>                        sources := [ "Hoelder1893" ] );
+>        end ) );
+gap> SmallGroupsInformation( 2088 );
+
+  There is 1 group of order 2088.
+
+  Just the cyclic one.
+
+  This size belongs to the layer "described". 
+  IdSmallGroup is not available for this size. 
+ 
+gap> r := SmallGroupsInformationRecord( 2088 );;
+gap> [ r.ranges[ 1 ].text, r.sources ];
+[ "cyclic", [ "Hoelder1893" ] ]
+gap> SmallGroupsAddLayer( rec( name := "uninformed", available := ReturnFail,
+>                              group := ReturnFail, informationRecord := 42 ) );
+Error, <desc>.informationRecord must be a function
+
+#
 # put the library back as it was, so the stand-ins do not follow the rest of
 # the tests around
 #
 gap> SMALL_GROUPS_LAYERS := saved.byName;;
 gap> SMALL_GROUPS_LAYER_LIST := saved.layers;;
 gap> SMALL_AVAILABLE_FUNCS := saved.avail;;
-gap> List( [ 2016, 2025, 2040, 2052, 2064, 2072 ], SmallGroupsAvailable );
-[ false, false, false, false, false, false ]
+gap> List( [ 2016, 2025, 2040, 2052, 2064, 2072, 2088 ], SmallGroupsAvailable );
+[ false, false, false, false, false, false, false ]
 gap> NumberSmallGroups( 96 );
 231
 

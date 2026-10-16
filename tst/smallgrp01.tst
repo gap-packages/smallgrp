@@ -103,6 +103,16 @@ gap> SmallGroupsInformation( 32 );
   IdSmallGroup is available for this size. 
  
 
+# doc/../gap/small.gd:1041-1050
+gap> r := SmallGroupsInformationRecord( 32 );;
+gap> r.number;
+51
+gap> r.ranges[ 2 ];
+rec( from := 2, text := "rank 2", to := 20, values := rec( RankPGroup := 2 ) )
+gap> r.sources;
+[ "OBr90", "JNO90", "OBr91", "BescheEick98", "BescheEick1000", 
+  "BescheEick768" ]
+
 # doc/../gap/small.gd:854-856
 gap> UnloadSmallGroupsData();
 

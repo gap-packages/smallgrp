@@ -979,6 +979,83 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 
 #############################################################################
 ##
+#F  SmallGroupsInformationRecord( <order> )
+##
+##  <#GAPDoc Label="SmallGroupsInformationRecord">
+##  <ManSection>
+##  <Func Name="SmallGroupsInformationRecord" Arg='order'/>
+##
+##  <Description>
+##  returns the information that <Ref Func="SmallGroupsInformation"/> prints
+##  as a record, or <K>fail</K> if the groups of order <A>order</A> are not
+##  available. Its components are:
+##  <List>
+##  <Mark><C>order</C>, <C>number</C></Mark>
+##  <Item>
+##    the order and the number of groups of that order.
+##  </Item>
+##  <Mark><C>layer</C></Mark>
+##  <Item>
+##    the name of the layer that provides the groups, see
+##    <Ref Func="SmallGroupsAddLayer"/>; it is <C>"SmallGrp"</C> for the
+##    layers of this package, which are then numbered by
+##    <C>layerNumber</C> as in Chapter <Ref Chap="Organisation"/>.
+##  </Item>
+##  <Mark><C>idAvailable</C></Mark>
+##  <Item>
+##    whether <Ref Attr="IdSmallGroup"/> is available for this order.
+##  </Item>
+##  <Mark><C>indexed</C></Mark>
+##  <Item>
+##    the names of the selection criteria that the selection functions know
+##    for this order without constructing groups.
+##  </Item>
+##  <Mark><C>ranges</C></Mark>
+##  <Item>
+##    a list describing how the groups are arranged, possibly empty. Each
+##    entry is a record with components <C>from</C> and <C>to</C>, the first
+##    and the last index of a range of groups; <C>text</C>, a description
+##    of what these groups have in common; and <C>values</C>, a record
+##    mapping names of attributes to the value that all these groups have.
+##  </Item>
+##  <Mark><C>sortedBy</C></Mark>
+##  <Item>
+##    optional, a description of the invariant by which the groups are
+##    sorted.
+##  </Item>
+##  <Mark><C>comment</C></Mark>
+##  <Item>
+##    optional, further text about these groups.
+##  </Item>
+##  <Mark><C>sources</C></Mark>
+##  <Item>
+##    optional, the keys of the publications that determined these groups,
+##    in the bibliography of the package providing the layer.
+##  </Item>
+##  <Mark><C>description</C></Mark>
+##  <Item>
+##    optional, the text that <Ref Func="SmallGroupsInformation"/> prints
+##    between the number of groups and the indexed selection criteria.
+##  </Item>
+##  </List>
+##  <Example><![CDATA[
+##  gap> r := SmallGroupsInformationRecord( 32 );;
+##  gap> r.number;
+##  51
+##  gap> r.ranges[ 2 ];
+##  rec( from := 2, text := "rank 2", to := 20, values := rec( RankPGroup := 2 ) )
+##  gap> r.sources;
+##  [ "OBr90", "JNO90", "OBr91", "BescheEick98", "BescheEick1000", 
+##    "BescheEick768" ]
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "SmallGroupsInformationRecord" );
+
+#############################################################################
+##
 #F  SmallGroupsAddLayer( <desc> )
 ##
 ##  <#GAPDoc Label="SmallGroupsAddLayer">
@@ -1038,6 +1115,17 @@ DeclareGlobalFunction( "SmallGroupsInformation" );
 ##    <C>( <A>order</A>, <A>inforec</A>, <A>number</A> )</C> printing what
 ##    <Ref Func="SmallGroupsInformation"/> should say about that order
 ##    beyond the number of groups.
+##  </Item>
+##  <Mark><C>informationRecord</C></Mark>
+##  <Item>
+##    optional, a function
+##    <C>( <A>order</A>, <A>inforec</A>, <A>number</A> )</C> returning
+##    <K>fail</K> or a record with some of the components <C>ranges</C>,
+##    <C>sortedBy</C>, <C>comment</C>, <C>sources</C> and
+##    <C>description</C> described in
+##    <Ref Func="SmallGroupsInformationRecord"/>. If it returns a
+##    <C>description</C>, <Ref Func="SmallGroupsInformation"/> prints that
+##    instead of calling <C>information</C>.
 ##  </Item>
 ##  <Mark><C>properties</C></Mark>
 ##  <Item>
