@@ -87,6 +87,17 @@ SMALL_GROUPS_LAYERS.SmallGrp := rec(
     information := function( size, inforec, num )
         SMALL_GROUPS_INFORMATION[ inforec.func ]( size, inforec, num );
     end,
+    informationRecord := function( size, inforec, num )
+        local r;
+        # orders added the old way may come without a record
+        if not IsBound( SMALL_GROUPS_INFORMATION_RECORDS[ inforec.func ] ) then
+            return fail;
+        fi;
+        r := SMALL_GROUPS_INFORMATION_RECORDS[ inforec.func ]
+                 ( size, inforec, num );
+        r.sources := SMALL_GROUPS_SOURCES( inforec );
+        return r;
+    end,
 );
 
 SMALL_GROUPS_LAYER_LIST[ 1 ] := SMALL_GROUPS_LAYERS.SmallGrp;
@@ -149,8 +160,8 @@ InstallGlobalFunction( SmallGroupsAddLayer, function( desc )
     fi;
 
     known := [ "name", "available", "group", "id", "idAvailable", "number",
-               "properties", "information", "select", "count",
-               "before", "after" ];
+               "properties", "information", "informationRecord", "select",
+               "count", "before", "after" ];
     for comp in RecNames( desc ) do
         if not comp in known then
             Error( "unknown component <desc>.", comp );
@@ -168,7 +179,8 @@ InstallGlobalFunction( SmallGroupsAddLayer, function( desc )
         Error( "a layer named \"", desc.name, "\" is already registered" );
     fi;
     for comp in [ "available", "group", "id", "idAvailable", "number",
-                  "properties", "information", "select", "count" ] do
+                  "properties", "information", "informationRecord",
+                  "select", "count" ] do
         if IsBound( desc.( comp ) ) and not IsFunction( desc.( comp ) ) then
             Error( "<desc>.", comp, " must be a function" );
         fi;
